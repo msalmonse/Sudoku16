@@ -8,9 +8,13 @@
 
 import SwiftUI
 
+let board = Board()
+
 struct ContentView: View {
     var body: some View {
-        Text("Hello World")
+        ScrollView([.horizontal, .vertical]) {
+            BoardSquares()
+        }
     }
 }
 
