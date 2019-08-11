@@ -119,8 +119,8 @@ class Board {
             if canBeSetAll(index, value, false) { ret = false }
         }
         else {
+            if range16.contains(cell.value) { _ = canBeSetAll(index, cell.value, true) }
             cell.value = 0
-            _ = canBeSetAll(index, value, true)
             canBeRecalc(index)
         }
         
