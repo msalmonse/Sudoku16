@@ -29,9 +29,16 @@ class Sudoku16Tests: XCTestCase {
         
         XCTAssertTrue(test.set(1, false))
         XCTAssertFalse(test.contains(1))
+        XCTAssertEqual(test.count, 15)
         
         XCTAssertFalse(test.set(1, true))
         XCTAssertTrue(test.contains(1))
+        XCTAssertEqual(test.count, 16)
+        XCTAssertFalse(test.isEmpty)
+        
+        test = none16
+        XCTAssertEqual(test.count, 0)
+        XCTAssertTrue(test.isEmpty)
     }
 
     func testCols() {

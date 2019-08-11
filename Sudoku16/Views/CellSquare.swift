@@ -18,7 +18,8 @@ struct CellSquare: View {
             CellRow(start: start + 32)
             CellRow(start: start + 48)
         }
-        .overlay(strokedRectangle(stroke: 3, color: .green))
+        .background(filledRoundedRectangle(cornerRadius: 3, color: squareColor(cell: start)))
+        .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3))
     }
 }
 

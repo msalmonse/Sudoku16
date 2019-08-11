@@ -93,7 +93,6 @@
 		C45F57FC22FEF71C008762F1 /* Sudoku16 */ = {
 			isa = PBXGroup;
 			children = (
-				C45F582B22FF4BCC008762F1 /* Utils */,
 				C45F57FD22FEF71C008762F1 /* AppDelegate.swift */,
 				C45F580322FEF720008762F1 /* Assets.xcassets */,
 				C45F580122FEF71C008762F1 /* ContentView.swift */,
@@ -102,6 +101,7 @@
 				C45F581F22FEF97B008762F1 /* Models */,
 				C45F580522FEF720008762F1 /* Preview Content */,
 				C45F57FF22FEF71C008762F1 /* SceneDelegate.swift */,
+				C45F582B22FF4BCC008762F1 /* Utils */,
 				C45F582622FF0F54008762F1 /* Views */,
 			);
 			path = Sudoku16;

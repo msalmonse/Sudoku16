@@ -13,6 +13,7 @@ import Foundation
 typealias Set16 = UInt16
 
 let all16: Set16 = 0xffff
+let none16: Set16 = 0x0000
 let range16 = 1...16
 
 extension Set16 {
@@ -23,6 +24,10 @@ extension Set16 {
         return (self & mask(i)) != 0
     }
     
+    var isEmpty: Bool { return self == none16 }
+    
+    var count: Int { return self.nonzeroBitCount }
+
     mutating func set(_ i: Int, _ set: Bool) -> Bool {
         let was = self.contains(i)
         if range16.contains(i) {

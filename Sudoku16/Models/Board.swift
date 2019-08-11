@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /// Helper functions to calculate cell position
 
@@ -53,6 +54,16 @@ func allForCell(_ i: Int) -> [Int] {
 
 func cellInSquare(_ sqr: Int, _ i: Int) -> Int {
     return (sqr << 2) | squareOffsets[i]
+}
+
+func squareColor(cell: Int) -> Color {
+    switch cell & 0x4c {
+    case 0, 8, 68, 76:
+        return Color.yellow.opacity(0.2)
+    case 4, 12, 64, 72:
+        return Color.blue.opacity(0.1)
+    default: return Color.clear
+    }
 }
 
 class Board {
