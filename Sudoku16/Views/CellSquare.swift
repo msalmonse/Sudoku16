@@ -28,10 +28,10 @@ struct CellRow: View {
     
     var body: some View {
         HStack (spacing: 0) {
-            CellView(cell: board.cells[start])
-            CellView(cell: board.cells[start + 1])
-            CellView(cell: board.cells[start + 2])
-            CellView(cell: board.cells[start + 3])
+            CellButton(index: start)
+            CellButton(index: start + 1)
+            CellButton(index: start + 2)
+            CellButton(index: start + 3)
         }
     }
 }

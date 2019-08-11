@@ -32,8 +32,23 @@ func nameForValue(_ i: Int) -> String {
     }
 }
 
+struct CellButton: View {
+    let index: Int
+    
+    var body: some View {
+        Button(
+            action: { showSheet.value = .cellDetail(self.index) },
+            label: {
+                CellView(cell: board.cells[self.index], width: 85, height: 75)
+            }
+        )
+    }
+}
+
 struct CellView: View {
     let cell: Cell
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
         ZStack {
@@ -45,8 +60,9 @@ struct CellView: View {
                 CanBeView(canBe: cell.canBe)
             }
         }
-        .frame(width: 85, height: 75)
+        .frame(width: width, height: height)
         .overlay(strokedRoundedRectangle(cornerRadius: 1))
+        .foregroundColor(.primary)
     }
 }
 
@@ -98,7 +114,7 @@ struct Cell_Previews: PreviewProvider {
     static let cell = Cell()
     static var previews: some View {
         VStack {
-            CellView(cell: cell)
+            CellView(cell: cell, width: 85, height: 75)
         }
     }
 }

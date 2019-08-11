@@ -72,29 +72,70 @@ class Board {
     init() {
         for _ in 0...255 { self.cells.append(Cell()) }
     }
+    
+    var unset: [Int] {
+        var ret: [Int] = []
+        for i in cells.indices {
+            if cells[i].value == 0 { ret.append(i) }
+        }
+        return ret
+    }
 
-    private func canBeSet(_ index: Int, _ value: Int, _ set: Bool) {
+    private func canBeSetAll(_ index: Int, _ value: Int, _ set: Bool) -> Bool {
+        var ret = true
         var j = -1
         for i in allForCell(index).sorted() {
             if (i != j && i != index) {
                 _ = cells[i].canBe.set(value, set)
+                if cells[i].canBe.isEmpty { ret = false }
+                j = i
+            }
+        }
+        return ret
+    }
+    
+    private func canBeRecalc(_ index: Int) {
+        let cell = cells[index]
+        cell.canBe = all16
+        var j = -1
+        for i in allForCell(index).sorted() {
+            if (i != j && i != index) {
+                let value = cells[i].value
+                if value != 0 { _ = cell.canBe.set(value, false) }
                 j = i
             }
         }
     }
 
-    func set(_ index: Int, _ value: Int) {
+    func set(_ index: Int, _ value: Int) -> Bool {
+        var ret = true
         let cell = self.cells[ index ]
-        if !range16.contains(cell.value) {
+        if range16.contains(value) {
             cell.value = value
-            canBeSet(index, value, false)
+            cell.canBe.setOnly(value)
+            if canBeSetAll(index, value, false) { ret = false }
         }
+        else {
+            cell.value = 0
+            _ = canBeSetAll(index, value, true)
+            canBeRecalc(index)
+        }
+        
+        return ret
     }
 
     static var random: Board {
         let board = Board()
-        for _ in 1...32 {
-            board.set(Int.random(in: 0...255), Int.random(in: 1...16))
+        for _ in 1...64 {
+            while true {
+                let i = Int.random(in: 0...255)
+                let cell = board.cells[i]
+                if cell.value != 0 || cell.canBe.isEmpty { continue }
+                let list = cell.canBe.list
+                let value = list[Int.random(in: 0..<list.count)]
+                _ = board.set(i, value)
+                break
+            }
         }
         return board
     }

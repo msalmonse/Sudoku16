@@ -24,10 +24,17 @@ extension Set16 {
         return (self & mask(i)) != 0
     }
     
-    var isEmpty: Bool { return self == none16 }
     
     var count: Int { return self.nonzeroBitCount }
-
+    var isEmpty: Bool { return self == none16 }
+    var list: [Int] {
+        var ret: [Int] = []
+        for i in range16 {
+            if self.contains(i) { ret.append(i) }
+        }
+        return ret
+    }
+    
     mutating func set(_ i: Int, _ set: Bool) -> Bool {
         let was = self.contains(i)
         if range16.contains(i) {
@@ -35,5 +42,9 @@ extension Set16 {
             else { self &= ~mask(i)}
         }
         return was
+    }
+    
+    mutating func setOnly(_ i: Int) {
+        if range16.contains(i) {self = mask(i) }
     }
 }
