@@ -25,12 +25,14 @@ struct CellDetail: View {
     var body: some View {
         VStack {
             Spacer()
-            CellView(cell: cell, width: 340, height: 300)
+            CellView(cell: cell, width: 340, height: 340)
+                .padding()
             HStack(spacing: 3) {
                 Button(
                     action: { _ = board.set(self.index, 0) },
-                    label: { Image(systemName: "clear").font(.title) }
+                    label: { Image(systemName: "clear").font(.largeTitle) }
                 )
+                .foregroundColor((cell.value == 0) ? .primary : .secondary)
                 .disabled(cell.value == 0)
                 Group {
                     NumberButton(index: index, number: 1, enable: enableButton(1))
@@ -39,7 +41,7 @@ struct CellDetail: View {
                     NumberButton(index: index, number: 4, enable: enableButton(4))
                     NumberButton(index: index, number: 5, enable: enableButton(5))
                     NumberButton(index: index, number: 6, enable: enableButton(6))
-                    NumberButton(index: index, number: 6, enable: enableButton(7))
+                    NumberButton(index: index, number: 7, enable: enableButton(7))
                     NumberButton(index: index, number: 8, enable: enableButton(8))
                 }
                 Group {
@@ -58,12 +60,13 @@ struct CellDetail: View {
                 action: { self.mode.value.dismiss() },
                 label: {
                     Text("Dismiss")
-                    .font(.title)
+                    .font(.largeTitle)
                     .foregroundColor(.primary)
                     .padding()
-                    .overlay(strokedRoundedRectangle(cornerRadius: 10))
+                    .overlay(strokedRoundedRectangle(cornerRadius: 16))
                 }
             )
+            Spacer()
         }
     }
 }
@@ -76,8 +79,9 @@ struct NumberButton: View {
     var body: some View {
         Button(
             action: { _ = board.set(self.index, self.number) },
-            label: { Image(systemName: nameForValue(number)).font(.title) }
+            label: { Image(systemName: nameForValue(number)).font(.largeTitle) }
         )
+        .foregroundColor(enable ? .primary : .secondary)
         .disabled(!enable)
 
     }

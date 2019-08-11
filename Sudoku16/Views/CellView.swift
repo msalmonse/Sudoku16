@@ -15,7 +15,7 @@ struct CellButton: View {
         Button(
             action: { showSheet.value = .cellDetail(self.index) },
             label: {
-                CellView(cell: board.cells[self.index], width: 85, height: 75)
+                CellView(cell: board.cells[self.index], width: 85, height: 85)
             }
         )
     }
@@ -30,14 +30,15 @@ struct CellView: View {
         ZStack {
             if cell.value <= 16 && cell.value > 0 {
                 Image(systemName: nameForValue(cell.value))
-                .font(Font.largeTitle.weight(.bold))
+                .font(Font.largeTitle.weight(.semibold))
             }
             else {
                 CanBeView(canBe: cell.canBe)
             }
         }
         .frame(width: width, height: height)
-        .overlay(strokedRoundedRectangle(cornerRadius: 1))
+        .scaleEffect(min(width, height)/85.0)
+        .overlay(strokedRoundedRectangle(cornerRadius: width/85.0))
         .foregroundColor(.primary)
     }
 }
@@ -46,7 +47,7 @@ struct CanBeView: View {
     let canBe: Set16
     
     var body: some View {
-        VStack(spacing: 3) {
+        VStack(spacing: 5) {
             MiniCellRow(canBe: canBe, start: 1)
             MiniCellRow(canBe: canBe, start: 5)
             MiniCellRow(canBe: canBe, start: 9)
@@ -60,7 +61,7 @@ struct MiniCellRow: View {
     let start: Int
     
     var body: some View {
-        HStack(spacing: 3) {
+        HStack(spacing: 2) {
             MiniCellView(canBe: canBe, index: start)
             MiniCellView(canBe: canBe, index: start + 1)
             MiniCellView(canBe: canBe, index: start + 2)
