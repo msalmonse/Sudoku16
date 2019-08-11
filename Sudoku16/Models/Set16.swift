@@ -13,19 +13,22 @@ import Foundation
 typealias Set16 = UInt16
 
 let all16: Set16 = 0xffff
-let range16 = 0...15
+let range16 = 1...16
 
 extension Set16 {
+    private func mask(_ i: Int) -> UInt16 { return UInt16(1 << (i - 1)) }
+
     func contains(_ i: Int) -> Bool {
         if !range16.contains(i) { return false }
-        return (self & (1 << i)) != 0
+        return (self & mask(i)) != 0
     }
     
-    mutating func set(_ i: Int) {
-        if range16.contains(i) { self |= (1 << i) }
-    }
-    
-    mutating func unset(_ i: Int) {
-        if range16.contains(i) { self &= ~(1 << i) }
+    mutating func set(_ i: Int, _ set: Bool) -> Bool {
+        let was = self.contains(i)
+        if range16.contains(i) {
+            if (set) { self |= mask(i) }
+            else { self &= ~mask(i)}
+        }
+        return was
     }
 }

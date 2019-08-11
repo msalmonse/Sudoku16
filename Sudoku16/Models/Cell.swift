@@ -10,7 +10,7 @@ import Foundation
 
 /// Details of each cell
 
-struct Cell {
-    var value: Int = -1
+class Cell {
+    var value: Int = 0
     var canBe = all16
 }

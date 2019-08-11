@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-let board = Board()
+var board = Board.random
 
 struct ContentView: View {
     var body: some View {
