@@ -23,6 +23,9 @@
 		C45F582F22FF4E9E008762F1 /* BoardSquares.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F582E22FF4E9E008762F1 /* BoardSquares.swift */; };
 		C495684B23003A16007C707B /* Published.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495684A23003A16007C707B /* Published.swift */; };
 		C495684D23003A5B007C707B /* ShowSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495684C23003A5B007C707B /* ShowSheet.swift */; };
+		C495684F23004DCE007C707B /* CellDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495684E23004DCE007C707B /* CellDetail.swift */; };
+		C495685123004F3C007C707B /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685023004F3C007C707B /* Sheets.swift */; };
+		C495685323005084007C707B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685223005084007C707B /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,9 @@
 		C45F582E22FF4E9E008762F1 /* BoardSquares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSquares.swift; sourceTree = "<group>"; };
 		C495684A23003A16007C707B /* Published.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Published.swift; sourceTree = "<group>"; };
 		C495684C23003A5B007C707B /* ShowSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSheet.swift; sourceTree = "<group>"; };
+		C495684E23004DCE007C707B /* CellDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetail.swift; sourceTree = "<group>"; };
+		C495685023004F3C007C707B /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
+		C495685223005084007C707B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,7 @@
 				C45F582222FEFAD6008762F1 /* Set16.swift */,
 				C495684A23003A16007C707B /* Published.swift */,
 				C495684C23003A5B007C707B /* ShowSheet.swift */,
+				C495685223005084007C707B /* Observable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -143,9 +150,11 @@
 		C45F582622FF0F54008762F1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C45F582722FF0F7F008762F1 /* CellView.swift */,
-				C45F582922FF46F9008762F1 /* CellSquare.swift */,
 				C45F582E22FF4E9E008762F1 /* BoardSquares.swift */,
+				C495684E23004DCE007C707B /* CellDetail.swift */,
+				C45F582922FF46F9008762F1 /* CellSquare.swift */,
+				C45F582722FF0F7F008762F1 /* CellView.swift */,
+				C495685023004F3C007C707B /* Sheets.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,10 +269,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C495684D23003A5B007C707B /* ShowSheet.swift in Sources */,
+				C495685323005084007C707B /* Observable.swift in Sources */,
 				C495684B23003A16007C707B /* Published.swift in Sources */,
 				C45F582A22FF46FA008762F1 /* CellSquare.swift in Sources */,
 				C45F582F22FF4E9E008762F1 /* BoardSquares.swift in Sources */,
 				C45F582522FEFBFA008762F1 /* Board.swift in Sources */,
+				C495685123004F3C007C707B /* Sheets.swift in Sources */,
+				C495684F23004DCE007C707B /* CellDetail.swift in Sources */,
 				C45F582D22FF4BE2008762F1 /* Shapes.swift in Sources */,
 				C45F582122FEF9C3008762F1 /* Cell.swift in Sources */,
 				C45F582822FF0F7F008762F1 /* CellView.swift in Sources */,

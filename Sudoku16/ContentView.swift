@@ -15,8 +15,11 @@ var showSheet = PublishedShowSheet(.none)
 
 struct ContentView: View {
     var body: some View {
-        ScrollView([.horizontal, .vertical]) {
-            BoardSquares()
+        HStack {
+            ScrollView([.horizontal, .vertical]) {
+                BoardSquares()
+            }
+            Sheets()
         }
     }
 }

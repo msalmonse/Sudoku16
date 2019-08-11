@@ -14,3 +14,27 @@ class Cell {
     var value: Int = 0
     var canBe = all16
 }
+
+// Convert a value to an image name
+
+func nameForValue(_ i: Int) -> String {
+    switch i {
+    case  1: return  "1.square"
+    case  2: return  "2.square"
+    case  3: return  "3.square"
+    case  4: return  "4.square"
+    case  5: return  "5.square"
+    case  6: return  "6.square"
+    case  7: return  "7.square"
+    case  8: return  "8.square"
+    case  9: return  "9.square"
+    case 10: return "10.square"
+    case 11: return "11.square"
+    case 12: return "12.square"
+    case 13: return "13.square"
+    case 14: return "14.square"
+    case 15: return "15.square"
+    case 16: return "16.square"
+    default: return "square"
+    }
+}
