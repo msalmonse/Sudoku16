@@ -67,6 +67,7 @@ func squareColor(cell: Int) -> Color {
 }
 
 class Board {
+    var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
     
     init() {
@@ -81,6 +82,7 @@ class Board {
         return ret
     }
 
+    // Set all the canBe's in rows, columns or squares, ignoring duplicates
     private func canBeSetAll(_ index: Int, _ value: Int, _ set: Bool) -> Bool {
         var ret = true
         var j = -1
@@ -94,6 +96,7 @@ class Board {
         return ret
     }
     
+    // Recalculate the canBe based on all values
     private func canBeRecalc(_ index: Int) {
         let cell = cells[index]
         cell.canBe = all16
