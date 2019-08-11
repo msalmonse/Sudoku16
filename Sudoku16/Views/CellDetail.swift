@@ -11,10 +11,15 @@ import SwiftUI
 struct CellDetail: View {
     let index: Int
     let cell: Cell
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     init(index: Int) {
         self.index = index
         cell = board.cells[index]
+    }
+    
+    func enableButton(_ index: Int) -> Bool {
+        return cell.value == 0 && cell.canBe.contains(index)
     }
 
     var body: some View {
@@ -27,26 +32,37 @@ struct CellDetail: View {
                 )
                 .disabled(cell.value == 0)
                 Group {
-                    NumberButton(index: index, number: 1, enable: cell.canBe.contains(1))
-                    NumberButton(index: index, number: 2, enable: cell.canBe.contains(2))
-                    NumberButton(index: index, number: 3, enable: cell.canBe.contains(3))
-                    NumberButton(index: index, number: 4, enable: cell.canBe.contains(4))
-                    NumberButton(index: index, number: 5, enable: cell.canBe.contains(5))
-                    NumberButton(index: index, number: 6, enable: cell.canBe.contains(6))
-                    NumberButton(index: index, number: 6, enable: cell.canBe.contains(7))
-                    NumberButton(index: index, number: 8, enable: cell.canBe.contains(8))
+                    NumberButton(index: index, number: 1, enable: enableButton(1))
+                    NumberButton(index: index, number: 2, enable: enableButton(2))
+                    NumberButton(index: index, number: 3, enable: enableButton(3))
+                    NumberButton(index: index, number: 4, enable: enableButton(4))
+                    NumberButton(index: index, number: 5, enable: enableButton(5))
+                    NumberButton(index: index, number: 6, enable: enableButton(6))
+                    NumberButton(index: index, number: 6, enable: enableButton(7))
+                    NumberButton(index: index, number: 8, enable: enableButton(8))
                 }
                 Group {
-                    NumberButton(index: index, number: 9, enable: cell.canBe.contains(9))
-                    NumberButton(index: index, number: 10, enable: cell.canBe.contains(10))
-                    NumberButton(index: index, number: 11, enable: cell.canBe.contains(11))
-                    NumberButton(index: index, number: 12, enable: cell.canBe.contains(12))
-                    NumberButton(index: index, number: 13, enable: cell.canBe.contains(13))
-                    NumberButton(index: index, number: 14, enable: cell.canBe.contains(14))
-                    NumberButton(index: index, number: 15, enable: cell.canBe.contains(15))
-                    NumberButton(index: index, number: 16, enable: cell.canBe.contains(16))
+                    NumberButton(index: index, number: 9, enable: enableButton(9))
+                    NumberButton(index: index, number: 10, enable: enableButton(10))
+                    NumberButton(index: index, number: 11, enable: enableButton(11))
+                    NumberButton(index: index, number: 12, enable: enableButton(12))
+                    NumberButton(index: index, number: 13, enable: enableButton(13))
+                    NumberButton(index: index, number: 14, enable: enableButton(14))
+                    NumberButton(index: index, number: 15, enable: enableButton(15))
+                    NumberButton(index: index, number: 16, enable: enableButton(16))
                 }
             }
+            Spacer()
+            Button(
+                action: { self.mode.value.dismiss() },
+                label: {
+                    Text("Dismiss")
+                    .font(.title)
+                    .foregroundColor(.primary)
+                    .padding()
+                    .overlay(strokedRoundedRectangle(cornerRadius: 10))
+                }
+            )
         }
     }
 }
