@@ -73,4 +73,14 @@ class Sudoku16Tests: XCTestCase {
             XCTAssertEqual(squareForCell(i), testDict[i])
         }
     }
+    
+    func testBoard() {
+        let test = Board()
+        XCTAssertEqual(test.cells[123].canBe, all16)
+        _ = test.set(124, 4)
+        XCTAssertNotEqual(test.cells[123].canBe, all16)
+        XCTAssertFalse(test.cells[123].canBe.contains(4))
+        _ = test.set(124, 0)
+        XCTAssertEqual(test.cells[123].canBe, all16)
+    }
 }
