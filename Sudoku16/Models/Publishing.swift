@@ -1,5 +1,5 @@
 //
-//  Published.swift
+//  Publishing.swift
 //  Sudoku16
 //
 //  Created by Michael Salmon on 2019-08-11.
@@ -11,7 +11,7 @@ import Combine
 
 /// Generic wrapper for publishing data
 
-class Published<T> {
+class Publishing<T> {
     var publisher = PassthroughSubject<T, Never>()
     var value: T {
         didSet { publisher.send(value) }
@@ -20,4 +20,4 @@ class Published<T> {
     init(_ initialValue: T) { self.value = initialValue }
 }
 
-typealias PublishedString = Published<String>
+typealias PublishingString = Publishing<String>

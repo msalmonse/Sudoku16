@@ -15,4 +15,4 @@ enum ShowSheet {
     case cellDetail(Int)
 }
 
-typealias PublishedShowSheet = Published<ShowSheet>
+typealias PublishingShowSheet = Publishing<ShowSheet>

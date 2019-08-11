@@ -10,8 +10,11 @@ import Foundation
 
 /// Details of each cell
 
-class Cell {
+class Cell: ObservableObject, Identifiable {
+    let id = UUID()
+    @Published
     var value: Int = 0
+    @Published
     var canBe = all16
 }
 

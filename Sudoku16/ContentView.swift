@@ -11,7 +11,7 @@ import SwiftUI
 var board = Board.random
 
 // which sheet to show
-var showSheet = PublishedShowSheet(.none)
+var showSheet = PublishingShowSheet(.none)
 
 struct ContentView: View {
     var body: some View {
