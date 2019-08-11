@@ -22,7 +22,7 @@ struct CellButton: View {
 }
 
 struct CellView: View {
-    let cell: Cell
+    @ObservedObject var cell: Cell
     let width: CGFloat
     let height: CGFloat
     

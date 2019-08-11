@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CellDetail: View {
     let index: Int
-    let cell: Cell
+    @ObservedObject var cell: Cell
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     init(index: Int) {
@@ -24,6 +24,7 @@ struct CellDetail: View {
 
     var body: some View {
         VStack {
+            Spacer()
             CellView(cell: cell, width: 340, height: 300)
             HStack(spacing: 3) {
                 Button(
