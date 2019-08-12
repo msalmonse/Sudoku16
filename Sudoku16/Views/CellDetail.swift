@@ -81,10 +81,14 @@ struct NumberButton: View {
     let index: Int
     let number: Int
     let enable: Bool
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         Button(
-            action: { _ = board.set(self.index, self.number) },
+            action: {
+                _ = board.set(self.index, self.number)
+                self.mode.value.dismiss()
+            },
             label: { Image(systemName: nameForValue(number)).font(.largeTitle) }
         )
         .foregroundColor(enable ? .primary : .secondary)
