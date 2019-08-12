@@ -27,32 +27,38 @@ struct CellDetail: View {
             Spacer()
             CellView(cell: cell, width: 340, height: 340)
             .padding()
-            HStack(spacing: 3) {
+            HStack(alignment: VerticalAlignment.center) {
                 Button(
                     action: { _ = board.set(self.index, 0) },
                     label: { Image(systemName: "clear").font(.largeTitle) }
                 )
                 .foregroundColor((cell.value != 0) ? .primary : .secondary)
                 .disabled(cell.value == 0)
-                Group {
-                    NumberButton(index: index, number: 1, enable: enableButton(1))
-                    NumberButton(index: index, number: 2, enable: enableButton(2))
-                    NumberButton(index: index, number: 3, enable: enableButton(3))
-                    NumberButton(index: index, number: 4, enable: enableButton(4))
-                    NumberButton(index: index, number: 5, enable: enableButton(5))
-                    NumberButton(index: index, number: 6, enable: enableButton(6))
-                    NumberButton(index: index, number: 7, enable: enableButton(7))
-                    NumberButton(index: index, number: 8, enable: enableButton(8))
-                }
-                Group {
-                    NumberButton(index: index, number: 9, enable: enableButton(9))
-                    NumberButton(index: index, number: 10, enable: enableButton(10))
-                    NumberButton(index: index, number: 11, enable: enableButton(11))
-                    NumberButton(index: index, number: 12, enable: enableButton(12))
-                    NumberButton(index: index, number: 13, enable: enableButton(13))
-                    NumberButton(index: index, number: 14, enable: enableButton(14))
-                    NumberButton(index: index, number: 15, enable: enableButton(15))
-                    NumberButton(index: index, number: 16, enable: enableButton(16))
+                VStack {
+                    HStack {
+                        NumberButton(index: index, number: 1, enable: enableButton(1))
+                        NumberButton(index: index, number: 2, enable: enableButton(2))
+                        NumberButton(index: index, number: 3, enable: enableButton(3))
+                        NumberButton(index: index, number: 4, enable: enableButton(4))
+                    }
+                    HStack {
+                        NumberButton(index: index, number: 5, enable: enableButton(5))
+                        NumberButton(index: index, number: 6, enable: enableButton(6))
+                        NumberButton(index: index, number: 7, enable: enableButton(7))
+                        NumberButton(index: index, number: 8, enable: enableButton(8))
+                    }
+                    HStack {
+                        NumberButton(index: index, number: 9, enable: enableButton(9))
+                        NumberButton(index: index, number: 10, enable: enableButton(10))
+                        NumberButton(index: index, number: 11, enable: enableButton(11))
+                        NumberButton(index: index, number: 12, enable: enableButton(12))
+                    }
+                    HStack {
+                        NumberButton(index: index, number: 13, enable: enableButton(13))
+                        NumberButton(index: index, number: 14, enable: enableButton(14))
+                        NumberButton(index: index, number: 15, enable: enableButton(15))
+                        NumberButton(index: index, number: 16, enable: enableButton(16))
+                    }
                 }
             }
             Spacer()
