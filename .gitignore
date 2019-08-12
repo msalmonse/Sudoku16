@@ -1,9 +1,9 @@
 .DS_store
 
 ## User settings
-ColourViewer.xcodeproj/project.xcworkspace/
-ColourViewer.xcodeproj/xcuserdata/
-ColourViewer.xcodeproj/xcshareddata/
+Sudoku16.xcodeproj/project.xcworkspace/
+Sudoku16.xcodeproj/xcuserdata/
+Sudoku16.xcodeproj/xcshareddata/
 ## previews
-ColourViewer/Preview\ Content/
-ColourViewer/iconGen_ColourViewer*/
+Sudoku16/Preview\ Content/
+Sudoku16/iconGen_ColourViewer*/
