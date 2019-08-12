@@ -31,8 +31,39 @@ fileprivate let solution1 = [                                          // Row #
 ]
 
 extension Board {
+
+    func swapColumns(_ a: Int, _ b: Int) {
+        for i in stride(from: 0, to: 256, by: 16) {
+            let t = solution[a + i]
+            solution[a + i] = solution[b + i]
+            solution[b + i] = t
+        }
+    }
+
+    func swapRows(_ a: Int, _ b: Int) {
+        for i in 0...15 {
+            let t = solution[a + i]
+            solution[a + i] = solution[b + i]
+            solution[b + i] = t
+        }
+    }
+
+    func swapColumnsInSquare(_ a: Int) {
+        let b = (a & ~3) + Int.random(in: 0...3) // Random column in the same square
+        if a != b { swapColumns(a, b) }
+    }
+
+    func swapRowsInSquare(_ a: Int) {
+        let b = (a & ~0x30) + Int.random(in: 0...3) << 4 // Random column in the same square
+        if a != b { swapRows(a, b) }
+    }
+
     func randomSolve() {
         let digitSwap = [0] + Array(1...16).shuffled()
         solution = solution1.map{digitSwap[$0]}
+        for _ in 0...9 {
+            swapColumnsInSquare(Int.random(in: 0...15))
+            swapRowsInSquare(Int.random(in: 0...15) << 4)
+        }
     }
 }

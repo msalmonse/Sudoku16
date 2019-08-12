@@ -62,18 +62,50 @@ struct CellDetail: View {
                 }
             }
             Spacer()
+            HStack {
+                
+                Button(
+                    action: {
+                        board.restart()
+                        self.mode.value.dismiss()
+                    },
+                    label: {
+                        ButtonText(text: "Restart")
+                    }
+                )
+
+                Button(
+                    action: {
+                        board.solve()
+                        self.mode.value.dismiss()
+                    },
+                    label: {
+                        ButtonText(text: "Solve")
+                    }
+                )
+            }
+            
             Button(
                 action: { self.mode.value.dismiss() },
                 label: {
-                    Text("Dismiss")
-                    .font(.largeTitle)
-                    .foregroundColor(.primary)
-                    .padding()
-                    .overlay(strokedRoundedRectangle(cornerRadius: 16))
+                    ButtonText(text: "Dismiss")
                 }
             )
             Spacer()
         }
+    }
+}
+
+struct ButtonText: View {
+    let text: String
+    
+    var body: some View {
+        Text(text)
+        .font(.largeTitle)
+        .foregroundColor(.primary)
+        .padding()
+        .frame(width: 200)
+        .overlay(strokedRoundedRectangle(cornerRadius: 16))
     }
 }
 

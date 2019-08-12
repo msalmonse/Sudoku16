@@ -75,7 +75,7 @@ class Board {
     }
     
     // Copy all or a part of the solution
-    private func solve(_ count: Int = 256) {
+    func solve(_ count: Int = 256) {
         let indices = Array(0...255).shuffled().prefix(count)
         let update = (count < 256)
         for i in indices {
@@ -109,6 +109,15 @@ class Board {
                 j = i
             }
         }
+    }
+    
+    func clear() {
+        for i in cells.indices { cells[i].clear() }
+    }
+    
+    func restart() {
+        clear()
+        solve(128)
     }
 
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {

@@ -31,6 +31,11 @@ class Cell: ObservableObject, Identifiable {
     @Published
     var canBe = all16
     var highlight: [CellHighlight] = Array(repeating: .none, count: 17)
+    
+    func clear() {
+        value = 0
+        canBe = all16
+    }
 }
 
 // Convert a value to an image name
