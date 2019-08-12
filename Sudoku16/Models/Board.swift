@@ -74,14 +74,15 @@ class Board {
         for _ in 0...255 { self.cells.append(Cell()) }
     }
     
-    var unset: [Int] {
-        var ret: [Int] = []
-        for i in cells.indices {
-            if cells[i].value == 0 { ret.append(i) }
+    // Copy all or a part of the solution
+    private func solve(_ count: Int = 256) {
+        let indices = Array(0...255).shuffled().prefix(count)
+        let update = (count < 256)
+        for i in indices {
+            _ = set(i, solution[i], updateCanBe: update)
         }
-        return ret
     }
-
+    
     // Set all the canBe's in rows, columns or squares, ignoring duplicates
     private func canBeSetAll(_ index: Int, _ value: Int, _ set: Bool) -> Bool {
         var ret = true
@@ -110,13 +111,15 @@ class Board {
         }
     }
 
-    func set(_ index: Int, _ value: Int) -> Bool {
+    func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
         var ret = true
         let cell = self.cells[ index ]
         if range16.contains(value) {
             cell.value = value
             cell.canBe.setOnly(value)
-            if canBeSetAll(index, value, false) { ret = false }
+            if updateCanBe {
+                if !canBeSetAll(index, value, false) { ret = false }
+            }
         }
         else {
             if range16.contains(cell.value) { _ = canBeSetAll(index, cell.value, true) }
@@ -129,17 +132,8 @@ class Board {
 
     static var random: Board {
         let board = Board()
-        for _ in 1...64 {
-            while true {
-                let i = Int.random(in: 0...255)
-                let cell = board.cells[i]
-                if cell.value != 0 || cell.canBe.isEmpty { continue }
-                let list = cell.canBe.list
-                let value = list[Int.random(in: 0..<list.count)]
-                _ = board.set(i, value)
-                break
-            }
-        }
+        board.randomSolve()
+        board.solve(128)
         return board
     }
 }
