@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C437DEDD2301B6B0005FF528 /* SwapT.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEDC2301B6B0005FF528 /* SwapT.swift */; };
 		C45F57FE22FEF71C008762F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F57FD22FEF71C008762F1 /* AppDelegate.swift */; };
 		C45F580022FEF71C008762F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F57FF22FEF71C008762F1 /* SceneDelegate.swift */; };
 		C45F580222FEF71C008762F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F580122FEF71C008762F1 /* ContentView.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C437DEDC2301B6B0005FF528 /* SwapT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapT.swift; sourceTree = "<group>"; };
 		C45F57FA22FEF71C008762F1 /* Sudoku16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C45F57FD22FEF71C008762F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C45F57FF22FEF71C008762F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				C45F582C22FF4BE2008762F1 /* Shapes.swift */,
+				C437DEDC2301B6B0005FF528 /* SwapT.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				C495685523012F9D007C707B /* RandomSolve.swift in Sources */,
 				C495685123004F3C007C707B /* Sheets.swift in Sources */,
 				C495684F23004DCE007C707B /* CellDetail.swift in Sources */,
+				C437DEDD2301B6B0005FF528 /* SwapT.swift in Sources */,
 				C45F582D22FF4BE2008762F1 /* Shapes.swift in Sources */,
 				C45F582122FEF9C3008762F1 /* Cell.swift in Sources */,
 				C45F582822FF0F7F008762F1 /* CellView.swift in Sources */,

@@ -85,4 +85,22 @@ class Sudoku16Tests: XCTestCase {
         
         _ = test.randomSolve()
     }
+
+    func testSwap() {
+        var a = 999
+        var b = 666
+        
+        swap(&a, &b)
+        
+        XCTAssertEqual(a, 666)
+        XCTAssertEqual(b, 999)
+        
+        var c = "Hello"
+        var d = "World"
+        
+        swap(&c, &d)
+        
+        XCTAssertEqual(c, "World")
+        XCTAssertEqual(d, "Hello")
+    }
 }
