@@ -8,6 +8,19 @@
 
 import SwiftUI
 
+fileprivate func cellHighlight(_ cell: Cell) -> Cell {
+    var hi: CellHighlight = .none
+    switch cell.canBe.count {
+    case 1: hi = .canBe1
+    case 2: hi = .canBe2
+    default: break
+    }
+    for i in range16 {
+        cell.highlight[i] = cell.canBe.contains(i) ? hi : .none
+    }
+    return cell
+}
+
 struct CellButton: View {
     let index: Int
     
@@ -33,7 +46,7 @@ struct CellView: View {
                 .font(Font.largeTitle.weight(.semibold))
             }
             else {
-                CanBeView(canBe: cell.canBe)
+                CanBeView(cell: cellHighlight(cell))
             }
         }
         .frame(width: width, height: height)
@@ -44,46 +57,50 @@ struct CellView: View {
 }
 
 struct CanBeView: View {
-    let canBe: Set16
+    @ObservedObject var cell: Cell
     
     var body: some View {
         VStack(spacing: 5) {
-            MiniCellRow(canBe: canBe, start: 1)
-            MiniCellRow(canBe: canBe, start: 5)
-            MiniCellRow(canBe: canBe, start: 9)
-            MiniCellRow(canBe: canBe, start: 13)
+            MiniCellRow(cell: cell, start: 1)
+            MiniCellRow(cell: cell, start: 5)
+            MiniCellRow(cell: cell, start: 9)
+            MiniCellRow(cell: cell, start: 13)
         }
     }
 }
 
 struct MiniCellRow: View {
-    let canBe: Set16
+    @ObservedObject var cell: Cell
     let start: Int
     
     var body: some View {
         HStack(spacing: 2) {
-            MiniCellView(canBe: canBe, index: start)
-            MiniCellView(canBe: canBe, index: start + 1)
-            MiniCellView(canBe: canBe, index: start + 2)
-            MiniCellView(canBe: canBe, index: start + 3)
+            MiniCellView(cell: cell, index: start)
+            MiniCellView(cell: cell, index: start + 1)
+            MiniCellView(cell: cell, index: start + 2)
+            MiniCellView(cell: cell, index: start + 3)
         }
 
     }
 }
 
 struct MiniCellView: View {
-    let index: Int
+    @ObservedObject var cell: Cell
     let show: Bool
+    let color: Color
+    let name: String
     
-    init(canBe: Set16, index: Int) {
-        show = canBe.contains(index)
-        self.index = show ? index : 0
+    init(cell: Cell, index: Int) {
+        show = cell.canBe.contains(index)
+        name = nameForValue(show ? index : 0)
+        color = show ? cell.highlight[index].color : .secondary
+        self.cell = cell
     }
     
     var body: some View {
-        Image(systemName: nameForValue(index))
+        Image(systemName: name)
         .opacity(show ? 1.0 : 0.1)
-        .scaledToFit()
+        .foregroundColor(color)
     }
 }
 #if DEBUG

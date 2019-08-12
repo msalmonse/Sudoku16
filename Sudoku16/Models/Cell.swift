@@ -7,7 +7,21 @@
 //
 
 import Foundation
+import SwiftUI
 
+enum CellHighlight {
+    case none   // no highlighting
+    case canBe1 // only one possibility
+    case canBe2 // two possibilities
+    
+    var color: Color {
+        switch self {
+        case .none:   return .primary
+        case .canBe1: return .green
+        case .canBe2: return .orange
+        }
+    }
+}
 /// Details of each cell
 
 class Cell: ObservableObject, Identifiable {
@@ -16,6 +30,7 @@ class Cell: ObservableObject, Identifiable {
     var value: Int = 0
     @Published
     var canBe = all16
+    var highlight: [CellHighlight] = Array(repeating: .none, count: 17)
 }
 
 // Convert a value to an image name
