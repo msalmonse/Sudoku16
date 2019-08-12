@@ -26,13 +26,13 @@ struct CellDetail: View {
         VStack {
             Spacer()
             CellView(cell: cell, width: 340, height: 340)
-                .padding()
+            .padding()
             HStack(spacing: 3) {
                 Button(
                     action: { _ = board.set(self.index, 0) },
                     label: { Image(systemName: "clear").font(.largeTitle) }
                 )
-                .foregroundColor((cell.value == 0) ? .primary : .secondary)
+                .foregroundColor((cell.value != 0) ? .primary : .secondary)
                 .disabled(cell.value == 0)
                 Group {
                     NumberButton(index: index, number: 1, enable: enableButton(1))
