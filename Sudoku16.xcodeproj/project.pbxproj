@@ -64,6 +64,7 @@
 		C495685023004F3C007C707B /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
 		C495685223005084007C707B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C495685423012F9D007C707B /* RandomSolve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomSolve.swift; sourceTree = "<group>"; };
+		C495685623019541007C707B /* Sudoku16.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sudoku16.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +106,7 @@
 		C45F57FC22FEF71C008762F1 /* Sudoku16 */ = {
 			isa = PBXGroup;
 			children = (
+				C495685623019541007C707B /* Sudoku16.entitlements */,
 				C45F57FD22FEF71C008762F1 /* AppDelegate.swift */,
 				C45F580322FEF720008762F1 /* Assets.xcassets */,
 				C45F580122FEF71C008762F1 /* ContentView.swift */,
@@ -438,8 +440,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sudoku16/Sudoku16.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Sudoku16/Preview\\ Content";
+				DEVELOPMENT_TEAM = 8A3KPNDM5C;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sudoku16/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -448,6 +453,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.Sudoku16;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -457,8 +463,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sudoku16/Sudoku16.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Sudoku16/Preview\\ Content";
+				DEVELOPMENT_TEAM = 8A3KPNDM5C;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sudoku16/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -467,6 +476,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.Sudoku16;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
