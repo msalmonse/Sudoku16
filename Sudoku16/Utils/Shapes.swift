@@ -47,3 +47,23 @@ func filledRectangle(
 
     return Rectangle().foregroundColor(c)
 }
+
+
+func strokedCapsule(
+        stroke w: CGFloat = 1,
+        color c: Color = .primary
+    ) -> some View {
+    /// Return a stroked RoundedRectangle.
+    /// Primarily for overlays
+    
+    return Capsule().stroke(lineWidth: w).foregroundColor(c)
+}
+
+func filledCapsule(
+        color c: Color = .primary
+    ) -> some View {
+    /// Return a filled RoundedRectangle.
+    /// Primarily for backgrounds
+
+    return Capsule().foregroundColor(c)
+}

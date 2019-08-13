@@ -19,7 +19,7 @@ struct ButtonText: View {
         .foregroundColor(.primary)
         .padding()
         .frame(width: 200)
-        .overlay(strokedRoundedRectangle(cornerRadius: 16))
+        .overlay(strokedCapsule())
     }
 }
 
