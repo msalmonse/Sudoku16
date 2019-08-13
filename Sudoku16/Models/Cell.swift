@@ -9,29 +9,49 @@
 import Foundation
 import SwiftUI
 
+/// The highlight colour of a cell
+
 enum CellHighlight {
     case none   // no highlighting
+    case alert  // something wrong
+    case canBe0 // no possible values
     case canBe1 // only one possibility
     case canBe2 // two possibilities
+    case wrong  // doesn't match solution
     
     var color: Color {
         switch self {
-        case .none:   return .primary
-        case .canBe1: return .green
-        case .canBe2: return .orange
+        case .none:     return .primary
+        case .alert:    return .red
+        case .canBe0:   return .red
+        case .canBe1:   return .green
+        case .canBe2:   return .orange
+        case .wrong:    return .red
         }
     }
 }
+
 /// Details of each cell
 
 class Cell: ObservableObject, Identifiable {
+    // Indices for highlight
+    static let valueIndex = 0
+    // 1...16 for canBe values
+    static let borderIndex = 17
+
     let id = UUID()
     @Published
     var value: Int = 0
     @Published
     var canBe = all16
-    var highlight: [CellHighlight] = Array(repeating: .none, count: 17)
+    var highlight: [CellHighlight] = Array(repeating: .none, count: 18)
     
+    var backgroundColor: Color {
+        let hi = highlight[Cell.borderIndex]
+        return (hi == .none) ? .clear : hi.color.opacity(0.4)
+    }
+    var borderColor: Color { highlight[Cell.borderIndex].color }
+
     func clear() {
         value = 0
         canBe = all16

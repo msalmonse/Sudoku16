@@ -51,10 +51,14 @@ struct DetailNavigation: View {
 fileprivate struct NavButton: View {
     let direction: Direction
     let next: Int
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         Button(
-            action: { showSheet.value = .cellDetail(self.next) },
+            action: {
+                showSheet.value = .cellDetail(self.next)
+                self.mode.value.dismiss()
+            },
             label: {
                 Image(systemName: direction.symbol)
                 .font(.largeTitle)

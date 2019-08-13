@@ -125,6 +125,7 @@ class Board {
         let cell = self.cells[ index ]
         if range16.contains(value) {
             cell.value = value
+            cell.highlight[Cell.valueIndex] = (solution[index] == value) ? .none : .wrong
             cell.canBe.setOnly(value)
             if updateCanBe {
                 if !canBeSetAll(index, value, false) { ret = false }
@@ -134,6 +135,7 @@ class Board {
             if range16.contains(cell.value) { _ = canBeSetAll(index, cell.value, true) }
             cell.value = 0
             canBeRecalc(index)
+            cell.highlight[Cell.valueIndex] = .none
         }
         
         return ret
