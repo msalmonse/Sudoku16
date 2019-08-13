@@ -44,6 +44,7 @@ struct CellView: View {
             if cell.value <= 16 && cell.value > 0 {
                 Image(systemName: nameForValue(cell.value))
                 .font(Font.largeTitle.weight(.semibold))
+                .foregroundColor(cell.highlight[0].color)
             }
             else {
                 CanBeView(cell: cellHighlight(cell))
@@ -51,7 +52,6 @@ struct CellView: View {
         }
         .frame(width: width, height: height)
         .overlay(strokedRoundedRectangle(cornerRadius: 1))
-        .foregroundColor(.primary)
     }
 }
 
@@ -97,7 +97,7 @@ struct MiniCellView: View {
     var body: some View {
         Text(show ? "◼︎" : "◻︎")
         .font(.caption)
-        .opacity(show ? 1.0 : 0.1)
+        .opacity(show ? 1.0 : 0.2)
         .foregroundColor(color)
     }
 }

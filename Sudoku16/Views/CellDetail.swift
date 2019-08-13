@@ -27,11 +27,12 @@ struct CellDetail: View {
     
     // Return a canBe button
     func canBeButton(_ number: Int) -> some View {
+        let color: Color = cell.canBe.contains(number) ? .primary : .secondary
         return DetailButton(
             index: index,
             number: number,
             enable: cell.value == 0,
-            color: cell.highlight[number].color,
+            color: color,
             doIt: {
                 _ = self.cell.canBe.toggle(number)
             }
@@ -90,7 +91,7 @@ struct CellDetail: View {
                         )
                         .foregroundColor((cell.value != 0) ? .primary : .secondary)
                         .disabled(cell.value == 0)
-                        VStack {
+                        VStack(spacing: 12) {
                             numberRow(start:  1)
                             numberRow(start:  5)
                             numberRow(start:  9)
@@ -114,7 +115,7 @@ struct CellDetail: View {
                         )
                         .foregroundColor(.primary )
                         .disabled(cell.value != 0)
-                        VStack {
+                        VStack(spacing: 12) {
                             canBeRow(start:  1)
                             canBeRow(start:  5)
                             canBeRow(start:  9)
@@ -127,7 +128,7 @@ struct CellDetail: View {
             }
             Spacer()
             
-            DetailNavigation(index: index)
+            // FixME DetailNavigation(index: index)
 
             Button(
                 action: { self.mode.value.dismiss() },
@@ -152,8 +153,8 @@ struct DetailButton: View {
             action: doIt,
             label: { Image(systemName: nameForValue(number)).font(.largeTitle) }
         )
-        .foregroundColor(enable ? .primary : .secondary)
-        .opacity(enable ? 1.0 : 0.2)
+        .foregroundColor(color)
+        .opacity(enable ? 1.0 : 0.3)
         .disabled(!enable)
 
     }
