@@ -25,8 +25,6 @@ struct CellDetail: View {
     var body: some View {
         VStack {
             Spacer()
-            CellView(cell: cell, width: 340, height: 340)
-            .padding()
             HStack(alignment: VerticalAlignment.center) {
                 Button(
                     action: { _ = board.set(self.index, 0) },
@@ -62,28 +60,6 @@ struct CellDetail: View {
                 }
             }
             Spacer()
-            HStack {
-                
-                Button(
-                    action: {
-                        board.restart()
-                        self.mode.value.dismiss()
-                    },
-                    label: {
-                        ButtonText(text: "Restart")
-                    }
-                )
-
-                Button(
-                    action: {
-                        board.solve()
-                        self.mode.value.dismiss()
-                    },
-                    label: {
-                        ButtonText(text: "Solve")
-                    }
-                )
-            }
             
             Button(
                 action: { self.mode.value.dismiss() },
@@ -93,19 +69,6 @@ struct CellDetail: View {
             )
             Spacer()
         }
-    }
-}
-
-struct ButtonText: View {
-    let text: String
-    
-    var body: some View {
-        Text(text)
-        .font(.largeTitle)
-        .foregroundColor(.primary)
-        .padding()
-        .frame(width: 200)
-        .overlay(strokedRoundedRectangle(cornerRadius: 16))
     }
 }
 

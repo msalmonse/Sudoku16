@@ -10,13 +10,31 @@ import SwiftUI
 
 struct BoardSquares: View {
     var body: some View {
-        VStack(spacing: 0) {
-            SquaresRow(start: 0)
-            SquaresRow(start: 64)
-            SquaresRow(start: 128)
-            SquaresRow(start: 192)
+        VStack {
+            HStack {
+                Spacer()
+                VStack(alignment: HorizontalAlignment.center, spacing: 0) {
+                    SquaresRow(start: 0)
+                    SquaresRow(start: 64)
+                    SquaresRow(start: 128)
+                    SquaresRow(start: 192)
+                }
+                .overlay(strokedRectangle(stroke: 3))
+                Spacer()
+            }
+            
+            HStack {
+                Button(
+                    action: { board.restart() },
+                    label: { ButtonText(text: "Restart") }
+                )
+
+                Button(
+                    action: { board.solve() },
+                    label: { ButtonText(text: "Solve") }
+                )
+            }
         }
-    .overlay(strokedRectangle(stroke: 3))
     }
 }
 

@@ -28,7 +28,7 @@ struct CellButton: View {
         Button(
             action: { showSheet.value = .cellDetail(self.index) },
             label: {
-                CellView(cell: board.cells[self.index], width: 85, height: 85)
+                CellView(cell: board.cells[self.index], width: 50, height: 60)
             }
         )
     }
@@ -50,8 +50,7 @@ struct CellView: View {
             }
         }
         .frame(width: width, height: height)
-        .scaleEffect(min(width, height)/85.0)
-        .overlay(strokedRoundedRectangle(cornerRadius: width/85.0))
+        .overlay(strokedRoundedRectangle(cornerRadius: 1))
         .foregroundColor(.primary)
     }
 }
@@ -60,7 +59,7 @@ struct CanBeView: View {
     @ObservedObject var cell: Cell
     
     var body: some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 0) {
             MiniCellRow(cell: cell, start: 1)
             MiniCellRow(cell: cell, start: 5)
             MiniCellRow(cell: cell, start: 9)
@@ -74,7 +73,7 @@ struct MiniCellRow: View {
     let start: Int
     
     var body: some View {
-        HStack(spacing: 2) {
+        HStack(spacing: 0) {
             MiniCellView(cell: cell, index: start)
             MiniCellView(cell: cell, index: start + 1)
             MiniCellView(cell: cell, index: start + 2)
@@ -88,17 +87,16 @@ struct MiniCellView: View {
     @ObservedObject var cell: Cell
     let show: Bool
     let color: Color
-    let name: String
     
     init(cell: Cell, index: Int) {
         show = cell.canBe.contains(index)
-        name = nameForValue(show ? index : 0)
         color = show ? cell.highlight[index].color : .secondary
         self.cell = cell
     }
     
     var body: some View {
-        Image(systemName: name)
+        Text(show ? "◼︎" : "◻︎")
+        .font(.caption)
         .opacity(show ? 1.0 : 0.1)
         .foregroundColor(color)
     }
