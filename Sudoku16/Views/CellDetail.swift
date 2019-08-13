@@ -10,18 +10,17 @@ import SwiftUI
 
 struct CellDetail: View {
     let index: Int
-    let row: Int
-    let col: Int
     @ObservedObject var cell: Cell
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
+    var row: Int { (index >> 4) + 1 }
+    var col: Int { (index & 0x0f) + 1 }
+
     init(index: Int) {
-        self.index = index
-        row = (index >> 4) + 1
-        col = (index & 0x0f) + 1
         cell = board.cells[index]
+        self.index = index
     }
-    
+
     func enableButton(_ index: Int) -> Bool {
         return cell.value == 0 && cell.canBe.contains(index)
     }
