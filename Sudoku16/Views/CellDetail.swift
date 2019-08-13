@@ -10,54 +10,121 @@ import SwiftUI
 
 struct CellDetail: View {
     let index: Int
+    let row: Int
+    let col: Int
     @ObservedObject var cell: Cell
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     init(index: Int) {
         self.index = index
+        row = (index >> 4) + 1
+        col = (index & 0x0f) + 1
         cell = board.cells[index]
     }
     
     func enableButton(_ index: Int) -> Bool {
         return cell.value == 0 && cell.canBe.contains(index)
     }
+    
+    // Return a canBe button
+    func canBeButton(_ number: Int) -> some View {
+        return DetailButton(
+            index: index,
+            number: number,
+            enable: cell.value == 0,
+            color: cell.highlight[number].color,
+            doIt: {
+                _ = self.cell.canBe.toggle(number)
+            }
+        )
+    }
+    
+    // Return a canBe row
+    func canBeRow(start: Int) -> some View {
+        return HStack {
+            canBeButton(start + 0)
+            canBeButton(start + 1)
+            canBeButton(start + 2)
+            canBeButton(start + 3)
+        }
+    }
+
+    // Return a number button
+    func numberButton(_ number: Int) -> some View {
+        let enable = enableButton(number)
+        return DetailButton(
+            index: index,
+            number: number,
+            enable: enable,
+            color: enable ? .primary : .secondary,
+            doIt: {
+                _ = board.set(self.index, number)
+                self.mode.value.dismiss()
+            }
+        )
+    }
+    
+    // Return a number row
+    func numberRow(start: Int) -> some View {
+        return HStack {
+            numberButton(start + 0)
+            numberButton(start + 1)
+            numberButton(start + 2)
+            numberButton(start + 3)
+        }
+    }
 
     var body: some View {
         VStack {
+            Text("Details for Cell, Row \(row), Column \(col)")
+            .font(.title)
             Spacer()
-            HStack(alignment: VerticalAlignment.center) {
-                Button(
-                    action: { _ = board.set(self.index, 0) },
-                    label: { Image(systemName: "clear").font(.largeTitle) }
-                )
-                .foregroundColor((cell.value != 0) ? .primary : .secondary)
-                .disabled(cell.value == 0)
+            HStack {
                 VStack {
-                    HStack {
-                        NumberButton(index: index, number: 1, enable: enableButton(1))
-                        NumberButton(index: index, number: 2, enable: enableButton(2))
-                        NumberButton(index: index, number: 3, enable: enableButton(3))
-                        NumberButton(index: index, number: 4, enable: enableButton(4))
-                    }
-                    HStack {
-                        NumberButton(index: index, number: 5, enable: enableButton(5))
-                        NumberButton(index: index, number: 6, enable: enableButton(6))
-                        NumberButton(index: index, number: 7, enable: enableButton(7))
-                        NumberButton(index: index, number: 8, enable: enableButton(8))
-                    }
-                    HStack {
-                        NumberButton(index: index, number: 9, enable: enableButton(9))
-                        NumberButton(index: index, number: 10, enable: enableButton(10))
-                        NumberButton(index: index, number: 11, enable: enableButton(11))
-                        NumberButton(index: index, number: 12, enable: enableButton(12))
-                    }
-                    HStack {
-                        NumberButton(index: index, number: 13, enable: enableButton(13))
-                        NumberButton(index: index, number: 14, enable: enableButton(14))
-                        NumberButton(index: index, number: 15, enable: enableButton(15))
-                        NumberButton(index: index, number: 16, enable: enableButton(16))
+                    Text("Set/Reset Cell")
+                    .font(.headline)
+                    Spacer()
+                    HStack(alignment: VerticalAlignment.center) {
+                        Button(
+                            action: { _ = board.set(self.index, 0) },
+                            label: { Image(systemName: "clear").font(.largeTitle) }
+                        )
+                        .foregroundColor((cell.value != 0) ? .primary : .secondary)
+                        .disabled(cell.value == 0)
+                        VStack {
+                            numberRow(start:  1)
+                            numberRow(start:  5)
+                            numberRow(start:  9)
+                            numberRow(start: 13)
+                        }
                     }
                 }
+                .padding()
+                .overlay(strokedRoundedRectangle(cornerRadius: 3))
+                VStack {
+                    Text("Set/Reset Tag")
+                    .font(.headline)
+                    Spacer()
+                    HStack(alignment: VerticalAlignment.center) {
+                        Button(
+                            action: { _ = board.canBeRecalc(self.index) },
+                            label: {
+                                Image(systemName: "arrow.counterclockwise.circle.fill")
+                                .font(.largeTitle)
+                            }
+                        )
+                        .foregroundColor(.primary )
+                        .disabled(cell.value != 0)
+                        VStack {
+                            canBeRow(start:  1)
+                            canBeRow(start:  5)
+                            canBeRow(start:  9)
+                            canBeRow(start: 13)
+                        }
+                    }
+                }
+                .padding()
+                .overlay(strokedRoundedRectangle(cornerRadius: 3))
             }
             Spacer()
             
@@ -72,21 +139,22 @@ struct CellDetail: View {
     }
 }
 
-struct NumberButton: View {
+struct DetailButton: View {
     let index: Int
     let number: Int
     let enable: Bool
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    let color: Color
+    let doIt: (() -> ())
+    
+    //@Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         Button(
-            action: {
-                _ = board.set(self.index, self.number)
-                self.mode.value.dismiss()
-            },
+            action: doIt,
             label: { Image(systemName: nameForValue(number)).font(.largeTitle) }
         )
         .foregroundColor(enable ? .primary : .secondary)
+        .opacity(enable ? 1.0 : 0.2)
         .disabled(!enable)
 
     }

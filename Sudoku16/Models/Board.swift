@@ -98,7 +98,7 @@ class Board {
     }
     
     // Recalculate the canBe based on all values
-    private func canBeRecalc(_ index: Int) {
+    func canBeRecalc(_ index: Int) {
         let cell = cells[index]
         cell.canBe = all16
         var j = -1
