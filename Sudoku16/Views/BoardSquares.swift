@@ -10,9 +10,8 @@ import SwiftUI
 
 struct BoardSquares: View {
     var body: some View {
-        VStack {
+        VStack(alignment: HorizontalAlignment.center) {
             HStack {
-                Spacer()
                 VStack(alignment: HorizontalAlignment.center, spacing: 0) {
                     SquaresRow(start: 0)
                     SquaresRow(start: 64)
@@ -20,8 +19,8 @@ struct BoardSquares: View {
                     SquaresRow(start: 192)
                 }
                 .overlay(strokedRectangle(stroke: 3))
-                Spacer()
             }
+            .padding()
             
             HStack {
                 Button(

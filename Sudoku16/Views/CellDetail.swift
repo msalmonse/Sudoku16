@@ -128,6 +128,8 @@ struct CellDetail: View {
             }
             Spacer()
             
+            DetailNavigation(index: index)
+
             Button(
                 action: { self.mode.value.dismiss() },
                 label: {
@@ -145,8 +147,6 @@ struct DetailButton: View {
     let enable: Bool
     let color: Color
     let doIt: (() -> ())
-    
-    //@Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         Button(
