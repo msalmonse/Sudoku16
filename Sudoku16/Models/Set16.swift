@@ -35,16 +35,22 @@ extension Set16 {
         return ret
     }
     
-    mutating func set(_ i: Int, _ set: Bool) -> Bool {
+    mutating func set(_ i: Int, _ setTo: Bool) -> Bool {
         let was = self.contains(i)
         if range16.contains(i) {
-            if (set) { self |= mask(i) }
+            if (setTo) { self |= mask(i) }
             else { self &= ~mask(i)}
         }
         return was
     }
     
     mutating func setOnly(_ i: Int) {
-        if range16.contains(i) {self = mask(i) }
+        if range16.contains(i) { self = mask(i) }
+    }
+
+    mutating func toggle(_ i: Int) -> Bool {
+        let was = self.contains(i)
+        if range16.contains(i) { self ^= mask(i) }
+        return was
     }
 }
