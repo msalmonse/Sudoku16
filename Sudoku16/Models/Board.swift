@@ -149,8 +149,8 @@ class Board {
     // generate a new randon solution
     
     func renew() {
-        board.randomizeSolution()
-        board.restart()
+        randomizeSolution()
+        restart()
     }
 
     static var random: Board {
