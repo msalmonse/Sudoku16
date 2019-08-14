@@ -68,10 +68,10 @@ func squareColor(cell: Int) -> Color {
 
 class Board {
     // User Settings
-    @UserDefault("ShowWrongValues", defaultValue: true)
-    var showWrongValues : Bool
-    @UserDefault("InitiallySolved", defaultValue: 128)
-    var initiallySolved: Double
+    static let settings = UserSettings()
+    
+    var showWrongValues : Bool { Self.settings.showWrongValues }
+    var initiallySolved: Int { Int(Self.settings.initiallySolved.rounded()) }
 
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
@@ -122,7 +122,7 @@ class Board {
         for i in cells.indices { cells[i].clear() }
     }
     
-    func restart() { solve(Int(initiallySolved.rounded())) }
+    func restart() { solve(initiallySolved) }
 
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
         var ret = true
@@ -148,7 +148,7 @@ class Board {
 
     static var random: Board {
         let board = Board()
-        board.randomSolve()
+        board.randomizeSolution()
         board.restart()
         return board
     }

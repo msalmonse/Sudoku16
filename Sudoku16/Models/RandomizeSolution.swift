@@ -1,5 +1,5 @@
 //
-//  RandomSolve.swift
+//  RandomizeSolution.swift
 //  Sudoku16
 //
 //  Created by Michael Salmon on 2019-08-12.
@@ -58,7 +58,7 @@ extension Board {
         if a != b { swapRows(a, b) }
     }
 
-    func randomSolve() {
+    func randomizeSolution() {
         let digitSwap = [0] + Array(1...16).shuffled()
         solution = solution1.map{digitSwap[$0]}
         for _ in 0...9 {

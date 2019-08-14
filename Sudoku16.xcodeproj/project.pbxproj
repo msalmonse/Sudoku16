@@ -10,7 +10,7 @@
 		C437DEDF2302850F005FF528 /* ButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEDE2302850F005FF528 /* ButtonText.swift */; };
 		C437DEE123029FEB005FF528 /* DetailNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE023029FEA005FF528 /* DetailNavigation.swift */; };
 		C437DEE32303D042005FF528 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE22303D042005FF528 /* Settings.swift */; };
-		C437DEE52303DB8A005FF528 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE42303DB8A005FF528 /* UserDefaults.swift */; };
+		C437DEE52303DB8A005FF528 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE42303DB8A005FF528 /* UserDefault.swift */; };
 		C437DEE72303DC7D005FF528 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE62303DC7D005FF528 /* UserSettings.swift */; };
 		C45F57FE22FEF71C008762F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F57FD22FEF71C008762F1 /* AppDelegate.swift */; };
 		C45F580022FEF71C008762F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F57FF22FEF71C008762F1 /* SceneDelegate.swift */; };
@@ -31,7 +31,7 @@
 		C495684F23004DCE007C707B /* CellDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495684E23004DCE007C707B /* CellDetail.swift */; };
 		C495685123004F3C007C707B /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685023004F3C007C707B /* Sheets.swift */; };
 		C495685323005084007C707B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685223005084007C707B /* Observable.swift */; };
-		C495685523012F9D007C707B /* RandomSolve.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685423012F9D007C707B /* RandomSolve.swift */; };
+		C495685523012F9D007C707B /* RandomizeSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685423012F9D007C707B /* RandomizeSolution.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,7 @@
 		C437DEDE2302850F005FF528 /* ButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonText.swift; sourceTree = "<group>"; };
 		C437DEE023029FEA005FF528 /* DetailNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNavigation.swift; sourceTree = "<group>"; };
 		C437DEE22303D042005FF528 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		C437DEE42303DB8A005FF528 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		C437DEE42303DB8A005FF528 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		C437DEE62303DC7D005FF528 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		C45F57FA22FEF71C008762F1 /* Sudoku16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C45F57FD22FEF71C008762F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 		C495684E23004DCE007C707B /* CellDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetail.swift; sourceTree = "<group>"; };
 		C495685023004F3C007C707B /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
 		C495685223005084007C707B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		C495685423012F9D007C707B /* RandomSolve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomSolve.swift; sourceTree = "<group>"; };
+		C495685423012F9D007C707B /* RandomizeSolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizeSolution.swift; sourceTree = "<group>"; };
 		C495685623019541007C707B /* Sudoku16.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sudoku16.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,10 +155,10 @@
 				C45F582022FEF9C3008762F1 /* Cell.swift */,
 				C495685223005084007C707B /* Observable.swift */,
 				C495684A23003A16007C707B /* Publishing.swift */,
-				C495685423012F9D007C707B /* RandomSolve.swift */,
+				C495685423012F9D007C707B /* RandomizeSolution.swift */,
 				C45F582222FEFAD6008762F1 /* Set16.swift */,
 				C495684C23003A5B007C707B /* ShowSheet.swift */,
-				C437DEE42303DB8A005FF528 /* UserDefaults.swift */,
+				C437DEE42303DB8A005FF528 /* UserDefault.swift */,
 				C437DEE62303DC7D005FF528 /* UserSettings.swift */,
 			);
 			path = Models;
@@ -297,7 +297,7 @@
 				C437DEDF2302850F005FF528 /* ButtonText.swift in Sources */,
 				C437DEE123029FEB005FF528 /* DetailNavigation.swift in Sources */,
 				C45F582522FEFBFA008762F1 /* Board.swift in Sources */,
-				C495685523012F9D007C707B /* RandomSolve.swift in Sources */,
+				C495685523012F9D007C707B /* RandomizeSolution.swift in Sources */,
 				C437DEE32303D042005FF528 /* Settings.swift in Sources */,
 				C495685123004F3C007C707B /* Sheets.swift in Sources */,
 				C495684F23004DCE007C707B /* CellDetail.swift in Sources */,
@@ -305,7 +305,7 @@
 				C45F582122FEF9C3008762F1 /* Cell.swift in Sources */,
 				C45F582822FF0F7F008762F1 /* CellView.swift in Sources */,
 				C45F582322FEFAD6008762F1 /* Set16.swift in Sources */,
-				C437DEE52303DB8A005FF528 /* UserDefaults.swift in Sources */,
+				C437DEE52303DB8A005FF528 /* UserDefault.swift in Sources */,
 				C45F57FE22FEF71C008762F1 /* AppDelegate.swift in Sources */,
 				C45F580022FEF71C008762F1 /* SceneDelegate.swift in Sources */,
 				C45F580222FEF71C008762F1 /* ContentView.swift in Sources */,

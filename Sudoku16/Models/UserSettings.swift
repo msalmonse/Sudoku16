@@ -23,4 +23,6 @@ final class UserSettings: ObservableObject, Identifiable {
     var initiallySolved: Double {
         willSet { objectWillChange.send() }
     }
+    
+    init() { return }
 }

@@ -88,6 +88,6 @@ class Sudoku16Tests: XCTestCase {
         _ = test.set(124, 0)
         XCTAssertEqual(test.cells[123].canBe, all16)
         
-        _ = test.randomSolve()
+        _ = test.randomizeSolution()
     }
 }
