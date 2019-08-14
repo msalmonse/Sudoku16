@@ -146,10 +146,16 @@ class Board {
         return ret
     }
 
-    static var random: Board {
-        let board = Board()
+    // generate a new randon solution
+    
+    func renew() {
         board.randomizeSolution()
         board.restart()
+    }
+
+    static var random: Board {
+        let board = Board()
+        board.renew()
         return board
     }
 }
