@@ -18,9 +18,19 @@ struct ButtonText: View {
         .font(.largeTitle)
         .foregroundColor(.primary)
         .padding()
-        .frame(width: 200)
+        .frame(width: 180, height: 60)
         .overlay(strokedCapsule())
+        .background(backgroundGradient())
+        .clipShape(Capsule())
     }
+}
+
+private func backgroundGradient() -> LinearGradient {
+    return LinearGradient(
+        gradient: Gradient(colors: [ .white, .blue, .blue, .blue, .black ]),
+        startPoint: .top,
+        endPoint: .bottom
+    )
 }
 
 #if DEBUG
