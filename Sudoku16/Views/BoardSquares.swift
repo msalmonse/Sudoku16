@@ -32,6 +32,11 @@ struct BoardSquares: View {
                     action: { board.solve() },
                     label: { ButtonText(text: "Solve") }
                 )
+
+                Button(
+                    action: { showSheet.value = .userSettings },
+                    label: { ButtonText(text: "Settings") }
+                )
             }
         }
     }

@@ -16,19 +16,27 @@ struct IdInt: Identifiable {
 
 struct Sheets: View {
     @State var showDetail: IdInt? = nil
+    @State var showUserSettings = false
 
     var body: some View {
-        Text("")
-        .hidden()
-        .sheet(item: $showDetail, content: { i in CellDetail(index: i.value) } )
-        .onReceive(showSheet.publisher,
-            perform: { showIt in
-                switch showIt {
-                case .none: break
-                case .cellDetail(let i): self.showDetail = IdInt(value: i)
+        VStack {
+            Text("").hidden()
+            .sheet(item: $showDetail, content: { i in CellDetail(index: i.value) } )
+
+            Text("").hidden()
+            .sheet(isPresented: $showUserSettings, content: { Settings() })
+
+            Text("").hidden()
+            .onReceive(showSheet.publisher,
+                perform: { showIt in
+                    switch showIt {
+                    case .none: break
+                    case .cellDetail(let i): self.showDetail = IdInt(value: i)
+                    case .userSettings: self.showUserSettings = true
+                    }
                 }
-            }
-        )
+            )
+        }.hidden()
     }
 }
 

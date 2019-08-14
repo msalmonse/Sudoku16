@@ -55,6 +55,7 @@ class Cell: ObservableObject, Identifiable {
     func clear() {
         value = 0
         canBe = all16
+        for i in highlight.indices { highlight[i] = .none }
     }
 }
 

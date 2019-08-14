@@ -14,6 +14,8 @@ var board = Board.random
 var showSheet = PublishingShowSheet(.none)
 
 struct ContentView: View {
+    @ObservedObject var settings = UserSettings()
+
     var body: some View {
         HStack {
             ScrollView([.horizontal, .vertical]) {
@@ -21,6 +23,7 @@ struct ContentView: View {
             }
             Sheets()
         }
+        .environmentObject(settings)
     }
 }
 

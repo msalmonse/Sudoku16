@@ -67,6 +67,12 @@ func squareColor(cell: Int) -> Color {
 }
 
 class Board {
+    // User Settings
+    @UserDefault("ShowWrongValues", defaultValue: true)
+    var showWrongValues : Bool
+    @UserDefault("Difficulty", defaultValue: 128)
+    var difficulty: Int
+
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
     
@@ -76,6 +82,7 @@ class Board {
     
     // Copy all or a part of the solution
     func solve(_ count: Int = 256) {
+        clear()
         let indices = Array(0...255).shuffled().prefix(count)
         let update = (count < 256)
         for i in indices {
@@ -115,17 +122,15 @@ class Board {
         for i in cells.indices { cells[i].clear() }
     }
     
-    func restart() {
-        clear()
-        solve(128)
-    }
+    func restart() { solve(difficulty) }
 
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
         var ret = true
         let cell = self.cells[ index ]
         if range16.contains(value) {
             cell.value = value
-            cell.highlight[Cell.valueIndex] = (solution[index] == value) ? .none : .wrong
+            cell.highlight[Cell.valueIndex] =
+                (showWrongValues && solution[index] != value) ? .wrong : .none
             cell.canBe.setOnly(value)
             if updateCanBe {
                 if !canBeSetAll(index, value, false) { ret = false }
@@ -144,7 +149,7 @@ class Board {
     static var random: Board {
         let board = Board()
         board.randomSolve()
-        board.solve(128)
+        board.restart()
         return board
     }
 }
