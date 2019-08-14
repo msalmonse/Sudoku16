@@ -70,8 +70,8 @@ class Board {
     // User Settings
     @UserDefault("ShowWrongValues", defaultValue: true)
     var showWrongValues : Bool
-    @UserDefault("Difficulty", defaultValue: 128)
-    var difficulty: Int
+    @UserDefault("InitiallySolved", defaultValue: 128)
+    var initiallySolved: Double
 
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
@@ -122,7 +122,7 @@ class Board {
         for i in cells.indices { cells[i].clear() }
     }
     
-    func restart() { solve(difficulty) }
+    func restart() { solve(Int(initiallySolved.rounded())) }
 
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
         var ret = true

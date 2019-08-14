@@ -19,8 +19,8 @@ final class UserSettings: ObservableObject, Identifiable {
         willSet { objectWillChange.send() }
     }
     
-    @UserDefault("Difficulty", defaultValue: 128)
-    var difficulty: Int {
+    @UserDefault("InitiallySolved", defaultValue: 128.0)
+    var initiallySolved: Double {
         willSet { objectWillChange.send() }
     }
 }
