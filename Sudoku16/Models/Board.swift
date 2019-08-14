@@ -145,6 +145,22 @@ class Board {
         
         return ret
     }
+    
+    // Highlight the current cell and all those on rows columns and squares
+    
+    func highlight(_ index: Int, _ value: Int, _ row: Bool, _ column: Bool, _ square: Bool) {
+        var cellIndices: [Int] = []
+        let hi: CellHighlight = (cells[index].highlight[value] != .user) ? .user : .none
+        
+        if row { cellIndices += rowForCell(index) }
+        if column { cellIndices += columnForCell(index) }
+        if square { cellIndices += squareForCell(index) }
+        
+        for i in cellIndices {
+            cells[i].highlight[value] = hi
+            cells[i].value = cells[i].value     // trigger redraw
+        }
+    }
 
     // generate a new randon solution
     

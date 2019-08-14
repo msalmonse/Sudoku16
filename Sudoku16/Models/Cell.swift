@@ -17,6 +17,7 @@ enum CellHighlight {
     case canBe0 // no possible values
     case canBe1 // only one possibility
     case canBe2 // two possibilities
+    case user   // user highlighted
     case wrong  // doesn't match solution
     
     var color: Color {
@@ -26,6 +27,7 @@ enum CellHighlight {
         case .canBe0:   return .red
         case .canBe1:   return .green
         case .canBe2:   return .orange
+        case .user:     return .blue
         case .wrong:    return .red
         }
     }

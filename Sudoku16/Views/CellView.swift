@@ -18,7 +18,9 @@ fileprivate func cellHighlight(_ cell: Cell) -> Cell {
     }
     
     for i in range16 {
-        cell.highlight[i] = cell.canBe.contains(i) ? hi : .none
+        if cell.highlight[i] != .user {
+            cell.highlight[i] = cell.canBe.contains(i) ? hi : .none
+        }
     }
     
     cell.highlight[Cell.borderIndex] = (hi == .canBe0) ? hi : .none

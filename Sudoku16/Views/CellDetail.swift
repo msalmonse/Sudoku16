@@ -12,7 +12,10 @@ struct CellDetail: View {
     let index: Int
     @ObservedObject var cell: Cell
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
+    @State var rowHighlight: Bool = false
+    @State var columnHighlight: Bool = false
+    @State var squareHilight: Bool = true
+
     var row: Int { (index >> 4) + 1 }
     var col: Int { (index & 0x0f) + 1 }
 
@@ -21,58 +24,6 @@ struct CellDetail: View {
         self.index = index
     }
 
-    func enableButton(_ index: Int) -> Bool {
-        return cell.value == 0 && cell.canBe.contains(index)
-    }
-    
-    // Return a canBe button
-    func canBeButton(_ number: Int) -> some View {
-        let color: Color = cell.canBe.contains(number) ? .primary : .secondary
-        return DetailButton(
-            index: index,
-            number: number,
-            enable: cell.value == 0,
-            color: color,
-            doIt: {
-                _ = self.cell.canBe.toggle(number)
-            }
-        )
-    }
-    
-    // Return a canBe row
-    func canBeRow(start: Int) -> some View {
-        return HStack {
-            canBeButton(start + 0)
-            canBeButton(start + 1)
-            canBeButton(start + 2)
-            canBeButton(start + 3)
-        }
-    }
-
-    // Return a number button
-    func numberButton(_ number: Int) -> some View {
-        let enable = enableButton(number)
-        return DetailButton(
-            index: index,
-            number: number,
-            enable: enable,
-            color: enable ? .primary : .secondary,
-            doIt: {
-                _ = board.set(self.index, number)
-                self.mode.value.dismiss()
-            }
-        )
-    }
-    
-    // Return a number row
-    func numberRow(start: Int) -> some View {
-        return HStack {
-            numberButton(start + 0)
-            numberButton(start + 1)
-            numberButton(start + 2)
-            numberButton(start + 3)
-        }
-    }
 
     var body: some View {
         VStack {
@@ -81,7 +32,7 @@ struct CellDetail: View {
             Spacer()
             HStack {
                 VStack {
-                    Text("Set/Reset Cell")
+                    Text("Set/Clear Cell")
                     .font(.headline)
                     Spacer()
                     HStack(alignment: VerticalAlignment.center) {
@@ -101,8 +52,9 @@ struct CellDetail: View {
                 }
                 .padding()
                 .overlay(strokedRoundedRectangle(cornerRadius: 3))
+
                 VStack {
-                    Text("Set/Reset Tag")
+                    Text("Set/Clear Tag")
                     .font(.headline)
                     Spacer()
                     HStack(alignment: VerticalAlignment.center) {
@@ -126,8 +78,34 @@ struct CellDetail: View {
                 .padding()
                 .overlay(strokedRoundedRectangle(cornerRadius: 3))
             }
+
+            HStack {
+                VStack {
+                    Text("Set/Clear Highlight")
+                    .font(.headline)
+                    Spacer()
+                    HStack(alignment: VerticalAlignment.center) {
+                        VStack(alignment: HorizontalAlignment.leading, spacing: 5) {
+                            Text("On:")
+                            Toggle(isOn: $rowHighlight, label: { Text("Row") })
+                            Toggle(isOn: $columnHighlight, label: { Text("Column") })
+                            Toggle(isOn: $squareHilight, label: { Text("Square") })
+                        }
+                        Divider().padding()
+                        VStack(spacing: 12) {
+                            highlightRow(start:  1)
+                            highlightRow(start:  5)
+                            highlightRow(start:  9)
+                            highlightRow(start: 13)
+                        }
+                    }
+                }
+                .padding()
+                .frame(width: 400)
+                .overlay(strokedRoundedRectangle(cornerRadius: 3))
+            }
             Spacer()
-            
+        
             // FixME DetailNavigation(index: index)
 
             Button(
@@ -138,25 +116,6 @@ struct CellDetail: View {
             )
             Spacer()
         }
-    }
-}
-
-struct DetailButton: View {
-    let index: Int
-    let number: Int
-    let enable: Bool
-    let color: Color
-    let doIt: (() -> ())
-    
-    var body: some View {
-        Button(
-            action: doIt,
-            label: { Image(systemName: nameForValue(number)).font(.largeTitle) }
-        )
-        .foregroundColor(color)
-        .opacity(enable ? 1.0 : 0.3)
-        .disabled(!enable)
-
     }
 }
 
