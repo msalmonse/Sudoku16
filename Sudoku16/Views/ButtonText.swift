@@ -26,8 +26,23 @@ struct ButtonText: View {
 }
 
 private func backgroundGradient() -> LinearGradient {
+    let r = 0.0
+    let g = 0.7
+    let b = 1.0
+    let colors: [Color] = [
+        Color(red: r, green: g, blue: b, opacity: 0.05),
+        Color(red: r, green: g, blue: b, opacity: 0.20),
+        Color(red: r, green: g, blue: b, opacity: 0.25),
+        Color(red: r, green: g, blue: b, opacity: 0.30),
+        Color(red: r, green: g, blue: b, opacity: 0.30),
+        Color(red: r, green: g, blue: b, opacity: 0.30),
+        Color(red: r, green: g, blue: b, opacity: 0.30),
+        Color(red: r, green: g, blue: b, opacity: 0.30),
+        Color(red: r, green: g, blue: b, opacity: 0.35),
+        Color(red: r, green: g, blue: b, opacity: 0.50),
+    ]
     return LinearGradient(
-        gradient: Gradient(colors: [ .white, .blue, .blue, .blue, .black ]),
+        gradient: Gradient(colors: colors),
         startPoint: .top,
         endPoint: .bottom
     )
