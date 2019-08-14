@@ -21,6 +21,17 @@ struct Settings: View {
         return "\(count) initially solved squares"
     }
     
+    func easeColor(_ ease: Double) -> Color {
+        switch ease {
+        case 50...90:   return .red
+        case 91...120:  return .orange
+        case 121...150: return .yellow
+        case 151...180: return .green
+        case 181...200: return .blue
+        default:        return .clear
+        }
+    }
+
     var body: some View {
         VStack {
             Text("User Settings")
@@ -38,6 +49,7 @@ struct Settings: View {
                         in: initiallySolvedRange,
                         step: 1.0
                     )
+                    .accentColor(easeColor(settings.initiallySolved))
                     Text(initiallySolvedMax)
                 }
                 Text(initialCount())
