@@ -24,6 +24,11 @@ struct BoardSquares: View {
             
             HStack {
                 Button(
+                    action: { board.renew() },
+                    label: { ButtonText(text: "New") }
+                )
+
+                Button(
                     action: { board.restart() },
                     label: { ButtonText(text: "Restart") }
                 )
