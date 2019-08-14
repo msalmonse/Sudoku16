@@ -20,33 +20,32 @@ struct ButtonText: View {
         .padding()
         .frame(width: 180, height: 60)
         .overlay(strokedCapsule())
-        .background(backgroundGradient())
+        .background(linearBackgroupd)
         .clipShape(Capsule())
     }
 }
 
-private func backgroundGradient() -> LinearGradient {
-    let r = 0.0
-    let g = 0.7
-    let b = 1.0
-    let colors: [Color] = [
-        Color(red: r, green: g, blue: b, opacity: 0.05),
-        Color(red: r, green: g, blue: b, opacity: 0.20),
-        Color(red: r, green: g, blue: b, opacity: 0.25),
-        Color(red: r, green: g, blue: b, opacity: 0.30),
-        Color(red: r, green: g, blue: b, opacity: 0.30),
-        Color(red: r, green: g, blue: b, opacity: 0.30),
-        Color(red: r, green: g, blue: b, opacity: 0.30),
-        Color(red: r, green: g, blue: b, opacity: 0.30),
-        Color(red: r, green: g, blue: b, opacity: 0.35),
-        Color(red: r, green: g, blue: b, opacity: 0.50),
-    ]
-    return LinearGradient(
-        gradient: Gradient(colors: colors),
-        startPoint: .top,
-        endPoint: .bottom
-    )
-}
+
+fileprivate let r = 0.00
+fileprivate let g = 0.75
+fileprivate let b = 1.00
+fileprivate let colors: [Color] = [
+    Color(red: r, green: g, blue: b, opacity: 0.05),
+    Color(red: r, green: g, blue: b, opacity: 0.20),
+    Color(red: r, green: g, blue: b, opacity: 0.25),
+    Color(red: r, green: g, blue: b, opacity: 0.30),
+    Color(red: r, green: g, blue: b, opacity: 0.30),
+    Color(red: r, green: g, blue: b, opacity: 0.30),
+    Color(red: r, green: g, blue: b, opacity: 0.30),
+    Color(red: r, green: g, blue: b, opacity: 0.30),
+    Color(red: r, green: g, blue: b, opacity: 0.35),
+    Color(red: r, green: g, blue: b, opacity: 0.50),
+]
+fileprivate let linearBackgroupd = LinearGradient(
+    gradient: Gradient(colors: colors),
+    startPoint: .top,
+    endPoint: .bottom
+)
 
 #if DEBUG
 struct ButtonText_Previews: PreviewProvider {
