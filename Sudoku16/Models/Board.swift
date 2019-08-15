@@ -75,23 +75,14 @@ class Board {
 
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
+    var unsolved = 0
     
     init() {
         for _ in 0...255 { self.cells.append(Cell()) }
     }
     
-    // Copy all or a part of the solution
-    func solve(_ count: Int = 256) {
-        clear()
-        let indices = Array(0...255).shuffled().prefix(count)
-        let update = (count < 256)
-        for i in indices {
-            _ = set(i, solution[i], updateCanBe: update)
-        }
-    }
-    
     // Set all the canBe's in rows, columns or squares, ignoring duplicates
-    private func canBeSetAll(_ index: Int, _ value: Int, _ set: Bool) -> Bool {
+    func canBeSetAll(_ index: Int, _ value: Int, _ set: Bool) -> Bool {
         var ret = true
         var j = -1
         for i in allForCell(index).sorted() {
@@ -104,74 +95,4 @@ class Board {
         return ret
     }
     
-    // Recalculate the canBe based on all values
-    func canBeRecalc(_ index: Int) {
-        let cell = cells[index]
-        cell.canBe = all16
-        var j = -1
-        for i in allForCell(index).sorted() {
-            if (i != j && i != index) {
-                let value = cells[i].value
-                if value != 0 { _ = cell.canBe.set(value, false) }
-                j = i
-            }
-        }
-    }
-    
-    func clear() {
-        for i in cells.indices { cells[i].clear() }
-    }
-    
-    func restart() { solve(initiallySolved) }
-
-    func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
-        var ret = true
-        let cell = self.cells[ index ]
-        if range16.contains(value) {
-            cell.value = value
-            cell.highlight[Cell.valueIndex] =
-                (showWrongValues && solution[index] != value) ? .wrong : .none
-            cell.canBe.setOnly(value)
-            if updateCanBe {
-                if !canBeSetAll(index, value, false) { ret = false }
-            }
-        }
-        else {
-            if range16.contains(cell.value) { _ = canBeSetAll(index, cell.value, true) }
-            cell.value = 0
-            canBeRecalc(index)
-            cell.highlight[Cell.valueIndex] = .none
-        }
-        
-        return ret
-    }
-    
-    // Highlight the current cell and all those on rows columns and squares
-    
-    func highlight(_ index: Int, _ value: Int, _ row: Bool, _ column: Bool, _ square: Bool) {
-        var cellIndices: [Int] = []
-        let hi: CellHighlight = (cells[index].highlight[value] != .user) ? .user : .none
-        
-        if row { cellIndices += rowForCell(index) }
-        if column { cellIndices += columnForCell(index) }
-        if square { cellIndices += squareForCell(index) }
-        
-        for i in cellIndices {
-            cells[i].highlight[value] = hi
-            cells[i].value = cells[i].value     // trigger redraw
-        }
-    }
-
-    // generate a new randon solution
-    
-    func renew() {
-        randomizeSolution()
-        restart()
-    }
-
-    static var random: Board {
-        let board = Board()
-        board.renew()
-        return board
-    }
 }
