@@ -96,5 +96,12 @@ class Sudoku16Tests: XCTestCase {
             test.solve()
         }
     }
+    
+    func testGlobalBoardPerformance() {
+        self.measure {
+            board.randomizeSolution()
+            board.solve()
+        }
+    }
 }
 
