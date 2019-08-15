@@ -10,7 +10,9 @@ import SwiftUI
 
 struct BoardSquares: View {
     var body: some View {
-        VStack(alignment: HorizontalAlignment.center) {
+        VStack(alignment: HorizontalAlignment.center, spacing: 1) {
+            // FixME unsolved must be observable
+            // Text("Unsolved cells: \(board.unsolved)").font(.body)
             HStack {
                 VStack(alignment: HorizontalAlignment.center, spacing: 0) {
                     SquaresRow(start: 0)
@@ -32,10 +34,15 @@ struct BoardSquares: View {
                     action: { board.restart() },
                     label: { ButtonText(text: "Restart") }
                 )
-
+                
                 Button(
                     action: { board.solve() },
                     label: { ButtonText(text: "Solve") }
+                )
+                
+                Button(
+                    action: { board.hint() },
+                    label: { ButtonText(text: "Hint") }
                 )
 
                 Button(

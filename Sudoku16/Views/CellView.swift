@@ -18,7 +18,7 @@ fileprivate func cellHighlight(_ cell: Cell) -> Cell {
     }
     
     for i in range16 {
-        if cell.highlight[i] != .user {
+        if !cell.highlight[i].sticky {
             cell.highlight[i] = cell.canBe.contains(i) ? hi : .none
         }
     }

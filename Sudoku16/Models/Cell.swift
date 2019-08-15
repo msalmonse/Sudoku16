@@ -17,6 +17,7 @@ enum CellHighlight {
     case canBe0 // no possible values
     case canBe1 // only one possibility
     case canBe2 // two possibilities
+    case hint   // result of hint
     case user   // user highlighted
     case wrong  // doesn't match solution
     
@@ -27,9 +28,24 @@ enum CellHighlight {
         case .canBe0:   return .red
         case .canBe1:   return .green
         case .canBe2:   return .orange
+        case .hint:     return .red
         case .user:     return .blue
         case .wrong:    return .red
         }
+    }
+    
+    var sticky: Bool {
+        switch self {
+        case .none:     return false
+        case .alert:    return true
+        case .canBe0:   return false
+        case .canBe1:   return false
+        case .canBe2:   return false
+        case .hint:     return true
+        case .user:     return true
+        case .wrong:    return true
+        }
+
     }
 }
 

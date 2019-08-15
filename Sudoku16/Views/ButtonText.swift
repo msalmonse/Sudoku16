@@ -15,10 +15,10 @@ struct ButtonText: View {
     
     var body: some View {
         Text(text)
-        .font(.largeTitle)
+        .font(.title)
         .foregroundColor(.primary)
         .padding()
-        .frame(width: 180, height: 60)
+        .frame(width: 150, height: 50)
         .overlay(strokedCapsule())
         .background(linearBackgroupd)
         .clipShape(Capsule())
