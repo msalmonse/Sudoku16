@@ -87,7 +87,14 @@ class Sudoku16Tests: XCTestCase {
         XCTAssertFalse(test.cells[123].canBe.contains(4))
         _ = test.set(124, 0)
         XCTAssertEqual(test.cells[123].canBe, all16)
-        
-        _ = test.randomizeSolution()
+    }
+    
+    func testBoardPerformance() {
+        let test = Board()
+        self.measure {
+            test.randomizeSolution()
+            test.solve()
+        }
     }
 }
+
