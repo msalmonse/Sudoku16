@@ -25,10 +25,6 @@ extension Board {
         }
     }
     
-    func clear() {
-        for i in cells.indices { cells[i].clear() }
-    }
-    
     func restart() { solve(initiallySolved) }
 
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
@@ -36,7 +32,7 @@ extension Board {
         let cell = self.cells[ index ]
         if range16.contains(value) {
             cell.value = value
-            unsolved -= 1
+            unsolved.value -= 1
             cell.highlight[Cell.valueIndex] =
                 (showWrongValues && solution[index] != value) ? .wrong : .none
             cell.highlight[Cell.borderIndex] = .none
@@ -50,7 +46,7 @@ extension Board {
             if range16.contains(cell.value) {
                 // Don't update canBe's if not the right solution
                 if solution[index] == cell.value { _ = canBeSetAll(index, cell.value, true) }
-                unsolved += 1
+                unsolved.value += 1
             }
             cell.value = 0
             canBeRecalc(index)
@@ -79,13 +75,15 @@ extension Board {
     
     // Copy all or a part of the solution
     func solve(_ count: Int = 256) {
+        sendNotifications(false)
         clear()
         let indices = Array(0...255).shuffled().prefix(count)
         let update = (count < 256)
         for i in indices {
             _ = set(i, solution[i], updateCanBe: update)
         }
-        unsolved = 256 - count
+        sendNotifications(true)
+        unsolved.value = 256 - count
     }
     
     // Give a hint: mark a square with correct solution

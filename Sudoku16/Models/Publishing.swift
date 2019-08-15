@@ -20,4 +20,5 @@ class Publishing<T> {
     init(_ initialValue: T) { self.value = initialValue }
 }
 
+typealias PublishingInt = Publishing<Int>
 typealias PublishingString = Publishing<String>

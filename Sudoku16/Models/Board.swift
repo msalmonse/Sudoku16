@@ -75,11 +75,15 @@ class Board {
 
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
-    var unsolved = 0
+    var unsolved = PublishingInt(0)
     
     init() {
         for _ in 0...255 { self.cells.append(Cell()) }
     }
+    
+    func clear() { _ = cells.map{ $0.clear() } }
+
+    func sendNotifications(_ send: Bool) { _ = cells.map{ $0.sendNotifications(send)} }
     
     // Set all the canBe's in rows, columns or squares, ignoring duplicates
     func canBeSetAll(_ index: Int, _ value: Int, _ set: Bool) -> Bool {

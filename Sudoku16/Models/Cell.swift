@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 import SwiftUI
 
 /// The highlight colour of a cell
@@ -49,6 +50,14 @@ enum CellHighlight {
     }
 }
 
+// Send notifications or not
+
+fileprivate enum Notify {
+    case send   // send notification
+    case quiet  // no notifications
+    case needto // send a notification next time it's allowed
+}
+
 /// Details of each cell
 
 class Cell: ObservableObject, Identifiable {
@@ -57,11 +66,19 @@ class Cell: ObservableObject, Identifiable {
     // 1...16 for canBe values
     static let borderIndex = 17
 
+    var objectWillChange = ObservableObjectPublisher()
+    fileprivate var notify = Notify.send
+    private func sendNotification() {
+        switch notify {
+        case .send: objectWillChange.send()
+        case .quiet: notify = .needto
+        case .needto: break
+        }
+    }
+
     let id = UUID()
-    @Published
-    var value: Int = 0
-    @Published
-    var canBe = all16
+    var value: Int = 0 { willSet{ sendNotification() } }
+    var canBe = all16  { willSet{ sendNotification() } }
     var highlight: [CellHighlight] = Array(repeating: .none, count: 18)
     
     var backgroundColor: Color {
@@ -74,6 +91,17 @@ class Cell: ObservableObject, Identifiable {
         value = 0
         canBe = all16
         for i in highlight.indices { highlight[i] = .none }
+    }
+    
+    func sendNotifications(_ send: Bool) {
+        switch (notify, send) {
+        case (.needto, true):   notify = .send; sendNotification()
+        case (.needto, false):  break
+        case (.send, true):     break
+        case (.send, false):    notify = .quiet
+        case (.quiet, true):    notify = .send
+        case (.quiet, false):   break
+        }
     }
 }
 

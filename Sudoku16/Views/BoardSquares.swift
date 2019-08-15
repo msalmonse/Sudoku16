@@ -9,10 +9,13 @@
 import SwiftUI
 
 struct BoardSquares: View {
+    @State var unsolved = board.unsolved.value
+
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 1) {
-            // FixME unsolved must be observable
-            // Text("Unsolved cells: \(board.unsolved)").font(.body)
+            Text("Unsolved cells: \(unsolved)").font(.body)
+            .onReceive(board.unsolved.publisher, perform: { self.unsolved = $0 })
+
             HStack {
                 VStack(alignment: HorizontalAlignment.center, spacing: 0) {
                     SquaresRow(start: 0)
