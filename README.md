@@ -1,4 +1,5 @@
-# 数独 十六
+# 数独
+# 十六
 Popular puzzle but with 16 numbers written with SwiftUI
 
 ## Main Screen
