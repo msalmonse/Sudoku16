@@ -23,7 +23,9 @@ fileprivate func cellHighlight(_ cell: Cell) -> Cell {
         }
     }
     
-    cell.highlight[Cell.borderIndex] = (hi == .canBe0) ? hi : .none
+    if !cell.highlight[Cell.borderIndex].sticky {
+        cell.highlight[Cell.borderIndex] = (hi == .canBe0) ? hi : .none
+    }
     
     return cell
 }

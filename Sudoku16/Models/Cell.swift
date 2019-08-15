@@ -28,7 +28,7 @@ enum CellHighlight {
         case .canBe0:   return .red
         case .canBe1:   return .green
         case .canBe2:   return .orange
-        case .hint:     return .red
+        case .hint:     return .green
         case .user:     return .blue
         case .wrong:    return .red
         }

@@ -39,14 +39,17 @@ extension Board {
             unsolved -= 1
             cell.highlight[Cell.valueIndex] =
                 (showWrongValues && solution[index] != value) ? .wrong : .none
+            cell.highlight[Cell.borderIndex] = .none
             cell.canBe.setOnly(value)
-            if updateCanBe {
+            // Don't update canBe's if not the right solution
+            if updateCanBe && solution[index] == value {
                 if !canBeSetAll(index, value, false) { ret = false }
             }
         }
         else {
             if range16.contains(cell.value) {
-                _ = canBeSetAll(index, cell.value, true)
+                // Don't update canBe's if not the right solution
+                if solution[index] == cell.value { _ = canBeSetAll(index, cell.value, true) }
                 unsolved += 1
             }
             cell.value = 0
@@ -93,6 +96,7 @@ extension Board {
         let v = solution[i]
         cells[i].canBe.setOnly(v)
         cells[i].highlight[v] = .hint
+        cells[i].highlight[Cell.borderIndex] = .hint
     }
 
     // generate a new randon solution

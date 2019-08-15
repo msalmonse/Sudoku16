@@ -41,11 +41,12 @@ extension CellDetail {
     // Return a number button
     func numberButton(_ number: Int) -> some View {
         let enable = enableButton(number)
+        let color = !enable ? .secondary : cell.highlight[number].color
         return DetailButton(
             index: index,
             number: number,
             enable: enable,
-            color: enable ? .primary : .secondary,
+            color: color,
             doIt: {
                 _ = board.set(self.index, number)
                 self.mode.value.dismiss()
