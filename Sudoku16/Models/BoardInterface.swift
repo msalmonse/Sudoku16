@@ -92,9 +92,8 @@ extension Board {
         let candidates = cells.indices.filter({ cells[$0].value == 0 })
         let i = candidates[Int.random(in: candidates.indices)] // random cell
         let v = solution[i]
-        cells[i].canBe.setOnly(v)
-        cells[i].highlight[v] = .hint
-        cells[i].highlight[Cell.borderIndex] = .hint
+        _ = set(i, v)
+        cells[i].highlight[Cell.valueIndex] = .hint
     }
 
     // generate a new randon solution
