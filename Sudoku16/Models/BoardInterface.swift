@@ -11,7 +11,6 @@ import Foundation
 extension Board {
 
     // Recalculate the canBe based on all values
-    
     func canBeRecalc(_ index: Int) {
         let cell = cells[index]
         cell.canBe = all16
@@ -25,8 +24,8 @@ extension Board {
         }
     }
     
-    func restart() { solve(initiallySolved) }
-
+    // Set or reset a cell
+    // Setting with a 0 is a reset
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
         var ret = true
         let cell = self.cells[ index ]
@@ -57,7 +56,6 @@ extension Board {
     }
     
     // Highlight the current cell and all those on rows columns and squares
-    
     func highlight(_ index: Int, _ value: Int, _ row: Bool, _ column: Bool, _ square: Bool) {
         var cellIndices: [Int] = []
         let hi: CellHighlight = (cells[index].highlight[value] != .user) ? .user : .none
@@ -85,9 +83,17 @@ extension Board {
         sendNotifications(true)
         unsolved.value = 256 - count
     }
-    
-    // Give a hint: mark a square with correct solution
-    
+
+    // Clear out and start again
+    func restart() { solve(initiallySolved) }
+
+    // generate a new randon solution
+    func renew() {
+        randomizeSolution()
+        restart()
+    }
+
+    // Give a hint: give a square the correct solution
     func hint() {
         let candidates = cells.indices.filter({ cells[$0].value == 0 })
         let i = candidates[Int.random(in: candidates.indices)] // random cell
@@ -96,15 +102,7 @@ extension Board {
         cells[i].highlight[Cell.valueIndex] = .hint
     }
 
-    // generate a new randon solution
-    
-    func renew() {
-        randomizeSolution()
-        restart()
-    }
-
     // generate a new board with a random solution
-    
     static var random: Board {
         let board = Board()
         board.renew()
