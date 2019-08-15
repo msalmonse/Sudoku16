@@ -17,6 +17,7 @@ struct IdInt: Identifiable {
 struct Sheets: View {
     @State var showDetail: IdInt? = nil
     @State var showUserSettings = false
+    @State var alertMessage: Message? = nil
 
     var body: some View {
         VStack {
@@ -27,10 +28,20 @@ struct Sheets: View {
             .sheet(isPresented: $showUserSettings, content: { Settings() })
 
             Text("").hidden()
+                .alert(item: $alertMessage) { msg in
+                    Alert(
+                        title: Text(msg.subject ?? "Alert"),
+                        message: Text(msg.text),
+                        dismissButton: .default(Text("Dismiss"))
+                    )
+                }
+
+            Text("").hidden()
             .onReceive(showSheet.publisher,
                 perform: { showIt in
                     switch showIt {
                     case .none: break
+                    case .showAlert(let msg): self.alertMessage = msg
                     case .cellDetail(let i): self.showDetail = IdInt(value: i)
                     case .userSettings: self.showUserSettings = true
                     }

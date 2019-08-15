@@ -13,6 +13,7 @@ import Foundation
 enum ShowSheet {
     case none
     case cellDetail(Int)
+    case showAlert(Message)
     case userSettings
 }
 

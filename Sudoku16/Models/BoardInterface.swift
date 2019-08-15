@@ -77,11 +77,11 @@ extension Board {
         clear()
         let indices = Array(0...255).shuffled().prefix(count)
         let update = (count < 256)
+        unsolved.value = 256
         for i in indices {
             _ = set(i, solution[i], updateCanBe: update)
         }
         sendNotifications(true)
-        unsolved.value = 256 - count
     }
 
     // Clear out and start again

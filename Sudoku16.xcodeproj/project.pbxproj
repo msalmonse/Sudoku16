@@ -34,6 +34,7 @@
 		C495685123004F3C007C707B /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685023004F3C007C707B /* Sheets.swift */; };
 		C495685323005084007C707B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685223005084007C707B /* Observable.swift */; };
 		C495685523012F9D007C707B /* RandomizeSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685423012F9D007C707B /* RandomizeSolution.swift */; };
+		C49E73B32305C75D003E8AD1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E73B22305C75D003E8AD1 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		C495685223005084007C707B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C495685423012F9D007C707B /* RandomizeSolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizeSolution.swift; sourceTree = "<group>"; };
 		C495685623019541007C707B /* Sudoku16.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sudoku16.entitlements; sourceTree = "<group>"; };
+		C49E73B22305C75D003E8AD1 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				C45F582422FEFBFA008762F1 /* Board.swift */,
 				C48CE0E123051B0800C10299 /* BoardInterface.swift */,
 				C45F582022FEF9C3008762F1 /* Cell.swift */,
+				C49E73B22305C75D003E8AD1 /* Message.swift */,
 				C495685223005084007C707B /* Observable.swift */,
 				C495684A23003A16007C707B /* Publishing.swift */,
 				C495685423012F9D007C707B /* RandomizeSolution.swift */,
@@ -315,6 +318,7 @@
 				C45F582322FEFAD6008762F1 /* Set16.swift in Sources */,
 				C437DEE52303DB8A005FF528 /* UserDefault.swift in Sources */,
 				C45F57FE22FEF71C008762F1 /* AppDelegate.swift in Sources */,
+				C49E73B32305C75D003E8AD1 /* Message.swift in Sources */,
 				C45F580022FEF71C008762F1 /* SceneDelegate.swift in Sources */,
 				C45F580222FEF71C008762F1 /* ContentView.swift in Sources */,
 			);

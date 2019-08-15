@@ -14,7 +14,17 @@ struct BoardSquares: View {
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 1) {
             Text("Unsolved cells: \(unsolved)").font(.body)
-            .onReceive(board.unsolved.publisher, perform: { self.unsolved = $0 })
+            .onReceive(
+                board.unsolved.publisher,
+                perform: {
+                    self.unsolved = $0
+                    if $0 == 0 {
+                        showSheet.value = .showAlert(
+                            Message("All cells solved", subject: "Game over")
+                        )
+                    }
+                }
+            )
 
             HStack {
                 VStack(alignment: HorizontalAlignment.center, spacing: 0) {
