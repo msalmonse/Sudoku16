@@ -41,8 +41,8 @@ struct Sheets: View {
                 perform: { showIt in
                     switch showIt {
                     case .none: break
-                    case .showAlert(let msg): self.alertMessage = msg
                     case .cellDetail(let i): self.showDetail = IdInt(value: i)
+                    case .showAlert(let msg): self.alertMessage = msg
                     case .userSettings: self.showUserSettings = true
                     }
                 }
