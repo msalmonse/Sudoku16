@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "FA5696A7-13DC-4CDA-BD3C-BD615FA780C1",
+      "name" : "Configuration 1",
+      "options" : {
+        "threadSanitizerEnabled" : false
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "addressSanitizer" : {
+      "detectStackUseAfterReturn" : true,
+      "enabled" : true
+    },
+    "threadSanitizerEnabled" : true,
+    "uiTestingScreenshotsLifetime" : "keepNever",
+    "undefinedBehaviorSanitizerEnabled" : true,
+    "userAttachmentLifetime" : "keepNever"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "skippedTests" : [
+        "Sudoku16Tests\/testBoardPerformance()",
+        "Sudoku16Tests\/testGlobalBoardPerformance()"
+      ],
+      "target" : {
+        "containerPath" : "container:Sudoku16.xcodeproj",
+        "identifier" : "C45F580F22FEF721008762F1",
+        "name" : "Sudoku16Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -81,6 +81,7 @@ class Sudoku16Tests: XCTestCase {
     
     func testBoard() {
         let test = Board()
+        test.solution[124] = 4
         XCTAssertEqual(test.cells[123].canBe, all16)
         _ = test.set(124, 4)
         XCTAssertNotEqual(test.cells[123].canBe, all16)

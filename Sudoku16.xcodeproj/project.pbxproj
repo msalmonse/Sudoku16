@@ -53,6 +53,7 @@
 		C437DEE22303D042005FF528 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C437DEE42303DB8A005FF528 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		C437DEE62303DC7D005FF528 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		C451FD4A230727A900CBFD39 /* Sudoku16.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sudoku16.xctestplan; sourceTree = "<group>"; };
 		C45F57FA22FEF71C008762F1 /* Sudoku16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C45F57FD22FEF71C008762F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C45F57FF22FEF71C008762F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		C45F57F122FEF71C008762F1 = {
 			isa = PBXGroup;
 			children = (
+				C451FD4A230727A900CBFD39 /* Sudoku16.xctestplan */,
 				C45F57FC22FEF71C008762F1 /* Sudoku16 */,
 				C45F581322FEF721008762F1 /* Sudoku16Tests */,
 				C45F57FB22FEF71C008762F1 /* Products */,
