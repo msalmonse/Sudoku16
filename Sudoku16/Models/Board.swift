@@ -76,9 +76,11 @@ class Board {
 
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
+    var erred = PublishingInt(0)
     var hintCount = PublishingInt(0)
     var unsolved = PublishingInt(0)
     var autofillQueue: [Int] = []
+    var autofilled = PublishingInt(0)
     
     init() {
         for _ in 0...255 { self.cells.append(Cell()) }
@@ -86,8 +88,10 @@ class Board {
     
     func clear() {
         _ = cells.map{ $0.clear() }
-        unsolved.value = 0
+        autofilled.value = 0
+        erred.value = 0
         hintCount.value = 0
+        unsolved.value = 0
     }
 
     func sendNotifications(_ send: Bool) { _ = cells.map{ $0.sendNotifications(send)} }
@@ -115,10 +119,12 @@ class Board {
         let cell = self.cells[ index ]
         if cell.value == value { return true }
         if range16.contains(value) {
+            let err = solution[index] != value
+            if err { erred.value += 1 }
             cell.value = value
             unsolved.value -= 1
             cell.highlight[Cell.valueIndex] =
-                (showWrongValues && solution[index] != value) ? .wrong : .none
+                (showWrongValues && err) ? .wrong : .none
             cell.highlight[Cell.borderIndex] = .none
             cell.canBe.setOnly(value)
             // Don't update canBe's if not the right solution
@@ -140,7 +146,7 @@ class Board {
         return ret
     }
 
-    // Take cells from the queue and solve them
+    // Take cells from the queue and solve them, return the number of cells autofilled
     func autofillUnqueue(_ hi: CellHighlight) -> Int {
         var count = 0
         
@@ -151,6 +157,8 @@ class Board {
             cells[i].highlight[Cell.valueIndex] = hi
             count += 1
         }
+        autofilled.value += count
+        
         return count
     }
 }

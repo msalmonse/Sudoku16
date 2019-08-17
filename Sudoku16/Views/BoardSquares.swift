@@ -9,12 +9,17 @@
 import SwiftUI
 
 struct BoardSquares: View {
-    @State var unsolved = board.unsolved.value
+    @State var autofilled = board.autofilled.value
     @State var hints = board.hintCount.value
-    
+    @State var erred = board.erred.value
+    @State var unsolved = board.unsolved.value
+
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 1) {
-            Text("Unsolved cells: \(unsolved), hints: \(hints)").font(.body)
+            Text(
+                "Unsolved: \(unsolved), hints: \(hints), errors: \(erred), autofilled: \(autofilled)"
+            )
+            .font(.body)
             .onReceive(
                 board.unsolved.publisher,
                 perform: {
@@ -26,6 +31,8 @@ struct BoardSquares: View {
                     }
                 }
             )
+            .onReceive(board.autofilled.publisher, perform: { self.autofilled = $0 })
+            .onReceive(board.erred.publisher, perform: { self.erred = $0 })
             .onReceive(board.hintCount.publisher, perform: { self.hints = $0 })
 
             HStack {
