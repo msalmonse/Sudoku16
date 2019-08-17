@@ -70,12 +70,15 @@ class Board {
     // User Settings
     static let settings = UserSettings()
     
-    var showWrongValues : Bool { Self.settings.showWrongValues }
+    var autofill : Bool { Self.settings.autofill }
     var initiallySolved: Int { Int(Self.settings.initiallySolved.rounded()) }
+    var showWrongValues : Bool { Self.settings.showWrongValues }
 
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
+    var hintCount = 0
     var unsolved = PublishingInt(0)
+    var autofillQueue: [Int] = []
     
     init() {
         for _ in 0...255 { self.cells.append(Cell()) }
@@ -91,12 +94,59 @@ class Board {
         var j = -1
         for i in allForCell(index).sorted() {
             if (i != j && i != index) {
-                _ = cells[i].canBe.set(value, set)
-                if cells[i].canBe.isEmpty { ret = false }
+                let cell = cells[i]
+                _ = cell.canBe.set(value, set)
+                if cell.canBe.isEmpty { ret = false }
+                if autofill && cell.canBe.count == 1 && cell.value == 0 { autofillQueue.append(i) }
                 j = i
             }
         }
         return ret
     }
     
+    // Set or reset a cell
+    // Setting with a 0 is a reset
+    func setOne(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
+        var ret = true
+        let cell = self.cells[ index ]
+        if cell.value == value { return true }
+        if range16.contains(value) {
+            cell.value = value
+            unsolved.value -= 1
+            cell.highlight[Cell.valueIndex] =
+                (showWrongValues && solution[index] != value) ? .wrong : .none
+            cell.highlight[Cell.borderIndex] = .none
+            cell.canBe.setOnly(value)
+            // Don't update canBe's if not the right solution
+            if updateCanBe && solution[index] == value {
+                if !canBeSetAll(index, value, false) { ret = false }
+            }
+        }
+        else {
+            if range16.contains(cell.value) {
+                // Don't update canBe's if not the right solution
+                if solution[index] == cell.value { _ = canBeSetAll(index, cell.value, true) }
+                unsolved.value += 1
+            }
+            cell.value = 0
+            canBeRecalc(index)
+            cell.highlight[Cell.valueIndex] = .none
+        }
+        
+        return ret
+    }
+
+    // Take cells from the queue and solve them
+    func autofillUnqueue(_ hi: CellHighlight) -> Int {
+        var count = 0
+        
+        while !autofillQueue.isEmpty {
+            let i = autofillQueue.removeLast()
+            let v = solution[i]
+            _ = setOne(i, v)
+            cells[i].highlight[Cell.valueIndex] = hi
+            count += 1
+        }
+        return count
+    }
 }

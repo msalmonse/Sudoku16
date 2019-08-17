@@ -27,31 +27,8 @@ extension Board {
     // Set or reset a cell
     // Setting with a 0 is a reset
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
-        var ret = true
-        let cell = self.cells[ index ]
-        if range16.contains(value) {
-            cell.value = value
-            unsolved.value -= 1
-            cell.highlight[Cell.valueIndex] =
-                (showWrongValues && solution[index] != value) ? .wrong : .none
-            cell.highlight[Cell.borderIndex] = .none
-            cell.canBe.setOnly(value)
-            // Don't update canBe's if not the right solution
-            if updateCanBe && solution[index] == value {
-                if !canBeSetAll(index, value, false) { ret = false }
-            }
-        }
-        else {
-            if range16.contains(cell.value) {
-                // Don't update canBe's if not the right solution
-                if solution[index] == cell.value { _ = canBeSetAll(index, cell.value, true) }
-                unsolved.value += 1
-            }
-            cell.value = 0
-            canBeRecalc(index)
-            cell.highlight[Cell.valueIndex] = .none
-        }
-        
+        let ret = setOne(index, value, updateCanBe: updateCanBe)
+        _ = autofillUnqueue(.auto)
         return ret
     }
     
@@ -98,8 +75,9 @@ extension Board {
         let candidates = cells.indices.filter({ cells[$0].value == 0 })
         let i = candidates[Int.random(in: candidates.indices)] // random cell
         let v = solution[i]
-        _ = set(i, v)
+        _ = setOne(i, v)
         cells[i].highlight[Cell.valueIndex] = .hint
+        hintCount += 1 + autofillUnqueue(.hint)
     }
 
     // generate a new board with a random solution

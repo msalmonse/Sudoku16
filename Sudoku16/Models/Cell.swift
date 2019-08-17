@@ -15,6 +15,7 @@ import SwiftUI
 enum CellHighlight {
     case none   // no highlighting
     case alert  // something wrong
+    case auto   // autofilled cell
     case canBe0 // no possible values
     case canBe1 // only one possibility
     case canBe2 // two possibilities
@@ -26,6 +27,7 @@ enum CellHighlight {
         switch self {
         case .none:     return .primary
         case .alert:    return .red
+        case .auto:     return .secondary
         case .canBe0:   return .red
         case .canBe1:   return .green
         case .canBe2:   return .orange
@@ -39,6 +41,7 @@ enum CellHighlight {
         switch self {
         case .none:     return false
         case .alert:    return true
+        case .auto:     return true
         case .canBe0:   return false
         case .canBe1:   return false
         case .canBe2:   return false

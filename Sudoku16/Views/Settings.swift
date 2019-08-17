@@ -37,7 +37,12 @@ struct Settings: View {
             Text("User Settings")
             .font(.title)
             Spacer()
+            
             Toggle("Show wrong solutions?", isOn: $settings.showWrongValues)
+            .padding()
+            .overlay(strokedRoundedRectangle(cornerRadius: 10))
+            
+            Toggle("Autofill cells?", isOn: $settings.autofill)
             .padding()
             .overlay(strokedRoundedRectangle(cornerRadius: 10))
 

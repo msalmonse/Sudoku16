@@ -24,5 +24,10 @@ final class UserSettings: ObservableObject, Identifiable {
         willSet { objectWillChange.send() }
     }
     
+    @UserDefault("Autofilled", defaultValue: false)
+    var autofill: Bool {
+        willSet { objectWillChange.send() }
+    }
+    
     init() { return }
 }
