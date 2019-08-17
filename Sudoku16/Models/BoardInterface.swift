@@ -77,7 +77,7 @@ extension Board {
         let v = solution[i]
         _ = setOne(i, v)
         cells[i].highlight[Cell.valueIndex] = .hint
-        hintCount += 1 + autofillUnqueue(.hint)
+        hintCount.value += 1 + autofillUnqueue(.hint)
     }
 
     // generate a new board with a random solution

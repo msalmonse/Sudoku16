@@ -10,10 +10,11 @@ import SwiftUI
 
 struct BoardSquares: View {
     @State var unsolved = board.unsolved.value
-
+    @State var hints = board.hintCount.value
+    
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 1) {
-            Text("Unsolved cells: \(unsolved)").font(.body)
+            Text("Unsolved cells: \(unsolved), hints: \(hints)").font(.body)
             .onReceive(
                 board.unsolved.publisher,
                 perform: {
@@ -25,6 +26,7 @@ struct BoardSquares: View {
                     }
                 }
             )
+            .onReceive(board.hintCount.publisher, perform: { self.hints = $0 })
 
             HStack {
                 VStack(alignment: HorizontalAlignment.center, spacing: 0) {

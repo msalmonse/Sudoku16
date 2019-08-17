@@ -76,7 +76,7 @@ class Board {
 
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
-    var hintCount = 0
+    var hintCount = PublishingInt(0)
     var unsolved = PublishingInt(0)
     var autofillQueue: [Int] = []
     
@@ -84,7 +84,11 @@ class Board {
         for _ in 0...255 { self.cells.append(Cell()) }
     }
     
-    func clear() { _ = cells.map{ $0.clear() } }
+    func clear() {
+        _ = cells.map{ $0.clear() }
+        unsolved.value = 0
+        hintCount.value = 0
+    }
 
     func sendNotifications(_ send: Bool) { _ = cells.map{ $0.sendNotifications(send)} }
     
