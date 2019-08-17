@@ -94,14 +94,14 @@ class Sudoku16Tests: XCTestCase {
         let test = Board()
         self.measure {
             test.randomizeSolution()
-            test.solve()
+            test.copySolution()
         }
     }
     
     func testGlobalBoardPerformance() {
         self.measure {
             board.randomizeSolution()
-            board.solve()
+            board.copySolution()
         }
     }
 }

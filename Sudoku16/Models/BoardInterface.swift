@@ -47,22 +47,13 @@ extension Board {
         }
     }
 
-    
-    // Copy all or a part of the solution
-    func solve(_ count: Int = 256) {
-        sendNotifications(false)
-        clear()
-        let indices = Array(0...255).shuffled().prefix(count)
-        let update = (count < 256)
-        unsolved.value = 256
-        for i in indices {
-            _ = set(i, solution[i], updateCanBe: update)
-        }
-        sendNotifications(true)
+    // Get hints until there are no unsolved cells
+    func solve() {
+        while unsolved.value > 0 { hint() }
     }
 
     // Clear out and start again
-    func restart() { solve(initiallySolved) }
+    func restart() { copySolution(initiallySolved) }
 
     // generate a new randon solution
     func renew() {

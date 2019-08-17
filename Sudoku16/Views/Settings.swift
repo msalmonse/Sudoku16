@@ -46,7 +46,7 @@ struct Settings: View {
             .padding()
             .overlay(strokedRoundedRectangle(cornerRadius: 10))
 
-            VStack(alignment: HorizontalAlignment.center) {
+            VStack(alignment: .center) {
                 HStack(spacing: 1) {
                     Text(initiallySolvedMin)
                     Slider(
@@ -62,6 +62,45 @@ struct Settings: View {
             .padding()
             .overlay(strokedRoundedRectangle(cornerRadius: 10))
 
+            VStack(alignment: .center) {
+                Text("Statistics").font(.title)
+                .padding(10)
+
+                HStack {
+                    Text("Puzzles solved:")
+                    Spacer()
+                    Text("\(settings.statSolved)")
+                    .multilineTextAlignment(.trailing)
+                }
+                HStack {
+                    Text("Errors made:")
+                    Spacer()
+                    Text("\(settings.statErrors)")
+                    .multilineTextAlignment(.trailing)
+                }
+                HStack {
+                    Text("Hints taken:")
+                    Spacer()
+                    Text("\(settings.statHints)")
+                    .multilineTextAlignment(.trailing)
+                }
+
+                Button(
+                    action: {
+                        self.settings.statErrors = 0
+                        self.settings.statHints = 0
+                        self.settings.statSolved = 0
+                    },
+                    label: { Text("Clear").font(.headline) }
+                )
+                .foregroundColor(.primary)
+                .padding(.horizontal, 10)
+                .overlay(strokedCapsule())
+                .padding(10)
+            }
+            .padding()
+            .overlay(strokedRoundedRectangle(cornerRadius: 10))
+
             Spacer()
             Button(
                 action: { self.mode.value.dismiss() },
@@ -71,7 +110,7 @@ struct Settings: View {
             )
             Spacer()
         }
-        .frame(width: 250)
+        .frame(width: 256)
     }
 }
 

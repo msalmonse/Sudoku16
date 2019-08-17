@@ -29,5 +29,25 @@ final class UserSettings: ObservableObject, Identifiable {
         willSet { objectWillChange.send() }
     }
     
+    // Statistics
+    
+    // Number of puzzles solved
+    @UserDefault("StatSolved", defaultValue: 0)
+    var statSolved: Int {
+        willSet { objectWillChange.send() }
+    }
+    
+    // Number of errors
+    @UserDefault("StatErrors", defaultValue: 0)
+    var statErrors: Int {
+        willSet { objectWillChange.send() }
+    }
+    
+    // Number of hints given
+    @UserDefault("StatHints", defaultValue: 0)
+    var statHints: Int {
+        willSet { objectWillChange.send() }
+    }
+    
     init() { return }
 }

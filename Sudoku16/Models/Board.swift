@@ -72,7 +72,21 @@ class Board {
     
     var autofill : Bool { Self.settings.autofill }
     var initiallySolved: Int { Int(Self.settings.initiallySolved.rounded()) }
-    var showWrongValues : Bool { Self.settings.showWrongValues }
+    var showWrongValues: Bool { Self.settings.showWrongValues }
+    // Statistics
+    var statErrors: Int {
+        get { Self.settings.statErrors }
+        set { Self.settings.statErrors = newValue }
+    }
+    var statHints: Int {
+        get { Self.settings.statHints }
+        set { Self.settings.statHints = newValue }
+    }
+
+    var statSolved: Int {
+        get { Self.settings.statSolved }
+        set { Self.settings.statSolved = newValue }
+    }
 
     var solution: [Int] = Array(repeating: 0, count: 256)
     var cells: [Cell] = []
@@ -86,6 +100,12 @@ class Board {
         for _ in 0...255 { self.cells.append(Cell()) }
     }
     
+    func updateStats() {
+        statErrors += erred.value
+        statHints += hintCount.value
+        statSolved += 1
+    }
+
     func clear() {
         _ = cells.map{ $0.clear() }
         autofilled.value = 0
@@ -143,7 +163,22 @@ class Board {
             cell.highlight[Cell.valueIndex] = .none
         }
         
+        if unsolved.value == 0 { updateStats() }
+        
         return ret
+    }
+    
+    // Copy all or a part of the solution
+    func copySolution(_ count: Int = 256) {
+        sendNotifications(false)
+        clear()
+        let indices = Array(0...255).shuffled().prefix(count)
+        let update = (count < 256)
+        unsolved.value = 256
+        for i in indices {
+            _ = set(i, solution[i], updateCanBe: update)
+        }
+        sendNotifications(true)
     }
 
     // Take cells from the queue and solve them, return the number of cells autofilled
