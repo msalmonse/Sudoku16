@@ -99,6 +99,14 @@ struct CellDetail: View {
                             highlightRow(start: 13)
                         }
                     }
+                    Button(
+                        action: { board.reCalcAll() },
+                        label: {
+                            Text("Reset all")
+                            .padding(5)
+                            .overlay(strokedCapsule())
+                    }
+                    )
                 }
                 .padding()
                 .frame(width: 400)

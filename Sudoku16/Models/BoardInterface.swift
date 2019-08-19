@@ -12,16 +12,37 @@ extension Board {
 
     // Recalculate the canBe based on all values
     func canBeRecalc(_ index: Int) {
-        let cell = cells[index]
-        cell.canBe = all16
+        var new16 = all16
         var j = -1
         for i in allForCell(index).sorted() {
             if (i != j && i != index) {
                 let value = cells[i].value
-                if value != 0 { _ = cell.canBe.set(value, false) }
+                if value != 0 { _ = new16.set(value, false) }
                 j = i
             }
         }
+        cells[index].canBe = new16
+    }
+    
+    // Recalculate all canBe's and reset all highlights
+    func reCalcAll() {
+        sendNotifications(false)
+        for i in cells.indices {
+            canBeRecalc(i)
+            let cell = cells[i]
+            var updated = false
+            for j in range16 {
+                if cell.highlight[j] != .none {
+                    cell.highlight[j] = .none
+                    updated = true
+                }
+            }
+            if updated {
+                cell.sendNotifications(true)
+                cell.sendNotification()         // Trigger redraw
+            }
+        }
+        sendNotifications(true)
     }
     
     // Set or reset a cell
@@ -43,7 +64,7 @@ extension Board {
         
         for i in cellIndices {
             cells[i].highlight[value] = hi
-            cells[i].value = cells[i].value     // trigger redraw
+            cells[i].sendNotification()     // trigger redraw
         }
     }
 

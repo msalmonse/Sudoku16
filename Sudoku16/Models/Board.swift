@@ -114,6 +114,7 @@ class Board {
         unsolved.value = 0
     }
 
+    // Turn publishing on or off for all cells
     func sendNotifications(_ send: Bool) { _ = cells.map{ $0.sendNotifications(send)} }
     
     // Set all the canBe's in rows, columns or squares, ignoring duplicates

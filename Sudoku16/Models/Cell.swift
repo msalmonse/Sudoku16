@@ -71,7 +71,7 @@ class Cell: ObservableObject, Identifiable {
 
     var objectWillChange = ObservableObjectPublisher()
     fileprivate var notify = Notify.send
-    private func sendNotification() {
+    func sendNotification() {
         switch notify {
         case .send: objectWillChange.send()
         case .quiet: notify = .needto
@@ -81,7 +81,7 @@ class Cell: ObservableObject, Identifiable {
 
     let id = UUID()
     var value: Int = 0 { willSet{ sendNotification() } }
-    var canBe = all16  { willSet{ sendNotification() } }
+    var canBe = all16  { willSet{ if canBe != newValue { sendNotification() } } }
     var highlight: [CellHighlight] = Array(repeating: .none, count: 18)
     
     var backgroundColor: Color {
