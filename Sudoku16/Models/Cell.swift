@@ -65,9 +65,10 @@ fileprivate enum Notify {
 
 class Cell: ObservableObject, Identifiable {
     // Indices for highlight
-    static let valueIndex = 0
+    static let valueHighlight = 0
     // 1...16 for canBe values
-    static let borderIndex = 17
+    static let borderHighlight = 17
+    static let highlightCount = 18
 
     var objectWillChange = ObservableObjectPublisher()
     fileprivate var notify = Notify.send
@@ -82,13 +83,13 @@ class Cell: ObservableObject, Identifiable {
     let id = UUID()
     var value: Int = 0 { willSet{ sendNotification() } }
     var canBe = all16  { willSet{ if canBe != newValue { sendNotification() } } }
-    var highlight: [CellHighlight] = Array(repeating: .none, count: 18)
+    var highlight: [CellHighlight] = Array(repeating: .none, count: highlightCount)
     
     var backgroundColor: Color {
-        let hi = highlight[Cell.borderIndex]
+        let hi = highlight[Cell.borderHighlight]
         return (hi == .none) ? .clear : hi.color.opacity(0.4)
     }
-    var borderColor: Color { highlight[Cell.borderIndex].color }
+    var borderColor: Color { highlight[Cell.borderHighlight].color }
 
     func clear() {
         value = 0
@@ -104,6 +105,27 @@ class Cell: ObservableObject, Identifiable {
         case (.send, false):    notify = .quiet
         case (.quiet, true):    notify = .send
         case (.quiet, false):   break
+        }
+    }
+    
+    /// Calculate the highlights for a cell
+    func reHighlight(_ unstick: Bool = false) {
+        var hi: CellHighlight = .none
+        switch canBe.count {
+        case 0: hi = .canBe0
+        case 1: hi = .canBe1
+        case 2: hi = .canBe2
+        default: break
+        }
+
+        for i in range16 {
+           if unstick || !highlight[i].sticky {
+               highlight[i] = canBe.contains(i) ? hi : .none
+           }
+        }
+
+        if !highlight[Cell.borderHighlight].sticky {
+           highlight[Cell.borderHighlight] = (hi == .canBe0) ? hi : .none
         }
     }
 }

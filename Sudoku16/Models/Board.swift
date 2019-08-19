@@ -111,7 +111,7 @@ class Board {
         autofilled.value = 0
         erred.value = 0
         hintCount.value = 0
-        unsolved.value = 0
+        unsolved.value = 256
     }
 
     // Turn publishing on or off for all cells
@@ -126,6 +126,7 @@ class Board {
                 let cell = cells[i]
                 _ = cell.canBe.set(value, set)
                 if cell.canBe.isEmpty { ret = false }
+                cell.reHighlight()
                 if autofill && cell.canBe.count == 1 && cell.value == 0 { autofillQueue.append(i) }
                 j = i
             }
@@ -144,9 +145,9 @@ class Board {
             if err { erred.value += 1 }
             cell.value = value
             unsolved.value -= 1
-            cell.highlight[Cell.valueIndex] =
+            cell.highlight[Cell.valueHighlight] =
                 (showWrongValues && err) ? .wrong : .none
-            cell.highlight[Cell.borderIndex] = .none
+            cell.highlight[Cell.borderHighlight] = .none
             cell.canBe.setOnly(value)
             // Don't update canBe's if not the right solution
             if updateCanBe && solution[index] == value {
@@ -161,8 +162,9 @@ class Board {
             }
             cell.value = 0
             canBeRecalc(index)
-            cell.highlight[Cell.valueIndex] = .none
+            cell.highlight[Cell.valueHighlight] = .none
         }
+        cell.reHighlight()
         
         if unsolved.value == 0 { updateStats() }
         
@@ -175,7 +177,6 @@ class Board {
         clear()
         let indices = Array(0...255).shuffled().prefix(count)
         let update = (count < 256)
-        unsolved.value = 256
         for i in indices {
             _ = set(i, solution[i], updateCanBe: update)
         }
@@ -190,7 +191,7 @@ class Board {
             let i = autofillQueue.removeLast()
             let v = solution[i]
             _ = setOne(i, v)
-            cells[i].highlight[Cell.valueIndex] = hi
+            cells[i].highlight[Cell.valueHighlight] = hi
             count += 1
         }
         autofilled.value += count

@@ -8,28 +8,6 @@
 
 import SwiftUI
 
-fileprivate func cellHighlight(_ cell: Cell) -> Cell {
-    var hi: CellHighlight = .none
-    switch cell.canBe.count {
-    case 0: hi = .canBe0
-    case 1: hi = .canBe1
-    case 2: hi = .canBe2
-    default: break
-    }
-    
-    for i in range16 {
-        if !cell.highlight[i].sticky {
-            cell.highlight[i] = cell.canBe.contains(i) ? hi : .none
-        }
-    }
-    
-    if !cell.highlight[Cell.borderIndex].sticky {
-        cell.highlight[Cell.borderIndex] = (hi == .canBe0) ? hi : .none
-    }
-    
-    return cell
-}
-
 struct CellButton: View {
     let index: Int
     
@@ -53,10 +31,10 @@ struct CellView: View {
             if cell.value <= 16 && cell.value > 0 {
                 Image(systemName: nameForValue(cell.value))
                 .font(Font.largeTitle.weight(.semibold))
-                .foregroundColor(cell.highlight[Cell.valueIndex].color)
+                .foregroundColor(cell.highlight[Cell.valueHighlight].color)
             }
             else {
-                CanBeView(cell: cellHighlight(cell))
+                CanBeView(cell: cell)
             }
         }
         .frame(width: width, height: height)

@@ -29,18 +29,8 @@ extension Board {
         sendNotifications(false)
         for i in cells.indices {
             canBeRecalc(i)
-            let cell = cells[i]
-            var updated = false
-            for j in range16 {
-                if cell.highlight[j] != .none {
-                    cell.highlight[j] = .none
-                    updated = true
-                }
-            }
-            if updated {
-                cell.sendNotifications(true)
-                cell.sendNotification()         // Trigger redraw
-            }
+            cells[i].reHighlight(true)
+            cells[i].sendNotification()     // trigger redraw
         }
         sendNotifications(true)
     }
@@ -88,7 +78,7 @@ extension Board {
         let i = candidates[Int.random(in: candidates.indices)] // random cell
         let v = solution[i]
         _ = setOne(i, v)
-        cells[i].highlight[Cell.valueIndex] = .hint
+        cells[i].highlight[Cell.valueHighlight] = .hint
         hintCount.value += 1 + autofillUnqueue(.hint)
     }
 
