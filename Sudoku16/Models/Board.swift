@@ -69,8 +69,8 @@ func squareColor(cell: Int) -> Color {
 class Board {
     // User Settings
     static let settings = UserSettings()
-    
-    var autofill : Bool { Self.settings.autofill }
+
+    var autofill: Bool { Self.settings.autofill }
     var initiallySolved: Int { Int(Self.settings.initiallySolved.rounded()) }
     var showWrongValues: Bool { Self.settings.showWrongValues }
     // Statistics
@@ -95,11 +95,11 @@ class Board {
     var unsolved = PublishingInt(0)
     var autofillQueue: [Int] = []
     var autofilled = PublishingInt(0)
-    
+
     init() {
         for _ in 0...255 { self.cells.append(Cell()) }
     }
-    
+
     func updateStats() {
         statErrors += erred.value
         statHints += hintCount.value
@@ -107,7 +107,7 @@ class Board {
     }
 
     func clear() {
-        _ = cells.map{ $0.clear() }
+        _ = cells.map { $0.clear() }
         autofilled.value = 0
         erred.value = 0
         hintCount.value = 0
@@ -115,14 +115,14 @@ class Board {
     }
 
     // Turn publishing on or off for all cells
-    func sendNotifications(_ send: Bool) { _ = cells.map{ $0.sendNotifications(send)} }
-    
+    func sendNotifications(_ send: Bool) { _ = cells.map { $0.sendNotifications(send) } }
+
     // Set all the canBe's in rows, columns or squares, ignoring duplicates
     func canBeSetAll(_ index: Int, _ value: Int, _ set: Bool) -> Bool {
         var ret = true
         var j = -1
         for i in allForCell(index).sorted() {
-            if (i != j && i != index) {
+            if i != j && i != index {
                 let cell = cells[i]
                 _ = cell.canBe.set(value, set)
                 if cell.canBe.isEmpty { ret = false }
@@ -133,7 +133,7 @@ class Board {
         }
         return ret
     }
-    
+
     // Set or reset a cell
     // Setting with a 0 is a reset
     func setOne(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
@@ -153,8 +153,7 @@ class Board {
             if updateCanBe && solution[index] == value {
                 if !canBeSetAll(index, value, false) { ret = false }
             }
-        }
-        else {
+        } else {
             if range16.contains(cell.value) {
                 // Don't update canBe's if not the right solution
                 if solution[index] == cell.value { _ = canBeSetAll(index, cell.value, true) }
@@ -165,12 +164,12 @@ class Board {
             cell.highlight[Cell.valueHighlight] = .none
         }
         cell.reHighlight()
-        
+
         if unsolved.value == 0 { updateStats() }
-        
+
         return ret
     }
-    
+
     // Copy all or a part of the solution
     func copySolution(_ count: Int = 256) {
         sendNotifications(false)
@@ -186,7 +185,7 @@ class Board {
     // Take cells from the queue and solve them, return the number of cells autofilled
     func autofillUnqueue(_ hi: CellHighlight) -> Int {
         var count = 0
-        
+
         while !autofillQueue.isEmpty {
             let i = autofillQueue.removeLast()
             let v = solution[i]
@@ -195,7 +194,7 @@ class Board {
             count += 1
         }
         autofilled.value += count
-        
+
         return count
     }
 }

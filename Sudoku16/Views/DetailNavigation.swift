@@ -10,7 +10,7 @@ import SwiftUI
 
 fileprivate enum Direction {
     case up, down, left, right
-    
+
     var symbol: String {
         switch self {
         case .up:    return "arrowtriangle.up.square"
@@ -22,7 +22,7 @@ fileprivate enum Direction {
 }
 struct DetailNavigation: View {
     let index: Int
-    
+
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 3) {
             NavButton(
@@ -52,7 +52,7 @@ fileprivate struct NavButton: View {
     let direction: Direction
     let next: Int
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
+
     var body: some View {
         Button(
             action: {

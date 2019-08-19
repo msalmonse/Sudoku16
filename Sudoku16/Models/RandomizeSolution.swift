@@ -13,17 +13,17 @@ fileprivate let solution1 = [                                          // Row #
      5,  6,  7,  8,    9, 10, 11, 12,   13, 14, 15, 16,    1,  2,  3,  4, //  2
      9, 10, 11, 12,   13, 14, 15, 16,    1,  2,  3,  4,    5,  6,  7,  8, //  3
     13, 14, 15, 16,    1,  2,  3,  4,    5,  6,  7,  8,    9, 10, 11, 12, //  4
-    
+
      3,  4,  1,  2,    7,  8,  5,  6,   11, 12,  9, 10,   15, 16, 13, 14, //  5
      7,  8,  5,  6,   11, 12,  9, 10,   15, 16, 13, 14,    3,  4,  1,  2, //  6
     11, 12,  9, 10,   15, 16, 13, 14,    3,  4,  1,  2,    7,  8,  5,  6, //  7
     15, 16, 13, 14,    3,  4,  1,  2,    7,  8,  5,  6,   11, 12,  9, 10, //  8
-    
+
      4,  1,  2,  3,    8,  5,  6,  7,   12,  9, 10, 11,   16, 13, 14, 15, //  9
      8,  5,  6,  7,   12,  9, 10, 11,   16, 13, 14, 15,    4,  1,  2,  3, // 10
     12,  9, 10, 11,   16, 13, 14, 15,    4,  1,  2,  3,    8,  5,  6,  7, // 11
     16, 13, 14, 15,    4,  1,  2,  3,    8,  5,  6,  7,   12,  9, 10, 11, // 12
-    
+
      2,  3,  4,  1,    6,  7,  8,  5,   10, 11, 12,  9,   14, 15, 16, 13, // 13
      6,  7,  8,  5,   10, 11, 12,  9,   14, 15, 16, 13,    2,  3,  4,  1, // 14
     10, 11, 12,  9,   14, 15, 16, 13,    2,  3,  4,  1,    6,  7,  8,  5, // 15
@@ -57,7 +57,7 @@ extension Board {
         let b = (a & ~0x30) + Int.random(in: 0...3) << 4 // Random column in the same square
         if a != b { swapRows(a, b) }
     }
-    
+
     // Swap all the columns between two columns of squares
     func swapSquaresInColumn(_ square: Int) {
         let a = square << 2
@@ -69,7 +69,7 @@ extension Board {
             swapColumns(a + 3, b + 3)
         }
     }
-    
+
     // Swap all the rows between two rows of squares
     func swapSquaresInRow(_ square: Int) {
         let a = square << 6
@@ -84,7 +84,7 @@ extension Board {
 
     func randomizeSolution() {
         let digitSwap = [0] + Array(1...16).shuffled()
-        solution = solution1.map{digitSwap[$0]}
+        solution = solution1.map { digitSwap[$0] }
         for _ in 0...9 {
             swapColumnsInSquare(Int.random(in: 0...15))
             swapRowsInSquare(Int.random(in: 0...15) << 4)

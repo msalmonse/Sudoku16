@@ -24,7 +24,6 @@ struct CellDetail: View {
         self.index = index
     }
 
-
     var body: some View {
         VStack {
             Text("Details for Cell, Row \(row), Column \(col)")
@@ -102,9 +101,7 @@ struct CellDetail: View {
                     Button(
                         action: { board.reCalcAll() },
                         label: {
-                            Text("Reset all")
-                            .padding(5)
-                            .overlay(strokedCapsule())
+                            ButtonText("Reset all", font: .body)
                     }
                     )
                 }
@@ -113,13 +110,13 @@ struct CellDetail: View {
                 .overlay(strokedRoundedRectangle(cornerRadius: 3))
             }
             Spacer()
-        
+
             // FixME DetailNavigation(index: index)
 
             Button(
                 action: { self.mode.value.dismiss() },
                 label: {
-                    ButtonText(text: "Dismiss")
+                    ButtonText("Dismiss")
                 }
             )
             Spacer()

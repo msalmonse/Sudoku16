@@ -15,12 +15,12 @@ fileprivate let initiallySolvedMax = String(format: "%.0f", initiallySolvedRange
 struct Settings: View {
     @ObservedObject var settings = UserSettings()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
+
     func initialCount() -> String {
         let count = Int(settings.initiallySolved.rounded())
         return "\(count) initially solved squares"
     }
-    
+
     func easeColor(_ ease: Double) -> Color {
         switch ease {
         case 50...90:   return .red
@@ -37,11 +37,11 @@ struct Settings: View {
             Text("User Settings")
             .font(.title)
             Spacer()
-            
+
             Toggle("Show wrong solutions?", isOn: $settings.showWrongValues)
             .padding()
             .overlay(strokedRoundedRectangle(cornerRadius: 10))
-            
+
             Toggle("Autofill cells?", isOn: $settings.autofill)
             .padding()
             .overlay(strokedRoundedRectangle(cornerRadius: 10))
@@ -91,12 +91,8 @@ struct Settings: View {
                         self.settings.statHints = 0
                         self.settings.statSolved = 0
                     },
-                    label: { Text("Clear").font(.headline) }
+                    label: { ButtonText("Clear", font: .headline) }
                 )
-                .foregroundColor(.primary)
-                .padding(.horizontal, 10)
-                .overlay(strokedCapsule())
-                .padding(10)
             }
             .padding()
             .overlay(strokedRoundedRectangle(cornerRadius: 10))
@@ -105,7 +101,7 @@ struct Settings: View {
             Button(
                 action: { self.mode.value.dismiss() },
                 label: {
-                    ButtonText(text: "Dismiss")
+                    ButtonText("Dismiss")
                 }
             )
             Spacer()

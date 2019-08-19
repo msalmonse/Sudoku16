@@ -22,7 +22,7 @@ struct Sheets: View {
     var body: some View {
         VStack {
             Text("").hidden()
-            .sheet(item: $showDetail, content: { i in CellDetail(index: i.value) } )
+            .sheet(item: $showDetail, content: { i in CellDetail(index: i.value) })
 
             Text("").hidden()
             .sheet(isPresented: $showUserSettings, content: { Settings() })

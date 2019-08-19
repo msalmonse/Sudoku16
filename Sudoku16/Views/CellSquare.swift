@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CellSquare: View {
     let start: Int
-    
+
     var body: some View {
         VStack (spacing: 0) {
             CellRow(start: start)
@@ -25,7 +25,7 @@ struct CellSquare: View {
 
 struct CellRow: View {
     let start: Int
-    
+
     var body: some View {
         HStack (spacing: 0) {
             CellButton(index: start)

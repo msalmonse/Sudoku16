@@ -15,7 +15,7 @@ func strokedRoundedRectangle(
     ) -> some View {
     /// Return a stroked RoundedRectangle.
     /// Primarily for overlays
-    
+
     return RoundedRectangle(cornerRadius: r).stroke(lineWidth: w).foregroundColor(c)
 }
 
@@ -35,7 +35,7 @@ func strokedRectangle(
     ) -> some View {
     /// Return a stroked RoundedRectangle.
     /// Primarily for overlays
-    
+
     return Rectangle().stroke(lineWidth: w).foregroundColor(c)
 }
 
@@ -48,14 +48,13 @@ func filledRectangle(
     return Rectangle().foregroundColor(c)
 }
 
-
 func strokedCapsule(
         stroke w: CGFloat = 1,
         color c: Color = .primary
     ) -> some View {
     /// Return a stroked RoundedRectangle.
     /// Primarily for overlays
-    
+
     return Capsule().stroke(lineWidth: w).foregroundColor(c)
 }
 

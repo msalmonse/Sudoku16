@@ -15,7 +15,7 @@ extension Board {
         var new16 = all16
         var j = -1
         for i in allForCell(index).sorted() {
-            if (i != j && i != index) {
+            if i != j && i != index {
                 let value = cells[i].value
                 if value != 0 { _ = new16.set(value, false) }
                 j = i
@@ -23,7 +23,7 @@ extension Board {
         }
         cells[index].canBe = new16
     }
-    
+
     // Recalculate all canBe's and reset all highlights
     func reCalcAll() {
         sendNotifications(false)
@@ -34,7 +34,7 @@ extension Board {
         }
         sendNotifications(true)
     }
-    
+
     // Set or reset a cell
     // Setting with a 0 is a reset
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
@@ -42,16 +42,16 @@ extension Board {
         _ = autofillUnqueue(.auto)
         return ret
     }
-    
+
     // Highlight the current cell and all those on rows columns and squares
     func highlight(_ index: Int, _ value: Int, _ row: Bool, _ column: Bool, _ square: Bool) {
         var cellIndices: [Int] = []
         let hi: CellHighlight = (cells[index].highlight[value] != .user) ? .user : .none
-        
+
         if row { cellIndices += rowForCell(index) }
         if column { cellIndices += columnForCell(index) }
         if square { cellIndices += squareForCell(index) }
-        
+
         for i in cellIndices {
             cells[i].highlight[value] = hi
             cells[i].sendNotification()     // trigger redraw

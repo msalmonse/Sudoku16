@@ -22,7 +22,7 @@ enum CellHighlight {
     case hint   // result of hint
     case user   // user highlighted
     case wrong  // doesn't match solution
-    
+
     var color: Color {
         switch self {
         case .none:     return .primary
@@ -36,7 +36,7 @@ enum CellHighlight {
         case .wrong:    return .red
         }
     }
-    
+
     var sticky: Bool {
         switch self {
         case .none:     return false
@@ -81,10 +81,10 @@ class Cell: ObservableObject, Identifiable {
     }
 
     let id = UUID()
-    var value: Int = 0 { willSet{ sendNotification() } }
-    var canBe = all16  { willSet{ if canBe != newValue { sendNotification() } } }
+    var value: Int = 0 { willSet { sendNotification() } }
+    var canBe = all16 { willSet { if canBe != newValue { sendNotification() } } }
     var highlight: [CellHighlight] = Array(repeating: .none, count: highlightCount)
-    
+
     var backgroundColor: Color {
         let hi = highlight[Cell.borderHighlight]
         return (hi == .none) ? .clear : hi.color.opacity(0.4)
@@ -96,7 +96,7 @@ class Cell: ObservableObject, Identifiable {
         canBe = all16
         for i in highlight.indices { highlight[i] = .none }
     }
-    
+
     func sendNotifications(_ send: Bool) {
         switch (notify, send) {
         case (.needto, true):   notify = .send; sendNotification()
@@ -107,7 +107,7 @@ class Cell: ObservableObject, Identifiable {
         case (.quiet, false):   break
         }
     }
-    
+
     /// Calculate the highlights for a cell
     func reHighlight(_ unstick: Bool = false) {
         var hi: CellHighlight = .none
@@ -132,6 +132,7 @@ class Cell: ObservableObject, Identifiable {
 
 // Convert a value to an image name
 
+// swiftlint:disable cyclomatic_complexity
 func nameForValue(_ i: Int) -> String {
     switch i {
     case  1: return  "1.square"

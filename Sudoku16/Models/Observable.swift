@@ -16,7 +16,7 @@ class Observable<T>: ObservableObject, Identifiable {
     var value: T {
         willSet { objectWillChange.send() }
     }
-    
+
     init(_ initialValue: T) { value = initialValue }
 }
 

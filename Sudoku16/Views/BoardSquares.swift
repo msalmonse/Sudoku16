@@ -45,31 +45,31 @@ struct BoardSquares: View {
                 .overlay(strokedRectangle(stroke: 3))
             }
             .padding()
-            
+
             HStack {
                 Button(
                     action: { board.renew() },
-                    label: { ButtonText(text: "New") }
+                    label: { ButtonText("New") }
                 )
 
                 Button(
                     action: { board.restart() },
-                    label: { ButtonText(text: "Restart") }
+                    label: { ButtonText("Restart") }
                 )
-                
+
                 Button(
                     action: { board.solve() },
-                    label: { ButtonText(text: "Solve") }
+                    label: { ButtonText("Solve") }
                 )
-                
+
                 Button(
                     action: { board.hint() },
-                    label: { ButtonText(text: "Hint") }
+                    label: { ButtonText("Hint") }
                 )
 
                 Button(
                     action: { showSheet.value = .userSettings },
-                    label: { ButtonText(text: "Settings") }
+                    label: { ButtonText("Settings") }
                 )
             }
         }
@@ -78,7 +78,7 @@ struct BoardSquares: View {
 
 struct SquaresRow: View {
     let start: Int
-    
+
     var body: some View {
         HStack (spacing: 0) {
             CellSquare(start: start)

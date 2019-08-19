@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CellButton: View {
     let index: Int
-    
+
     var body: some View {
         Button(
             action: { showSheet.value = .cellDetail(self.index) },
@@ -25,15 +25,14 @@ struct CellView: View {
     @ObservedObject var cell: Cell
     let width: CGFloat
     let height: CGFloat
-    
+
     var body: some View {
         ZStack {
             if cell.value <= 16 && cell.value > 0 {
                 Image(systemName: nameForValue(cell.value))
                 .font(Font.largeTitle.weight(.semibold))
                 .foregroundColor(cell.highlight[Cell.valueHighlight].color)
-            }
-            else {
+            } else {
                 CanBeView(cell: cell)
             }
         }
@@ -45,7 +44,7 @@ struct CellView: View {
 
 struct CanBeView: View {
     @ObservedObject var cell: Cell
-    
+
     var body: some View {
         VStack(spacing: 0) {
             MiniCellRow(cell: cell, start: 1)
@@ -59,7 +58,7 @@ struct CanBeView: View {
 struct MiniCellRow: View {
     @ObservedObject var cell: Cell
     let start: Int
-    
+
     var body: some View {
         HStack(spacing: 0) {
             MiniCellView(cell: cell, index: start)
@@ -75,13 +74,13 @@ struct MiniCellView: View {
     @ObservedObject var cell: Cell
     let show: Bool
     let color: Color
-    
+
     init(cell: Cell, index: Int) {
         show = cell.canBe.contains(index)
         color = show ? cell.highlight[index].color : .secondary
         self.cell = cell
     }
-    
+
     var body: some View {
         Text(show ? "◼︎" : "◻︎")
         .font(.caption)

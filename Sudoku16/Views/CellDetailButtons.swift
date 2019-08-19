@@ -13,7 +13,7 @@ extension CellDetail {
     func enableButton(_ index: Int) -> Bool {
         return cell.value == 0 && cell.canBe.contains(index)
     }
-    
+
     // Return a canBe button
     func canBeButton(_ number: Int) -> some View {
         let color: Color = cell.canBe.contains(number) ? .primary : .secondary
@@ -27,7 +27,7 @@ extension CellDetail {
             }
         )
     }
-    
+
     // Return a canBe row
     func canBeRow(start: Int) -> some View {
         return HStack {
@@ -53,7 +53,7 @@ extension CellDetail {
             }
         )
     }
-    
+
     // Return a number row
     func numberRow(start: Int) -> some View {
         return HStack {
@@ -63,7 +63,7 @@ extension CellDetail {
             numberButton(start + 3)
         }
     }
-    
+
     // Return a highlight button
     func highlightButton(_ number: Int) -> some View {
         let color: Color = (cell.highlight[number] == .user) ? .secondary : .primary
@@ -83,7 +83,7 @@ extension CellDetail {
             }
         )
     }
-    
+
     // Return a highlight row
     func highlightRow(start: Int) -> some View {
         return HStack {
@@ -101,8 +101,8 @@ struct DetailButton: View {
     let number: Int
     let enable: Bool
     let color: Color
-    let doIt: (() -> ())
-    
+    let doIt: (() -> Void)
+
     var body: some View {
         Button(
             action: doIt,
