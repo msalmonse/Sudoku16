@@ -1,0 +1,8 @@
+disabled_rules:
+  - colon
+  - comma
+  - identifier_name
+  - private_over_fileprivate
+  - redundant_optional_initialization
+  - trailing_comma
+  - type_name
