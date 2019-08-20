@@ -118,13 +118,13 @@ class Board {
     func sendNotifications(_ send: Bool) { _ = cells.map { $0.sendNotifications(send) } }
 
     // Set all the canBe's in rows, columns or squares, ignoring duplicates
-    func canBeSetAll(_ index: Int, _ value: Int, _ set: Bool) -> Bool {
+    func canBeSetAll(_ index: Int, _ value: Int, _ setTo: Bool) -> Bool {
         var ret = true
         var j = -1
         for i in allForCell(index).sorted() {
             if i != j && i != index {
                 let cell = cells[i]
-                _ = cell.canBe.set(value, set)
+                cell.canBe[value] = setTo
                 if cell.canBe.isEmpty { ret = false }
                 cell.reHighlight()
                 if autofill && cell.canBe.count == 1 && cell.value == 0 { autofillQueue.append(i) }
@@ -148,7 +148,8 @@ class Board {
             cell.highlight[Cell.valueHighlight] =
                 (showWrongValues && err) ? .wrong : .none
             cell.highlight[Cell.borderHighlight] = .none
-            cell.canBe.setOnly(value)
+            // Set canBe to only the set value
+            cell.canBe = Set16[value]
             // Don't update canBe's if not the right solution
             if updateCanBe && solution[index] == value {
                 if !canBeSetAll(index, value, false) { ret = false }

@@ -17,7 +17,7 @@ extension Board {
         for i in allForCell(index).sorted() {
             if i != j && i != index {
                 let value = cells[i].value
-                if value != 0 { _ = new16.set(value, false) }
+                if value != 0 { new16[value] = false }
                 j = i
             }
         }

@@ -76,7 +76,7 @@ struct MiniCellView: View {
     let color: Color
 
     init(cell: Cell, index: Int) {
-        show = cell.canBe.contains(index)
+        show = cell.canBe[index]
         color = show ? cell.highlight[index].color : .secondary
         self.cell = cell
     }

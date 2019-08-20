@@ -11,12 +11,12 @@ import SwiftUI
 
 extension CellDetail {
     func enableButton(_ index: Int) -> Bool {
-        return cell.value == 0 && cell.canBe.contains(index)
+        return cell.value == 0 && cell.canBe[index]
     }
 
     // Return a canBe button
     func canBeButton(_ number: Int) -> some View {
-        let color: Color = cell.canBe.contains(number) ? .primary : .secondary
+        let color: Color = cell.canBe[number] ? .primary : .secondary
         return DetailButton(
             index: index,
             number: number,

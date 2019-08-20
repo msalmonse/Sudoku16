@@ -120,7 +120,7 @@ class Cell: ObservableObject, Identifiable {
 
         for i in range16 {
            if unstick || !highlight[i].sticky {
-               highlight[i] = canBe.contains(i) ? hi : .none
+               highlight[i] = canBe[i] ? hi : .none
            }
         }
 
