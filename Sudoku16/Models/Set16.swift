@@ -51,4 +51,14 @@ extension Set16 {
         if range16.contains(i) { self ^= mask(i) }
         return was
     }
+
+    /// Another way to check or set membership
+    subscript(index: Int) -> Bool {
+        get {
+            contains(index)
+        }
+        set(newValue) {
+            _ = set(index, newValue)
+        }
+    }
 }
