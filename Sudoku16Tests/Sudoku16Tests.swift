@@ -113,4 +113,13 @@ class Sudoku16Tests: XCTestCase {
             board.copySolution()
         }
     }
+
+    func testBundledData() {
+        XCTAssertEqual(bundledData(key: "CFBundleName"), "Sudoku16")
+        XCTAssertNotEqual(bundledData(key: "CFBundleVersion"), "")
+        let list = bundleKeys()
+        XCTAssertNotNil(list)
+        XCTAssertFalse(list!.isEmpty)
+        print(list!)
+    }
 }
