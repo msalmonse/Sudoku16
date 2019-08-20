@@ -15,6 +15,25 @@ fileprivate let initiallySolvedMax = String(format: "%.0f", initiallySolvedRange
 struct Settings: View {
     @ObservedObject var settings = UserSettings()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    let nameVersion: String
+
+    init() {
+        let name = bundledData(key: "CFBundleName")
+        let version = bundledData(key: "CFBundleShortVersionString")
+        let build = bundledData(key: "CFBundleVersion")
+
+        var string = ""
+        if name != nil {
+            string = name!
+            if version != nil {
+                string += " - \(version!)"
+                if build != nil {
+                    string += "(\(build!))"
+                }
+            }
+        }
+        self.nameVersion = string
+    }
 
     func initialCount() -> String {
         let count = Int(settings.initiallySolved.rounded())
@@ -105,6 +124,7 @@ struct Settings: View {
                 }
             )
             Spacer()
+            Text(nameVersion).padding(5)
         }
         .frame(width: 256)
     }
