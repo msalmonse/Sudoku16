@@ -99,7 +99,7 @@ struct Settings: View {
 
             Spacer()
             Button(
-                action: { self.mode.value.dismiss() },
+                action: { self.mode.wrappedValue.dismiss() },
                 label: {
                     ButtonText("Dismiss")
                 }

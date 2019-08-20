@@ -114,7 +114,7 @@ struct CellDetail: View {
             // FixME DetailNavigation(index: index)
 
             Button(
-                action: { self.mode.value.dismiss() },
+                action: { self.mode.wrappedValue.dismiss() },
                 label: {
                     ButtonText("Dismiss")
                 }

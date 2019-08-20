@@ -49,7 +49,7 @@ extension CellDetail {
             color: color,
             doIt: {
                 _ = board.set(self.index, number)
-                self.mode.value.dismiss()
+                self.mode.wrappedValue.dismiss()
             }
         )
     }

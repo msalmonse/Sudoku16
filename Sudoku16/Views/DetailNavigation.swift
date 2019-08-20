@@ -57,7 +57,7 @@ fileprivate struct NavButton: View {
         Button(
             action: {
                 showSheet.value = .cellDetail(self.next)
-                self.mode.value.dismiss()
+                self.mode.wrappedValue.dismiss()
             },
             label: {
                 Image(systemName: direction.symbol)

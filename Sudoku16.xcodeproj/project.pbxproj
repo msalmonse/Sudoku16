@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C437DEDF2302850F005FF528 /* ButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEDE2302850F005FF528 /* ButtonText.swift */; };
-		C437DEE123029FEB005FF528 /* DetailNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE023029FEA005FF528 /* DetailNavigation.swift */; };
 		C437DEE32303D042005FF528 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE22303D042005FF528 /* Settings.swift */; };
 		C437DEE52303DB8A005FF528 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE42303DB8A005FF528 /* UserDefault.swift */; };
 		C437DEE72303DC7D005FF528 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE62303DC7D005FF528 /* UserSettings.swift */; };
@@ -327,7 +326,6 @@
 				C437DEE72303DC7D005FF528 /* UserSettings.swift in Sources */,
 				C45F582F22FF4E9E008762F1 /* BoardSquares.swift in Sources */,
 				C437DEDF2302850F005FF528 /* ButtonText.swift in Sources */,
-				C437DEE123029FEB005FF528 /* DetailNavigation.swift in Sources */,
 				C45F582522FEFBFA008762F1 /* Board.swift in Sources */,
 				C48CE0E223051B0800C10299 /* BoardInterface.swift in Sources */,
 				C495685523012F9D007C707B /* RandomizeSolution.swift in Sources */,
