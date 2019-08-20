@@ -9,8 +9,6 @@
 import XCTest
 @testable import Sudoku16
 
-// swiftlint:disable colon
-
 class Sudoku16Tests: XCTestCase {
 
     override func setUp() {
