@@ -61,4 +61,9 @@ extension Set16 {
             _ = set(index, newValue)
         }
     }
+
+    /// Constant values with only 1 set member
+    static subscript(index: Int) -> Set16 {
+        return all16.mask(index)
+    }
 }
