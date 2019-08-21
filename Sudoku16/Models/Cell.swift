@@ -128,6 +128,9 @@ class Cell: ObservableObject, Identifiable {
            highlight[Cell.borderHighlight] = (hi == .canBe0) ? hi : .none
         }
     }
+
+    /// Return the name associated with a value
+    var name: String { return nameForValue(value) }
 }
 
 // Convert a value to an image name

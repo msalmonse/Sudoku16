@@ -26,6 +26,9 @@
 		C45F582D22FF4BE2008762F1 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F582C22FF4BE2008762F1 /* Shapes.swift */; };
 		C45F582F22FF4E9E008762F1 /* BoardSquares.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F582E22FF4E9E008762F1 /* BoardSquares.swift */; };
 		C46637B6230C626D009AF330 /* BundledData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46637B5230C626D009AF330 /* BundledData.swift */; };
+		C46637E9230D0F39009AF330 /* DetailNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE023029FEA005FF528 /* DetailNavigation.swift */; };
+		C46637EB230D10B5009AF330 /* MiniBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46637EA230D10B5009AF330 /* MiniBoard.swift */; };
+		C46637ED230D1402009AF330 /* Identified.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46637EC230D1402009AF330 /* Identified.swift */; };
 		C48CE0E0230482E800C10299 /* CellDetailButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48CE0DF230482E800C10299 /* CellDetailButtons.swift */; };
 		C48CE0E223051B0800C10299 /* BoardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48CE0E123051B0800C10299 /* BoardInterface.swift */; };
 		C495684B23003A16007C707B /* Publishing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495684A23003A16007C707B /* Publishing.swift */; };
@@ -73,6 +76,8 @@
 		C45F582C22FF4BE2008762F1 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		C45F582E22FF4E9E008762F1 /* BoardSquares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSquares.swift; sourceTree = "<group>"; };
 		C46637B5230C626D009AF330 /* BundledData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledData.swift; sourceTree = "<group>"; };
+		C46637EA230D10B5009AF330 /* MiniBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniBoard.swift; sourceTree = "<group>"; };
+		C46637EC230D1402009AF330 /* Identified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identified.swift; sourceTree = "<group>"; };
 		C48CE0DF230482E800C10299 /* CellDetailButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetailButtons.swift; sourceTree = "<group>"; };
 		C48CE0E123051B0800C10299 /* BoardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardInterface.swift; sourceTree = "<group>"; };
 		C495684A23003A16007C707B /* Publishing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publishing.swift; sourceTree = "<group>"; };
@@ -162,7 +167,9 @@
 			children = (
 				C45F582422FEFBFA008762F1 /* Board.swift */,
 				C48CE0E123051B0800C10299 /* BoardInterface.swift */,
+				C46637B5230C626D009AF330 /* BundledData.swift */,
 				C45F582022FEF9C3008762F1 /* Cell.swift */,
+				C46637EC230D1402009AF330 /* Identified.swift */,
 				C49E73B22305C75D003E8AD1 /* Message.swift */,
 				C495685223005084007C707B /* Observable.swift */,
 				C495684A23003A16007C707B /* Publishing.swift */,
@@ -171,7 +178,6 @@
 				C495684C23003A5B007C707B /* ShowSheet.swift */,
 				C437DEE42303DB8A005FF528 /* UserDefault.swift */,
 				C437DEE62303DC7D005FF528 /* UserSettings.swift */,
-				C46637B5230C626D009AF330 /* BundledData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,6 +192,7 @@
 				C45F582922FF46F9008762F1 /* CellSquare.swift */,
 				C45F582722FF0F7F008762F1 /* CellView.swift */,
 				C437DEE023029FEA005FF528 /* DetailNavigation.swift */,
+				C46637EA230D10B5009AF330 /* MiniBoard.swift */,
 				C437DEE22303D042005FF528 /* Settings.swift */,
 				C495685023004F3C007C707B /* Sheets.swift */,
 			);
@@ -331,6 +338,7 @@
 				C437DEDF2302850F005FF528 /* ButtonText.swift in Sources */,
 				C45F582522FEFBFA008762F1 /* Board.swift in Sources */,
 				C48CE0E223051B0800C10299 /* BoardInterface.swift in Sources */,
+				C46637EB230D10B5009AF330 /* MiniBoard.swift in Sources */,
 				C495685523012F9D007C707B /* RandomizeSolution.swift in Sources */,
 				C437DEE32303D042005FF528 /* Settings.swift in Sources */,
 				C495685123004F3C007C707B /* Sheets.swift in Sources */,
@@ -341,9 +349,11 @@
 				C48CE0E0230482E800C10299 /* CellDetailButtons.swift in Sources */,
 				C45F582322FEFAD6008762F1 /* Set16.swift in Sources */,
 				C437DEE52303DB8A005FF528 /* UserDefault.swift in Sources */,
+				C46637E9230D0F39009AF330 /* DetailNavigation.swift in Sources */,
 				C45F57FE22FEF71C008762F1 /* AppDelegate.swift in Sources */,
 				C46637B6230C626D009AF330 /* BundledData.swift in Sources */,
 				C49E73B32305C75D003E8AD1 /* Message.swift in Sources */,
+				C46637ED230D1402009AF330 /* Identified.swift in Sources */,
 				C45F580022FEF71C008762F1 /* SceneDelegate.swift in Sources */,
 				C45F580222FEF71C008762F1 /* ContentView.swift in Sources */,
 			);

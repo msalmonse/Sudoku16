@@ -21,34 +21,52 @@ fileprivate enum Direction {
     }
 }
 struct DetailNavigation: View {
-    let index: Int
+    @Binding var index: Int
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
-        VStack(alignment: HorizontalAlignment.center, spacing: 3) {
-            NavButton(
-                direction: .up,
-                next: (index > 15) ? index - 16 : -1
-            )
-            HStack(alignment: VerticalAlignment.center, spacing: 3) {
+        VStack {
+            CellDetail(index: index)
+            Spacer()
+            VStack(alignment: HorizontalAlignment.center, spacing: 3) {
                 NavButton(
-                    direction: .left,
-                    next: ((index & 15) > 0) ? index - 1 : -1
+                    index: $index,
+                    direction: .up,
+                    next: (index > 15) ? index - 16 : -1
                 )
-                NavButton(
-                    direction: .down,
-                    next: (index < 240) ? index + 16 : -1
-                )
-                NavButton(
-                    direction: .right,
-                    next: ((index & 15) < 15) ? index + 1 : -1
-                )
+                HStack(alignment: VerticalAlignment.center, spacing: 3) {
+                    NavButton(
+                        index: $index,
+                        direction: .left,
+                        next: ((index & 15) > 0) ? index - 1 : -1
+                    )
+                    NavButton(
+                        index: $index,
+                        direction: .down,
+                        next: (index < 240) ? index + 16 : -1
+                    )
+                    NavButton(
+                        index: $index,
+                        direction: .right,
+                        next: ((index & 15) < 15) ? index + 1 : -1
+                    )
 
+                }
+                Spacer()
+                Button(
+                    action: { self.mode.wrappedValue.dismiss() },
+                    label: {
+                        ButtonText("Dismiss")
+                    }
+                )
+                Spacer()
             }
         }
     }
 }
 
 fileprivate struct NavButton: View {
+    @Binding var index: Int
     let direction: Direction
     let next: Int
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -56,8 +74,7 @@ fileprivate struct NavButton: View {
     var body: some View {
         Button(
             action: {
-                showSheet.value = .cellDetail(self.next)
-                self.mode.wrappedValue.dismiss()
+                self.index = self.next
             },
             label: {
                 Image(systemName: direction.symbol)
@@ -72,7 +89,7 @@ fileprivate struct NavButton: View {
 #if DEBUG
 struct DetailNavigation_Previews: PreviewProvider {
     static var previews: some View {
-        DetailNavigation(index: 120)
+        DetailNavigation(index: .constant(120))
     }
 }
 #endif

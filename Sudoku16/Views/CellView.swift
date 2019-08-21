@@ -29,7 +29,7 @@ struct CellView: View {
     var body: some View {
         ZStack {
             if cell.value <= 16 && cell.value > 0 {
-                Image(systemName: nameForValue(cell.value))
+                Image(systemName: cell.name)
                 .font(Font.largeTitle.weight(.semibold))
                 .foregroundColor(cell.highlight[Cell.valueHighlight].color)
             } else {

@@ -9,30 +9,26 @@
 import Combine
 import SwiftUI
 
-struct IdInt: Identifiable {
-    let id = UUID()
-    var value: Int
-}
-
 struct Sheets: View {
-    @State var showDetail: IdInt? = nil
+    @State var detailIndex: Int = 0
+    @State var showDetail: Bool = false
     @State var showUserSettings = false
     @State var alertMessage: Message? = nil
 
     var body: some View {
         VStack {
             Text("").hidden()
-            .sheet(item: $showDetail, content: { i in CellDetail(index: i.value) })
+            .sheet(isPresented: $showDetail) { DetailNavigation(index: self.$detailIndex) }
 
             Text("").hidden()
-            .sheet(isPresented: $showUserSettings, content: { Settings() })
+            .sheet(isPresented: $showUserSettings) { Settings() }
 
             Text("").hidden()
                 .alert(item: $alertMessage) { msg in
                     Alert(
                         title: Text(msg.subject ?? "Alert"),
                         message: Text(msg.text),
-                        dismissButton: .default(Text("Dismiss"))
+                        dismissButton: Alert.Button.default(Text("Dismiss"))
                     )
                 }
 
@@ -41,7 +37,9 @@ struct Sheets: View {
                 perform: { showIt in
                     switch showIt {
                     case .none: break
-                    case .cellDetail(let i): self.showDetail = IdInt(value: i)
+                    case .cellDetail(let idx):
+                        self.detailIndex = idx
+                        self.showDetail = true
                     case .showAlert(let msg): self.alertMessage = msg
                     case .userSettings: self.showUserSettings = true
                     }

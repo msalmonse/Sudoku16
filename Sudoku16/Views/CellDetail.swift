@@ -11,10 +11,10 @@ import SwiftUI
 struct CellDetail: View {
     let index: Int
     @ObservedObject var cell: Cell
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @State var rowHighlight: Bool = false
     @State var columnHighlight: Bool = false
     @State var squareHilight: Bool = true
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var row: Int { (index >> 4) + 1 }
     var col: Int { (index & 0x0f) + 1 }
@@ -28,6 +28,10 @@ struct CellDetail: View {
         VStack {
             Text("Details for Cell, Row \(row), Column \(col)")
             .font(.title)
+            Spacer()
+            MiniBoard(selected: index)
+            .padding(5)
+            .overlay(strokedRoundedRectangle(cornerRadius: 2, stroke: 2))
             Spacer()
             HStack {
                 VStack {
@@ -109,17 +113,6 @@ struct CellDetail: View {
                 .frame(width: 400)
                 .overlay(strokedRoundedRectangle(cornerRadius: 3))
             }
-            Spacer()
-
-            // FixME DetailNavigation(index: index)
-
-            Button(
-                action: { self.mode.wrappedValue.dismiss() },
-                label: {
-                    ButtonText("Dismiss")
-                }
-            )
-            Spacer()
         }
     }
 }
