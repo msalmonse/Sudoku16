@@ -31,6 +31,7 @@ struct MiniRow: View {
     let row: Int
     let rowIndex: [IddInt]
     let selected: Int
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     init(row: Int, selected: Int) {
         let range = (row << 4)...(row << 4 | 15)
@@ -43,11 +44,17 @@ struct MiniRow: View {
         HStack(spacing: 1) {
             Image(systemName: nameForValue(row + 1))
             .padding(.trailing, 3)
-            .foregroundColor(.secondary)
+            .foregroundColor(.primary)
             ForEach (rowIndex) {index in
-                Image(systemName: board.cells[index.value].name)
+                Image(systemName:
+                    index.value == self.selected ? "clear" : board.cells[index.value].name
+                )
                 .font(.title)
-                .background(filledRectangle(color: squareColor(index.value, selected: self.selected)))
+                .background(
+                    filledRectangle(
+                        color: squareColor(index.value, selected: self.selected, scheme: self.scheme)
+                    )
+                )
             }
         }
     }

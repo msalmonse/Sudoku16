@@ -15,6 +15,7 @@ struct CellDetail: View {
     @State var columnHighlight: Bool = false
     @State var squareHilight: Bool = true
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     var row: Int { (index >> 4) + 1 }
     var col: Int { (index & 0x0f) + 1 }
@@ -105,7 +106,7 @@ struct CellDetail: View {
                     Button(
                         action: { board.reCalcAll() },
                         label: {
-                            ButtonText("Reset all", font: .body)
+                            ButtonText("Reset all", font: .body, scheme: scheme)
                     }
                     )
                 }

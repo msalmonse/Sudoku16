@@ -15,6 +15,7 @@ fileprivate let initiallySolvedMax = String(format: "%.0f", initiallySolvedRange
 struct Settings: View {
     @ObservedObject var settings = UserSettings()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.colorScheme) var scheme: ColorScheme
     let nameVersion: String
 
     init() {
@@ -110,7 +111,7 @@ struct Settings: View {
                         self.settings.statHints = 0
                         self.settings.statSolved = 0
                     },
-                    label: { ButtonText("Clear", font: .headline) }
+                    label: { ButtonText("Clear", font: .headline, scheme: scheme) }
                 )
             }
             .padding()
@@ -120,7 +121,7 @@ struct Settings: View {
             Button(
                 action: { self.mode.wrappedValue.dismiss() },
                 label: {
-                    ButtonText("Dismiss")
+                    ButtonText("Dismiss", scheme: scheme)
                 }
             )
             Spacer()

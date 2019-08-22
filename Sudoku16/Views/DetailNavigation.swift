@@ -23,6 +23,7 @@ fileprivate enum Direction {
 struct DetailNavigation: View {
     @Binding var index: Int
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     var body: some View {
         VStack {
@@ -56,7 +57,7 @@ struct DetailNavigation: View {
                 Button(
                     action: { self.mode.wrappedValue.dismiss() },
                     label: {
-                        ButtonText("Dismiss")
+                        ButtonText("Dismiss", scheme: scheme)
                     }
                 )
                 Spacer()

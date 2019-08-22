@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CellSquare: View {
     let start: Int
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     var body: some View {
         VStack (spacing: 0) {
@@ -18,7 +19,9 @@ struct CellSquare: View {
             CellRow(start: start + 32)
             CellRow(start: start + 48)
         }
-        .background(filledRoundedRectangle(cornerRadius: 3, color: squareColor(start)))
+        .background(
+            filledRoundedRectangle(cornerRadius: 3, color: squareColor(start, scheme: scheme))
+        )
         .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3))
     }
 }

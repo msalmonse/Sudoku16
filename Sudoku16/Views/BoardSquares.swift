@@ -52,27 +52,27 @@ struct BoardSquares: View {
             HStack {
                 Button(
                     action: { board.renew() },
-                    label: { ButtonText("New", isDark: scheme == .dark) }
+                    label: { ButtonText("New", scheme: scheme) }
                 )
 
                 Button(
                     action: { board.restart() },
-                    label: { ButtonText("Restart", isDark: scheme == .dark) }
+                    label: { ButtonText("Restart", scheme: scheme) }
                 )
 
                 Button(
                     action: { board.solve() },
-                    label: { ButtonText("Solve", isDark: scheme == .dark) }
+                    label: { ButtonText("Solve", scheme: scheme) }
                 )
 
                 Button(
                     action: { board.hint() },
-                    label: { ButtonText("Hint", isDark: scheme == .dark) }
+                    label: { ButtonText("Hint", scheme: scheme) }
                 )
 
                 Button(
                     action: { showSheet.value = .userSettings },
-                    label: { ButtonText("Settings", isDark: scheme == .dark) }
+                    label: { ButtonText("Settings", scheme: scheme) }
                 )
             }
         }

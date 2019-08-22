@@ -109,7 +109,6 @@ struct DetailButton: View {
             label: { Image(systemName: nameForValue(number)).font(.largeTitle) }
         )
         .foregroundColor(color)
-        .opacity(enable ? 1.0 : 0.3)
         .disabled(!enable)
 
     }

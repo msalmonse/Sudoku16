@@ -18,11 +18,16 @@ struct ButtonText: View {
     let width: CGFloat
     let height: CGFloat
 
-    init(_ text: String, font: Font = .title, color: Color = .primary, isDark: Bool = false) {
+    init(
+        _ text: String,
+        font: Font = .title,
+        color: Color = .primary,
+        scheme: ColorScheme = .light
+    ) {
         self.text = text
         self.font = font
         self.color = color
-        self.isDark = isDark
+        self.isDark = scheme == .dark
 
         switch font {
         case .headline: width = 100; height = 35

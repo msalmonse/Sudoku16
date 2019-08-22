@@ -56,13 +56,32 @@ func cellInSquare(_ sqr: Int, _ i: Int) -> Int {
     return (sqr << 2) | squareOffsets[i]
 }
 
-func squareColor(_ index: Int, selected: Int = -1) -> Color {
-    let isSelected = index == selected
+fileprivate let blueHue = 0.60
+fileprivate let yellowHue = 0.15
+fileprivate let dark = 0.7
+fileprivate let light = 1.0
+
+fileprivate let blueDark = Color(hue: blueHue, saturation: 0.1, brightness: dark)
+fileprivate let blueDarkSelected = Color(hue: blueHue, saturation: 0.5, brightness: dark)
+fileprivate let blueLight = Color(hue: blueHue, saturation: 0.1, brightness: light)
+fileprivate let blueLightSelected = Color(hue: blueHue, saturation: 0.5, brightness: light)
+fileprivate let yellowDark = Color(hue: yellowHue, saturation: 0.1, brightness: dark)
+fileprivate let yellowDarkSelected = Color(hue: yellowHue, saturation: 0.9, brightness: dark)
+fileprivate let yellowLight = Color(hue: yellowHue, saturation: 0.1, brightness: light)
+fileprivate let yellowLightSelected = Color(hue: yellowHue, saturation: 0.9, brightness: light)
+
+fileprivate let yellowColors = [ yellowLight, yellowDark, yellowLightSelected, yellowDarkSelected ]
+fileprivate let blueColors = [ blueLight, blueDark, blueLightSelected, blueDarkSelected ]
+
+func squareColor(_ index: Int, selected: Int = -1, scheme: ColorScheme = .light) -> Color {
+    var colorIndex = 0
+    if scheme == .dark { colorIndex += 1 }
+    if index == selected { colorIndex += 2 }
     switch index & 0x4c {
     case 0, 8, 68, 76:
-        return Color.yellow.opacity(isSelected ? 0.7 : 0.2)
+        return yellowColors[ colorIndex ]
     case 4, 12, 64, 72:
-        return Color.blue.opacity(isSelected ? 0.5 : 0.1)
+        return blueColors[ colorIndex ]
     default: return Color.clear
     }
 }
