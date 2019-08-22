@@ -46,7 +46,7 @@ extension Board {
     // Highlight the current cell and all those on rows columns and squares
     func highlight(_ index: Int, _ value: Int, _ row: Bool, _ column: Bool, _ square: Bool) {
         var cellIndices: [Int] = []
-        let hi: CellHighlight = (cells[index].highlight[value] != .user) ? .user : .none
+        let hi: CellHighlight = (cells[index].highlight[value] != .user) ? .user : .low
 
         if row { cellIndices += rowForCell(index) }
         if column { cellIndices += columnForCell(index) }

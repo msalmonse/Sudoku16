@@ -13,7 +13,7 @@ import SwiftUI
 /// The highlight colour of a cell
 
 enum CellHighlight {
-    case none   // no highlighting
+    case low    // no highlighting
     case alert  // something wrong
     case auto   // autofilled cell
     case canBe0 // no possible values
@@ -25,7 +25,7 @@ enum CellHighlight {
 
     var color: Color {
         switch self {
-        case .none:     return .primary
+        case .low:      return .primary
         case .alert:    return .red
         case .auto:     return .secondary
         case .canBe0:   return .red
@@ -39,7 +39,7 @@ enum CellHighlight {
 
     var sticky: Bool {
         switch self {
-        case .none:     return false
+        case .low:      return false
         case .alert:    return true
         case .auto:     return true
         case .canBe0:   return false
@@ -83,7 +83,7 @@ class Cell: ObservableObject, Identifiable {
     let id = UUID()
     var value: Int = 0 { willSet { sendNotification() } }
     var canBe = all16 { willSet { if canBe != newValue { sendNotification() } } }
-    var highlight: [CellHighlight] = Array(repeating: .none, count: highlightCount)
+    var highlight: [CellHighlight] = Array(repeating: .low, count: highlightCount)
 
     var backgroundColor: Color {
         let hi = highlight[Cell.borderHighlight]
@@ -94,7 +94,7 @@ class Cell: ObservableObject, Identifiable {
     func clear() {
         value = 0
         canBe = all16
-        for i in highlight.indices { highlight[i] = .none }
+        for i in highlight.indices { highlight[i] = .low }
     }
 
     func sendNotifications(_ send: Bool) {
@@ -110,7 +110,7 @@ class Cell: ObservableObject, Identifiable {
 
     /// Calculate the highlights for a cell
     func reHighlight(_ unstick: Bool = false) {
-        var hi: CellHighlight = .none
+        var hi: CellHighlight = .low
         switch canBe.count {
         case 0: hi = .canBe0
         case 1: hi = .canBe1
@@ -120,12 +120,12 @@ class Cell: ObservableObject, Identifiable {
 
         for i in range16 {
            if unstick || !highlight[i].sticky {
-               highlight[i] = canBe[i] ? hi : .none
+               highlight[i] = canBe[i] ? hi : .low
            }
         }
 
         if !highlight[Cell.borderHighlight].sticky {
-           highlight[Cell.borderHighlight] = (hi == .canBe0) ? hi : .none
+           highlight[Cell.borderHighlight] = (hi == .canBe0) ? hi : .low
         }
     }
 

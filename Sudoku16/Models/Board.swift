@@ -146,8 +146,8 @@ class Board {
             cell.value = value
             unsolved.value -= 1
             cell.highlight[Cell.valueHighlight] =
-                (showWrongValues && err) ? .wrong : .none
-            cell.highlight[Cell.borderHighlight] = .none
+                (showWrongValues && err) ? .wrong : .low
+            cell.highlight[Cell.borderHighlight] = .low
             // Set canBe to only the set value
             cell.canBe = Set16[value]
             // Don't update canBe's if not the right solution
@@ -162,7 +162,7 @@ class Board {
             }
             cell.value = 0
             canBeRecalc(index)
-            cell.highlight[Cell.valueHighlight] = .none
+            cell.highlight[Cell.valueHighlight] = .low
         }
         cell.reHighlight()
 
