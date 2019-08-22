@@ -36,28 +36,28 @@ struct ButtonText: View {
         .padding()
         .frame(width: width, height: height)
         .overlay(strokedCapsule())
-        .background(linearBackgroupd)
+        .background(linearLight)
         .clipShape(Capsule())
     }
 }
 
-fileprivate let r = 0.00
-fileprivate let g = 0.75
-fileprivate let b = 1.00
-fileprivate let colors: [Color] = [
-    Color(red: r, green: g, blue: b, opacity: 0.05),
-    Color(red: r, green: g, blue: b, opacity: 0.20),
-    Color(red: r, green: g, blue: b, opacity: 0.25),
-    Color(red: r, green: g, blue: b, opacity: 0.30),
-    Color(red: r, green: g, blue: b, opacity: 0.30),
-    Color(red: r, green: g, blue: b, opacity: 0.30),
-    Color(red: r, green: g, blue: b, opacity: 0.30),
-    Color(red: r, green: g, blue: b, opacity: 0.30),
-    Color(red: r, green: g, blue: b, opacity: 0.35),
-    Color(red: r, green: g, blue: b, opacity: 0.50),
-]
-fileprivate let linearBackgroupd = LinearGradient(
-    gradient: Gradient(colors: colors),
+fileprivate let hue = 0.54
+fileprivate let saturations = [ 0.0, 0.15, 0.20, 0.25, 0.30, 0.30, 0.30, 0.35, 0.40, 0.45, 0.60  ]
+
+fileprivate let linearDark = LinearGradient(
+    gradient: Gradient(colors: saturations.map {
+            Color(hue: hue, saturation: $0, brightness: 0.67)
+        }
+    ),
+    startPoint: .top,
+    endPoint: .bottom
+)
+
+fileprivate let linearLight = LinearGradient(
+    gradient: Gradient(colors: saturations.map {
+            Color(hue: hue, saturation: $0, brightness: 1.0)
+        }
+    ),
     startPoint: .top,
     endPoint: .bottom
 )
