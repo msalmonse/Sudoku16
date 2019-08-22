@@ -14,13 +14,15 @@ struct ButtonText: View {
     let text: String
     let font: Font
     let color: Color
+    let isDark: Bool
     let width: CGFloat
     let height: CGFloat
 
-    init(_ text: String, font: Font = .title, color: Color = .primary) {
+    init(_ text: String, font: Font = .title, color: Color = .primary, isDark: Bool = false) {
         self.text = text
         self.font = font
         self.color = color
+        self.isDark = isDark
 
         switch font {
         case .headline: width = 100; height = 35
@@ -36,7 +38,7 @@ struct ButtonText: View {
         .padding()
         .frame(width: width, height: height)
         .overlay(strokedCapsule())
-        .background(linearLight)
+        .background(isDark ? linearDark : linearLight)
         .clipShape(Capsule())
     }
 }

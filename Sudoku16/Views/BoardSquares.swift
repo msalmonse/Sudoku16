@@ -13,6 +13,7 @@ struct BoardSquares: View {
     @State var hints = board.hintCount.value
     @State var erred = board.erred.value
     @State var unsolved = board.unsolved.value
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 1) {
@@ -20,6 +21,8 @@ struct BoardSquares: View {
                 "Unsolved: \(unsolved), hints: \(hints), errors: \(erred), autofilled: \(autofilled)"
             )
             .font(.body)
+
+            Text("").hidden()
             .onReceive(
                 board.unsolved.publisher,
                 perform: {
@@ -49,27 +52,27 @@ struct BoardSquares: View {
             HStack {
                 Button(
                     action: { board.renew() },
-                    label: { ButtonText("New") }
+                    label: { ButtonText("New", isDark: scheme == .dark) }
                 )
 
                 Button(
                     action: { board.restart() },
-                    label: { ButtonText("Restart") }
+                    label: { ButtonText("Restart", isDark: scheme == .dark) }
                 )
 
                 Button(
                     action: { board.solve() },
-                    label: { ButtonText("Solve") }
+                    label: { ButtonText("Solve", isDark: scheme == .dark) }
                 )
 
                 Button(
                     action: { board.hint() },
-                    label: { ButtonText("Hint") }
+                    label: { ButtonText("Hint", isDark: scheme == .dark) }
                 )
 
                 Button(
                     action: { showSheet.value = .userSettings },
-                    label: { ButtonText("Settings") }
+                    label: { ButtonText("Settings", isDark: scheme == .dark) }
                 )
             }
         }
