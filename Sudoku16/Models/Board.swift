@@ -56,12 +56,13 @@ func cellInSquare(_ sqr: Int, _ i: Int) -> Int {
     return (sqr << 2) | squareOffsets[i]
 }
 
-func squareColor(cell: Int) -> Color {
-    switch cell & 0x4c {
+func squareColor(_ index: Int, selected: Int = -1) -> Color {
+    let isSelected = index == selected
+    switch index & 0x4c {
     case 0, 8, 68, 76:
-        return Color.yellow.opacity(0.2)
+        return Color.yellow.opacity(isSelected ? 0.7 : 0.2)
     case 4, 12, 64, 72:
-        return Color.blue.opacity(0.1)
+        return Color.blue.opacity(isSelected ? 0.5 : 0.1)
     default: return Color.clear
     }
 }

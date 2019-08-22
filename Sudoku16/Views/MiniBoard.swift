@@ -47,7 +47,7 @@ struct MiniRow: View {
             ForEach (rowIndex) {index in
                 Image(systemName: board.cells[index.value].name)
                 .font(.title)
-                .background(filledRectangle(color: self.selected == index.value ? .yellow : .clear))
+                .background(filledRectangle(color: squareColor(index.value, selected: self.selected)))
             }
         }
     }
