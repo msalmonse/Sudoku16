@@ -31,7 +31,7 @@ struct CellView: View {
             if cell.value <= 16 && cell.value > 0 {
                 Image(systemName: cell.name)
                 .font(Font.largeTitle.weight(.semibold))
-                .foregroundColor(cell.highlight[Cell.valueHighlight].color)
+                .foregroundColor(cell.valueColor)
             } else {
                 CanBeView(cell: cell)
             }

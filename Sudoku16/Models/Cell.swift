@@ -25,13 +25,13 @@ enum CellHighlight {
 
     var color: Color {
         switch self {
-        case .low:      return .primary
         case .alert:    return .red
         case .auto:     return .secondary
         case .canBe0:   return .red
         case .canBe1:   return .green
         case .canBe2:   return .orange
         case .hint:     return .green
+        case .low:      return .primary
         case .user:     return .blue
         case .wrong:    return .red
         }
@@ -39,13 +39,13 @@ enum CellHighlight {
 
     var sticky: Bool {
         switch self {
-        case .low:      return false
         case .alert:    return true
         case .auto:     return true
         case .canBe0:   return false
         case .canBe1:   return false
         case .canBe2:   return false
         case .hint:     return true
+        case .low:      return false
         case .user:     return true
         case .wrong:    return true
         }
@@ -87,9 +87,10 @@ class Cell: ObservableObject, Identifiable {
 
     var backgroundColor: Color {
         let hi = highlight[Cell.borderHighlight]
-        return (hi == .none) ? .clear : hi.color.opacity(0.4)
+        return (hi == .low) ? .clear : hi.color.opacity(0.4)
     }
     var borderColor: Color { highlight[Cell.borderHighlight].color }
+    var valueColor: Color { highlight[Cell.valueHighlight].color }
 
     func clear() {
         value = 0
