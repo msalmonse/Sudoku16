@@ -137,6 +137,43 @@ class Board {
     // Turn publishing on or off for all cells
     func sendNotifications(_ send: Bool) { _ = cells.map { $0.sendNotifications(send) } }
 
+    // Check for any number that has only one candidate
+    func only1Check(for checkList: [Int]) -> Bool {
+        var ret = false
+        for value in range16 {
+            var count = 0
+            var mark = 0
+            for index in checkList where cells[index].value == 0 && cells[index].canBe[value] {
+                if count == 0 {
+                    count += 1
+                    mark = index
+                } else {
+                    count = 0
+                    break
+                }
+            }
+            if count == 1 {
+                cells[mark].highlight[value] = .only1
+                cells[mark].sendNotification()
+                ret = true
+            }
+        }
+
+        return ret
+    }
+
+    // Run only1Check over column, row and square
+    @discardableResult
+    func only1CheckAll(for index: Int) -> Bool {
+        var ret = false
+
+        if only1Check(for: columnForCell(index)) { ret = true }
+        if only1Check(for: rowForCell(index)) { ret = true }
+        if only1Check(for: squareForCell(index)) { ret = true }
+
+        return ret
+    }
+
     // Set all the canBe's in rows, columns or squares, ignoring duplicates
     @discardableResult
     func canBeSetAll(_ index: Int, _ value: Int, _ setTo: Bool) -> Bool {
@@ -175,6 +212,7 @@ class Board {
             // Don't update canBe's if not the right solution
             if updateCanBe && solution[index] == value {
                 if !canBeSetAll(index, value, false) { ret = false }
+                only1CheckAll(for: index)
             }
         } else {
             if range16.contains(cell.value) {

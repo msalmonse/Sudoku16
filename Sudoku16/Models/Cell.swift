@@ -13,13 +13,14 @@ import SwiftUI
 /// The highlight colour of a cell
 
 enum CellHighlight {
-    case low    // no highlighting
     case alert  // something wrong
     case auto   // autofilled cell
     case canBe0 // no possible values
     case canBe1 // only one possibility
     case canBe2 // two possibilities
     case hint   // result of hint
+    case low    // no highlighting
+    case only1  // only possible candidate on row, column or square
     case user   // user highlighted
     case wrong  // doesn't match solution
 
@@ -32,6 +33,7 @@ enum CellHighlight {
         case .canBe2:   return .orange
         case .hint:     return .green
         case .low:      return .primary
+        case .only1:    return .green
         case .user:     return .blue
         case .wrong:    return .red
         }
@@ -46,6 +48,7 @@ enum CellHighlight {
         case .canBe2:   return false
         case .hint:     return true
         case .low:      return false
+        case .only1:    return true
         case .user:     return true
         case .wrong:    return true
         }
