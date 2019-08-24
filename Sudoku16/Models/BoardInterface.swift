@@ -37,9 +37,10 @@ extension Board {
 
     // Set or reset a cell
     // Setting with a 0 is a reset
+    @discardableResult
     func set(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
         let ret = setOne(index, value, updateCanBe: updateCanBe)
-        _ = autofillUnqueue(.auto)
+        autofillUnqueue(.auto)
         return ret
     }
 
@@ -77,7 +78,7 @@ extension Board {
         let candidates = cells.indices.filter({ cells[$0].value == 0 })
         let i = candidates[Int.random(in: candidates.indices)] // random cell
         let v = solution[i]
-        _ = setOne(i, v)
+        setOne(i, v)
         cells[i].highlight[Cell.valueHighlight] = .hint
         hintCount.value += 1 + autofillUnqueue(.hint)
     }

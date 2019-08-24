@@ -41,7 +41,7 @@ struct CellDetail: View {
                     Spacer()
                     HStack(alignment: VerticalAlignment.center) {
                         Button(
-                            action: { _ = board.set(self.index, 0) },
+                            action: { board.set(self.index, 0) },
                             label: { Image(systemName: "clear").font(.largeTitle) }
                         )
                         .foregroundColor((cell.value != 0) ? .primary : .secondary)
@@ -63,7 +63,7 @@ struct CellDetail: View {
                     Spacer()
                     HStack(alignment: VerticalAlignment.center) {
                         Button(
-                            action: { _ = board.canBeRecalc(self.index) },
+                            action: { board.canBeRecalc(self.index) },
                             label: {
                                 Image(systemName: "arrow.counterclockwise.circle.fill")
                                 .font(.largeTitle)

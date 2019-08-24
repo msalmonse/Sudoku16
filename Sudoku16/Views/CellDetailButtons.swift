@@ -23,7 +23,7 @@ extension CellDetail {
             enable: cell.value == 0,
             color: color,
             doIt: {
-                _ = self.cell.canBe.toggle(number)
+                self.cell.canBe.toggle(number)
             }
         )
     }
@@ -48,7 +48,7 @@ extension CellDetail {
             enable: enable,
             color: color,
             doIt: {
-                _ = board.set(self.index, number)
+                board.set(self.index, number)
                 self.mode.wrappedValue.dismiss()
             }
         )

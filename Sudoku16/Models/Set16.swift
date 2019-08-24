@@ -34,6 +34,7 @@ extension Set16 {
         return ret
     }
 
+    @discardableResult
     mutating func set(_ i: Int, _ setTo: Bool) -> Bool {
         let was = self.contains(i)
         if range16.contains(i) {
@@ -46,6 +47,7 @@ extension Set16 {
         if range16.contains(i) { self = mask(i) }
     }
 
+    @discardableResult
     mutating func toggle(_ i: Int) -> Bool {
         let was = self.contains(i)
         if range16.contains(i) { self ^= mask(i) }
@@ -58,7 +60,7 @@ extension Set16 {
             contains(index)
         }
         set(newValue) {
-            _ = set(index, newValue)
+            set(index, newValue)
         }
     }
 

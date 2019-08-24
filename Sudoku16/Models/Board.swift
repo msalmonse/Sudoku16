@@ -138,6 +138,7 @@ class Board {
     func sendNotifications(_ send: Bool) { _ = cells.map { $0.sendNotifications(send) } }
 
     // Set all the canBe's in rows, columns or squares, ignoring duplicates
+    @discardableResult
     func canBeSetAll(_ index: Int, _ value: Int, _ setTo: Bool) -> Bool {
         var ret = true
         var j = -1
@@ -156,6 +157,7 @@ class Board {
 
     // Set or reset a cell
     // Setting with a 0 is a reset
+    @discardableResult
     func setOne(_ index: Int, _ value: Int, updateCanBe: Bool = true) -> Bool {
         var ret = true
         let cell = self.cells[ index ]
@@ -177,7 +179,7 @@ class Board {
         } else {
             if range16.contains(cell.value) {
                 // Don't update canBe's if not the right solution
-                if solution[index] == cell.value { _ = canBeSetAll(index, cell.value, true) }
+                if solution[index] == cell.value { canBeSetAll(index, cell.value, true) }
                 unsolved.value += 1
             }
             cell.value = 0
@@ -198,19 +200,20 @@ class Board {
         let indices = Array(0...255).shuffled().prefix(count)
         let update = (count < 256)
         for i in indices {
-            _ = set(i, solution[i], updateCanBe: update)
+            set(i, solution[i], updateCanBe: update)
         }
         sendNotifications(true)
     }
 
     // Take cells from the queue and solve them, return the number of cells autofilled
+    @discardableResult
     func autofillUnqueue(_ hi: CellHighlight) -> Int {
         var count = 0
 
         while !autofillQueue.isEmpty {
             let i = autofillQueue.removeLast()
             let v = solution[i]
-            _ = setOne(i, v)
+            setOne(i, v)
             cells[i].highlight[Cell.valueHighlight] = hi
             count += 1
         }
