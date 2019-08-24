@@ -47,7 +47,7 @@ struct MiniRow: View {
             .foregroundColor(.primary)
             ForEach (rowIndex) {index in
                 Image(systemName:
-                    index.value == self.selected ? "clear" : board.cells[index.value].name
+                    index.value == self.selected ? "multiply.square.fill" : board.cells[index.value].name
                 )
                 .font(.title)
                 .background(
