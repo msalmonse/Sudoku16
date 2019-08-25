@@ -76,6 +76,7 @@ extension Board {
     // Give a hint: give a square the correct solution
     func hint() {
         let candidates = cells.indices.filter({ cells[$0].value == 0 })
+        if candidates.isEmpty { return }
         let i = candidates[Int.random(in: candidates.indices)] // random cell
         let v = solution[i]
         setOne(i, v)
