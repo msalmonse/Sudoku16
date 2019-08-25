@@ -19,6 +19,7 @@ fileprivate let squareOffsets = [
     0, 1, 2, 3, 16, 17, 18, 19, 32, 33, 34, 35, 48, 49, 50, 51
 ]
 
+// return the column containing the cell
 func columnForCell(_ i: Int) -> [Int] {
     let cell1 = i & 15
     var ret: [Int] = []
@@ -26,10 +27,12 @@ func columnForCell(_ i: Int) -> [Int] {
     return ret
 }
 
-func cellInColumn(_ col: Int, _ i: Int) -> Int {
-    return col | (i << 4)
+// return the cells in column number
+func cellsForColumn(_ col: Int) -> [Int] {
+    return columnForCell(col)
 }
 
+// return the cells in the row containing the cell
 func rowForCell(_ i: Int) -> [Int] {
     let cell1 = i & ~15
     var ret: [Int] = []
@@ -37,10 +40,12 @@ func rowForCell(_ i: Int) -> [Int] {
     return ret
 }
 
-func cellInRow(_ row: Int, _ i: Int) -> Int {
-    return (row << 4) | i
+// return a list of the cells in row number
+func cellsForRow(_ row: Int) -> [Int] {
+    return rowForCell(row << 4)
 }
 
+// return a list of the cells in the square containing the cell
 func squareForCell(_ i: Int) -> [Int] {
     let cell1 = i & 0xcc
     var ret: [Int] = []
@@ -48,12 +53,15 @@ func squareForCell(_ i: Int) -> [Int] {
     return ret
 }
 
-func allForCell(_ i: Int) -> [Int] {
-    return columnForCell(i) + rowForCell(i) + squareForCell(i)
+// return a list of the cells in a square
+func cellsForSquare(_ sqr: Int) -> [Int] {
+    let sqrRow = sqr >> 2
+    let sqrCol = sqr & 3
+    return squareForCell(sqrRow << 4 | sqrCol << 2)
 }
 
-func cellInSquare(_ sqr: Int, _ i: Int) -> Int {
-    return (sqr << 2) | squareOffsets[i]
+func allForCell(_ i: Int) -> [Int] {
+    return columnForCell(i) + rowForCell(i) + squareForCell(i)
 }
 
 fileprivate let blueHue = 0.60
@@ -140,21 +148,24 @@ class Board {
     // Check for any number that has only one candidate
     func only1Check(for checkList: [Int]) -> Bool {
         var ret = false
+        let cellList = checkList.map { cells[$0] }.filter { $0.value == 0}
+        if cellList.isEmpty { return false }
         for value in range16 {
-            var count = 0
-            var mark = 0
-            for index in checkList where cells[index].value == 0 && cells[index].canBe[value] {
-                if count == 0 {
-                    count += 1
-                    mark = index
+            var only1 = false
+            var mark: Cell? = nil
+            for cell in cellList where cell.canBe[value] {
+                if !only1 {
+                    only1 = true
+                    mark = cell
                 } else {
-                    count = 0
+                    // two or more hits
+                    only1 = false
                     break
                 }
             }
-            if count == 1 {
-                cells[mark].highlight[value] = .only1
-                cells[mark].sendNotification()
+            if only1 {
+                mark?.highlight[value] = .only1
+                mark?.sendNotification()
                 ret = true
             }
         }
@@ -171,6 +182,19 @@ class Board {
         if only1Check(for: rowForCell(index)) { ret = true }
         if only1Check(for: squareForCell(index)) { ret = true }
 
+        return ret
+    }
+
+    // Run only1Check over all columns, rows and squares
+    @discardableResult
+    func only1CheckGlobal() -> Bool {
+        var ret = false
+
+        for index in 0...15 {
+            if only1Check(for: cellsForColumn(index)) { ret = true }
+            if only1Check(for: cellsForRow(index)) { ret = true }
+            if only1Check(for: cellsForRow(index)) { ret = true }
+        }
         return ret
     }
 

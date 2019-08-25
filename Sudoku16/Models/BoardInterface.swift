@@ -13,12 +13,12 @@ extension Board {
     // Recalculate the canBe based on all values
     func canBeRecalc(_ index: Int) {
         var new16 = all16
-        var j = -1
-        for i in allForCell(index).sorted() {
-            if i != j && i != index {
-                let value = cells[i].value
+        var previous = -1
+        for current in allForCell(index).sorted() {
+            if current != previous && current != index {
+                let value = cells[current].value
                 if value != 0 { new16[value] = false }
-                j = i
+                previous = current
             }
         }
         cells[index].canBe = new16
@@ -27,11 +27,12 @@ extension Board {
     // Recalculate all canBe's and reset all highlights
     func reCalcAll() {
         sendNotifications(false)
-        for i in cells.indices {
-            canBeRecalc(i)
-            cells[i].reHighlight(true)
-            cells[i].sendNotification()     // trigger redraw
+        for current in cells.indices where cells[current].value == 0 {
+            canBeRecalc(current)
+            cells[current].reHighlight(true)
+            cells[current].sendNotification()     // trigger redraw
         }
+        only1CheckGlobal()
         sendNotifications(true)
     }
 
@@ -53,9 +54,9 @@ extension Board {
         if column { cellIndices += columnForCell(index) }
         if square { cellIndices += squareForCell(index) }
 
-        for i in cellIndices {
-            cells[i].highlight[value] = hi
-            cells[i].sendNotification()     // trigger redraw
+        for current in cellIndices {
+            cells[current].highlight[value] = hi
+            cells[current].sendNotification()     // trigger redraw
         }
     }
 
@@ -77,10 +78,10 @@ extension Board {
     func hint() {
         let candidates = cells.indices.filter({ cells[$0].value == 0 })
         if candidates.isEmpty { return }
-        let i = candidates[Int.random(in: candidates.indices)] // random cell
-        let v = solution[i]
-        setOne(i, v)
-        cells[i].highlight[Cell.valueHighlight] = .hint
+        let index = candidates[Int.random(in: candidates.indices)] // random cell
+        let value = solution[index]
+        setOne(index, value)
+        cells[index].highlight[Cell.valueHighlight] = .hint
         hintCount.value += 1 + autofillUnqueue(.hint)
     }
 
