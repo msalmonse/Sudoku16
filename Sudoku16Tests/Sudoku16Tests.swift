@@ -120,6 +120,7 @@ class Sudoku16Tests: XCTestCase {
     func testGlobalBoardPerformance() {
         self.measure {
             board.randomizeSolution()
+            board.reCalcAll()
             board.copySolution()
         }
     }
