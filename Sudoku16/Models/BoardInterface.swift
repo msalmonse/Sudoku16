@@ -12,7 +12,7 @@ extension Board {
 
     // Recalculate the canBe based on all values
     func canBeRecalc(_ index: Int) {
-        var new16 = all16
+        var new16 = Set16.all
         var previous = -1
         for current in allForCell(index).sorted() {
             if current != previous && current != index {

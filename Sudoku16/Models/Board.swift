@@ -150,7 +150,7 @@ class Board {
         var ret = false
         let cellList = checkList.map { cells[$0] }.filter { $0.value == 0}
         if cellList.isEmpty { return false }
-        for value in range16 {
+        for value in Set16.range {
             var only1 = false
             var mark: Cell? = nil
             for cell in cellList where cell.canBe[value] {
@@ -223,7 +223,7 @@ class Board {
         var ret = true
         let cell = self.cells[ index ]
         if cell.value == value { return true }
-        if range16.contains(value) {
+        if Set16.range.contains(value) {
             let err = solution[index] != value
             if err { erred.value += 1 }
             cell.value = value
@@ -239,7 +239,7 @@ class Board {
                 only1CheckAll(for: index)
             }
         } else {
-            if range16.contains(cell.value) {
+            if Set16.range.contains(cell.value) {
                 // Don't update canBe's if not the right solution
                 if solution[index] == cell.value { canBeSetAll(index, cell.value, true) }
                 unsolved.value += 1

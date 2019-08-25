@@ -12,45 +12,47 @@ import Foundation
 
 typealias Set16 = UInt16
 
-let all16: Set16 = 0xffff
-let none16: Set16 = 0x0000
-let range16 = 1...16
-
 extension Set16 {
-    private func mask(_ i: Int) -> UInt16 { return UInt16(1 << (i - 1)) }
+    static let range = 1...16
+    static let all: Set16 = 0xffff
+    static let empty: Set16 = 0x0000
 
-    func contains(_ i: Int) -> Bool {
-        if !range16.contains(i) { return false }
-        return (self & mask(i)) != 0
+    private func mask(_ member: Int) -> UInt16 {
+        return UInt16(1 << (member - Self.range.lowerBound))
+    }
+
+    func contains(_ member: Int) -> Bool {
+        if !Set16.range.contains(member) { return false }
+        return (self & mask(member)) != 0
     }
 
     var count: Int { return self.nonzeroBitCount }
-    var isEmpty: Bool { return self == none16 }
+    var isEmpty: Bool { return self == Set16.empty }
     var list: [Int] {
         var ret: [Int] = []
-        for i in range16 {
-            if self.contains(i) { ret.append(i) }
+        for member in Set16.range where self.contains(member) {
+            ret.append(member)
         }
         return ret
     }
 
     @discardableResult
-    mutating func set(_ i: Int, _ setTo: Bool) -> Bool {
-        let was = self.contains(i)
-        if range16.contains(i) {
-            if setTo { self |= mask(i) } else { self &= ~mask(i) }
+    mutating func set(_ member: Int, _ setTo: Bool) -> Bool {
+        let was = self.contains(member)
+        if Set16.range.contains(member) {
+            if setTo { self |= mask(member) } else { self &= ~mask(member) }
         }
         return was
     }
 
-    mutating func setOnly(_ i: Int) {
-        if range16.contains(i) { self = mask(i) }
+    mutating func setOnly(_ member: Int) {
+        if Set16.range.contains(member) { self = mask(member) }
     }
 
     @discardableResult
-    mutating func toggle(_ i: Int) -> Bool {
-        let was = self.contains(i)
-        if range16.contains(i) { self ^= mask(i) }
+    mutating func toggle(_ member: Int) -> Bool {
+        let was = self.contains(member)
+        if Set16.range.contains(member) { self ^= mask(member) }
         return was
     }
 
@@ -66,6 +68,6 @@ extension Set16 {
 
     /// Constant values with only 1 set member
     static subscript(index: Int) -> Set16 {
-        return all16.mask(index)
+        return Set16.all.mask(index)
     }
 }

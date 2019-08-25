@@ -20,7 +20,7 @@ class Sudoku16Tests: XCTestCase {
     }
 
     func testSet16() {
-        var test = all16
+        var test = Set16.all
 
         XCTAssertTrue(test.contains(1))
         XCTAssertTrue(test.contains(16))
@@ -36,7 +36,7 @@ class Sudoku16Tests: XCTestCase {
         XCTAssertEqual(test.count, 16)
         XCTAssertFalse(test.isEmpty)
 
-        test = none16
+        test = Set16.empty
         XCTAssertEqual(test.count, 0)
         XCTAssertTrue(test.isEmpty)
 
@@ -46,6 +46,7 @@ class Sudoku16Tests: XCTestCase {
         _ = test.toggle(2)
         XCTAssertFalse(test.contains(2))
         XCTAssertFalse(test[2])
+        XCTAssertTrue(test.isEmpty)
 
         test[4] = true
         XCTAssertTrue(test.contains(4))
@@ -91,12 +92,12 @@ class Sudoku16Tests: XCTestCase {
     func testBoard() {
         let test = Board()
         test.solution[124] = 4
-        XCTAssertEqual(test.cells[123].canBe, all16)
+        XCTAssertEqual(test.cells[123].canBe, Set16.all)
         _ = test.set(124, 4)
-        XCTAssertNotEqual(test.cells[123].canBe, all16)
+        XCTAssertNotEqual(test.cells[123].canBe, Set16.all)
         XCTAssertFalse(test.cells[123].canBe.contains(4))
         _ = test.set(124, 0)
-        XCTAssertEqual(test.cells[123].canBe, all16)
+        XCTAssertEqual(test.cells[123].canBe, Set16.all)
     }
 
     func testBoardPerformance() {

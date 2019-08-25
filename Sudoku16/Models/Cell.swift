@@ -85,7 +85,7 @@ class Cell: ObservableObject, Identifiable {
 
     let id = UUID()
     var value: Int = 0 { willSet { sendNotification() } }
-    var canBe = all16 { willSet { if canBe != newValue { sendNotification() } } }
+    var canBe = Set16.all { willSet { if canBe != newValue { sendNotification() } } }
     var highlight: [CellHighlight] = Array(repeating: .low, count: highlightCount)
 
     var backgroundColor: Color {
@@ -97,7 +97,7 @@ class Cell: ObservableObject, Identifiable {
 
     func clear() {
         value = 0
-        canBe = all16
+        canBe = Set16.all
         for i in highlight.indices { highlight[i] = .low }
     }
 
@@ -122,7 +122,7 @@ class Cell: ObservableObject, Identifiable {
         default: break
         }
 
-        for i in range16 {
+        for i in Set16.range {
            if unstick || !highlight[i].sticky {
                highlight[i] = canBe[i] ? hi : .low
            }
