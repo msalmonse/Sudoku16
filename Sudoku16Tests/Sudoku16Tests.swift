@@ -103,6 +103,16 @@ class Sudoku16Tests: XCTestCase {
         let test = Board()
         self.measure {
             test.randomizeSolution()
+            test.hint()
+            test.hint()
+            test.hint()
+            test.hint()
+            test.hint()
+            test.hint()
+            test.hint()
+            test.hint()
+            test.hint()
+            test.hint()
             test.copySolution()
         }
     }
