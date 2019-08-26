@@ -21,7 +21,8 @@ enum CellHighlight {
     case hint   // result of hint
     case low    // no highlighting
     case only1  // only possible candidate on row, column or square
-    case user   // user highlighted
+    case user0  // user highlighted red
+    case user1  // user highlighted blue
     case wrong  // doesn't match solution
 
     var color: Color {
@@ -34,8 +35,17 @@ enum CellHighlight {
         case .hint:     return .green
         case .low:      return .primary
         case .only1:    return .green
-        case .user:     return .blue
+        case .user0:    return .red
+        case .user1:    return .blue
         case .wrong:    return .red
+        }
+    }
+
+    var isUser: Bool {
+        switch self {
+        case .user0:    return true
+        case .user1:    return true
+        default:        return false
         }
     }
 
@@ -49,10 +59,10 @@ enum CellHighlight {
         case .hint:     return true
         case .low:      return false
         case .only1:    return true
-        case .user:     return true
+        case .user0:    return true
+        case .user1:    return true
         case .wrong:    return true
         }
-
     }
 }
 

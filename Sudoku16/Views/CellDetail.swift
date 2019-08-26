@@ -14,6 +14,7 @@ struct CellDetail: View {
     @State var rowHighlight: Bool = false
     @State var columnHighlight: Bool = false
     @State var squareHilight: Bool = true
+    @State var highlight: CellHighlight = .user1
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @Environment(\.colorScheme) var scheme: ColorScheme
 
@@ -23,6 +24,10 @@ struct CellDetail: View {
     init(index: Int) {
         cell = board.cells[index]
         self.index = index
+    }
+
+    private func starName(_ hi: CellHighlight) -> String {
+        return hi == highlight ? "star.fill" : "star"
     }
 
     var body: some View {
@@ -90,10 +95,27 @@ struct CellDetail: View {
                     Spacer()
                     HStack(alignment: VerticalAlignment.center) {
                         VStack(alignment: HorizontalAlignment.leading, spacing: 5) {
+                            // Determine which cells to highlight
                             Text("On:")
                             Toggle(isOn: $rowHighlight, label: { Text("Row") })
                             Toggle(isOn: $columnHighlight, label: { Text("Column") })
                             Toggle(isOn: $squareHilight, label: { Text("Square") })
+
+                            HStack {
+                                // Which colour?
+                                Text("Colour:")
+                                Spacer()
+                                Button(
+                                    action: { self.highlight = .user0 },
+                                    label: { Image(systemName: starName(.user0)) }
+                                )
+                                .foregroundColor(CellHighlight.user0.color)
+                                Button(
+                                    action: { self.highlight = .user1 },
+                                    label: { Image(systemName: starName(.user1)) }
+                                )
+                                .foregroundColor(CellHighlight.user1.color)
+                            }
                         }
                         Divider().padding()
                         VStack(spacing: 12) {

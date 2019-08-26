@@ -66,7 +66,7 @@ extension CellDetail {
 
     // Return a highlight button
     func highlightButton(_ number: Int) -> some View {
-        let color: Color = (cell.highlight[number] == .user) ? .secondary : .primary
+        let color: Color = (cell.highlight[number].isUser) ? .secondary : .primary
         return DetailButton(
             index: index,
             number: number,
@@ -78,7 +78,8 @@ extension CellDetail {
                     number,
                     self.rowHighlight,
                     self.columnHighlight,
-                    self.squareHilight
+                    self.squareHilight,
+                    highlight: self.highlight
                 )
             }
         )
