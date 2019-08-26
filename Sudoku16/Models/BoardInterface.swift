@@ -61,9 +61,17 @@ extension Board {
         if column { cellIndices += columnForCell(index) }
         if square { cellIndices += squareForCell(index) }
 
-        for current in cellIndices {
-            cells[current].highlight[value] = hi
-            cells[current].sendNotification()     // trigger redraw
+        for cell in cellIndices.map({ cells[$0] }) {
+            cell.highlight[value] = hi
+            cell.sendNotification()     // trigger redraw
+        }
+    }
+
+    // toggle the canBe and check for singles
+    func canBeToggle(index: Int, member: Int) {
+        // If going from true to false then check for singles
+        if cells[index].canBe.toggle(member) {
+            only1CheckAll(for: index)
         }
     }
 

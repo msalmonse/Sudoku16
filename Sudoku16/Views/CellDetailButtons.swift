@@ -23,7 +23,7 @@ extension CellDetail {
             enable: cell.value == 0,
             color: color,
             doIt: {
-                self.cell.canBe.toggle(number)
+                board.canBeToggle(index: self.index, member: number)
             }
         )
     }
