@@ -11,17 +11,20 @@ import Foundation
 extension Board {
 
     // Recalculate the canBe based on all values
-    func canBeRecalc(_ index: Int) {
+    @discardableResult
+    func canBeRecalc(_ index: Int) -> Bool {
         var new16 = Set16.all
-        var previous = -1
-        for current in allForCell(index).sorted() {
-            if current != previous && current != index {
-                let value = cells[current].value
-                if value != 0 { new16[value] = false }
-                previous = current
-            }
+        // Check cells on our row, column and square
+        for current in allForCell(index) where current != index {
+            let value = cells[current].value
+            if value != 0 { new16[value] = false }
         }
-        cells[index].canBe = new16
+        if cells[index].canBe == new16 {
+            return false
+        } else {
+            cells[index].canBe = new16
+            return true
+        }
     }
 
     // Recalculate all canBe's and reset all highlights
