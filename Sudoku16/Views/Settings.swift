@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UserDefaults
 
 fileprivate let initiallySolvedRange = 50.0...200.0
 fileprivate let initiallySolvedMin = String(format: "%.0f", initiallySolvedRange.lowerBound)

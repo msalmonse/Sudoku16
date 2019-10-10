@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		C437DEDF2302850F005FF528 /* ButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEDE2302850F005FF528 /* ButtonText.swift */; };
 		C437DEE32303D042005FF528 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE22303D042005FF528 /* Settings.swift */; };
-		C437DEE52303DB8A005FF528 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE42303DB8A005FF528 /* UserDefault.swift */; };
 		C437DEE72303DC7D005FF528 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE62303DC7D005FF528 /* UserSettings.swift */; };
 		C45F57FE22FEF71C008762F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F57FD22FEF71C008762F1 /* AppDelegate.swift */; };
 		C45F580022FEF71C008762F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F57FF22FEF71C008762F1 /* SceneDelegate.swift */; };
@@ -25,7 +24,6 @@
 		C45F582A22FF46FA008762F1 /* CellSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F582922FF46F9008762F1 /* CellSquare.swift */; };
 		C45F582D22FF4BE2008762F1 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F582C22FF4BE2008762F1 /* Shapes.swift */; };
 		C45F582F22FF4E9E008762F1 /* BoardSquares.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45F582E22FF4E9E008762F1 /* BoardSquares.swift */; };
-		C46637B6230C626D009AF330 /* BundledData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46637B5230C626D009AF330 /* BundledData.swift */; };
 		C46637E9230D0F39009AF330 /* DetailNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437DEE023029FEA005FF528 /* DetailNavigation.swift */; };
 		C46637EB230D10B5009AF330 /* MiniBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46637EA230D10B5009AF330 /* MiniBoard.swift */; };
 		C46637ED230D1402009AF330 /* Identified.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46637EC230D1402009AF330 /* Identified.swift */; };
@@ -38,6 +36,7 @@
 		C495685323005084007C707B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685223005084007C707B /* Observable.swift */; };
 		C495685523012F9D007C707B /* RandomizeSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495685423012F9D007C707B /* RandomizeSolution.swift */; };
 		C49E73B32305C75D003E8AD1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E73B22305C75D003E8AD1 /* Message.swift */; };
+		C4F0420E234F1C6600652E8D /* UserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = C4F0420D234F1C6600652E8D /* UserDefaults */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +53,6 @@
 		C437DEDE2302850F005FF528 /* ButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonText.swift; sourceTree = "<group>"; };
 		C437DEE023029FEA005FF528 /* DetailNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNavigation.swift; sourceTree = "<group>"; };
 		C437DEE22303D042005FF528 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		C437DEE42303DB8A005FF528 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		C437DEE62303DC7D005FF528 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		C451FD4A230727A900CBFD39 /* Sudoku16.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sudoku16.xctestplan; sourceTree = "<group>"; };
 		C45F57FA22FEF71C008762F1 /* Sudoku16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku16.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,7 +73,6 @@
 		C45F582922FF46F9008762F1 /* CellSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSquare.swift; sourceTree = "<group>"; };
 		C45F582C22FF4BE2008762F1 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		C45F582E22FF4E9E008762F1 /* BoardSquares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSquares.swift; sourceTree = "<group>"; };
-		C46637B5230C626D009AF330 /* BundledData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledData.swift; sourceTree = "<group>"; };
 		C46637EA230D10B5009AF330 /* MiniBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniBoard.swift; sourceTree = "<group>"; };
 		C46637EC230D1402009AF330 /* Identified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identified.swift; sourceTree = "<group>"; };
 		C48CE0DF230482E800C10299 /* CellDetailButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetailButtons.swift; sourceTree = "<group>"; };
@@ -95,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4F0420E234F1C6600652E8D /* UserDefaults in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,7 +165,6 @@
 			children = (
 				C45F582422FEFBFA008762F1 /* Board.swift */,
 				C48CE0E123051B0800C10299 /* BoardInterface.swift */,
-				C46637B5230C626D009AF330 /* BundledData.swift */,
 				C45F582022FEF9C3008762F1 /* Cell.swift */,
 				C46637EC230D1402009AF330 /* Identified.swift */,
 				C49E73B22305C75D003E8AD1 /* Message.swift */,
@@ -176,7 +173,6 @@
 				C495685423012F9D007C707B /* RandomizeSolution.swift */,
 				C45F582222FEFAD6008762F1 /* Set16.swift */,
 				C495684C23003A5B007C707B /* ShowSheet.swift */,
-				C437DEE42303DB8A005FF528 /* UserDefault.swift */,
 				C437DEE62303DC7D005FF528 /* UserSettings.swift */,
 			);
 			path = Models;
@@ -225,6 +221,9 @@
 			dependencies = (
 			);
 			name = Sudoku16;
+			packageProductDependencies = (
+				C4F0420D234F1C6600652E8D /* UserDefaults */,
+			);
 			productName = Sudoku16;
 			productReference = C45F57FA22FEF71C008762F1 /* Sudoku16.app */;
 			productType = "com.apple.product-type.application";
@@ -275,6 +274,9 @@
 				Base,
 			);
 			mainGroup = C45F57F122FEF71C008762F1;
+			packageReferences = (
+				C4F0420C234F1C6600652E8D /* XCRemoteSwiftPackageReference "UserDefaults" */,
+			);
 			productRefGroup = C45F57FB22FEF71C008762F1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -366,10 +368,8 @@
 				C45F582822FF0F7F008762F1 /* CellView.swift in Sources */,
 				C48CE0E0230482E800C10299 /* CellDetailButtons.swift in Sources */,
 				C45F582322FEFAD6008762F1 /* Set16.swift in Sources */,
-				C437DEE52303DB8A005FF528 /* UserDefault.swift in Sources */,
 				C46637E9230D0F39009AF330 /* DetailNavigation.swift in Sources */,
 				C45F57FE22FEF71C008762F1 /* AppDelegate.swift in Sources */,
-				C46637B6230C626D009AF330 /* BundledData.swift in Sources */,
 				C49E73B32305C75D003E8AD1 /* Message.swift in Sources */,
 				C46637ED230D1402009AF330 /* Identified.swift in Sources */,
 				C45F580022FEF71C008762F1 /* SceneDelegate.swift in Sources */,
@@ -640,6 +640,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C4F0420C234F1C6600652E8D /* XCRemoteSwiftPackageReference "UserDefaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/msalmonse/UserDefaults.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C4F0420D234F1C6600652E8D /* UserDefaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4F0420C234F1C6600652E8D /* XCRemoteSwiftPackageReference "UserDefaults" */;
+			productName = UserDefaults;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C45F57F222FEF71C008762F1 /* Project object */;
 }
