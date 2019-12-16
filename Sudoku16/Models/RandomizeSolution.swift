@@ -105,9 +105,11 @@ extension Board {
         }
     }
 
-    func randomizeSolution() {
+    func randomizeSolution(_ useVariant: Int = -1) {
         let digitSwap = [0] + Array(1...16).shuffled()
-        let variant = Int.random(in: solutions.indices)
+        let variant = solutions.indices.contains(useVariant)
+            ? useVariant
+            : Int.random(in: solutions.indices)
         solution = solutions[variant].map { digitSwap[$0] }
         for _ in 0...9 {
             swapColumnsInSquare(Int.random(in: 0...15))

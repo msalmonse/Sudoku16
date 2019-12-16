@@ -89,6 +89,27 @@ class Sudoku16Tests: XCTestCase {
         }
     }
 
+    func testBoardCheck() {
+        var checkData = (1...16).map { $0 }
+        XCTAssertTrue(Board.check(checkData))
+        checkData[0] = 16
+        XCTAssertFalse(Board.check(checkData))
+        checkData.append(0)
+        XCTAssertFalse(Board.check(checkData))
+    }
+
+    func testBoardValues() {
+        let board = Board()
+        for variant in 0...1 {
+            board.randomizeSolution(variant)
+            for index in 0...15 {
+                XCTAssertTrue(board.colCheck(index))
+                XCTAssertTrue(board.rowCheck(index))
+                XCTAssertTrue(board.sqrCheck(index))
+            }
+        }
+    }
+
     func testBoard() {
         let test = Board()
         test.solution[124] = 4
